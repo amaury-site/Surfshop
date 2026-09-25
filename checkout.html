@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Paiement Sécurisé • AURA SURF</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .checkout-grid {
+            display: grid;
+            grid-template-columns: 1.4fr 1fr;
+            gap: 32px;
+        }
+        .form-group {
+            margin-bottom: 16px;
+        }
+        .form-group label {
+            display: block;
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            margin-bottom: 6px;
+            color: var(--color-ocean-dark);
+        }
+        .form-control {
+            width: 100%;
+            padding: 12px 14px;
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-sm);
+            font-size: 0.95rem;
+            background: #FFF;
+        }
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 14px;
+        }
+        .apple-pay-btn {
+            background: #000;
+            color: #FFF;
+            border: none;
+            border-radius: var(--radius-sm);
+            padding: 14px;
+            width: 100%;
+            font-weight: 700;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            cursor: pointer;
+            margin-bottom: 20px;
+        }
+        .divider {
+            text-align: center;
+            position: relative;
+            margin: 20px 0;
+            color: var(--color-text-muted);
+            font-size: 0.8rem;
+        }
+        .divider::before, .divider::after {
+            content: "";
+            position: absolute;
+            top: 50%;
+            width: 42%;
+            height: 1px;
+            background: var(--color-border);
+        }
+        .divider::before { left: 0; }
+        .divider::after { right: 0; }
+        @media (max-width: 768px) {
+            .checkout-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="site-header">
+        <div class="header-container">
+            <a href="index.html" class="brand-logo">
+                <span>AURA</span><span class="brand-badge">CHECKOUT</span>
+            </a>
+            <a href="index.html" class="nav-link">← Retour à l'Atelier</a>
+        </div>
+    </header>
+
+    <main class="page-container">
+        <div class="page-header">
+            <span class="hero-tag">Protocole Chiffré SSL 256-BIT</span>
+            <h1>Finalisation de Commande</h1>
+        </div>
+
+        <div class="checkout-grid">
+            <!-- Formulaire de Livraison et de Règlement -->
+            <section class="page-card">
+                <button type="button" class="apple-pay-btn" onclick="simulatePayment('Apple Pay')">
+                    Payer avec Pay
+                </button>
+                <div class="divider">OU PAR CARTE BANCAIRE</div>
+
+                <form id="payment-form" onsubmit="handleFormCheckout(event)">
+                    <h3 style="margin-bottom: 16px; font-size: 1.1rem;">1. Coordonnées & Livraison</h3>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="firstname">Prénom</label>
+                            <input type="text" id="firstname" class="form-control" required placeholder="Alex">
+                        </div>
+                        <div class="form-group">
+                            <label for="lastname">Nom</label>
+                            <input type="text" id="lastname" class="form-control" required placeholder="Dupont">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Adresse E-mail (Confirmation de commande)</label>
+                        <input type="email" id="email" class="form-control" required placeholder="alex.dupont@surf.fr">
+                    </div>
+                    <div class="form-group">
+                        <label for="address">Adresse de livraison</label>
+                        <input type="text" id="address" class="form-control" required placeholder="14 Avenue de la Plage">
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="zipcode">Code Postal</label>
+                            <input type="text" id="zipcode" class="form-control" required placeholder="64200">
+                        </div>
+                        <div class="form-group">
+                            <label for="city">Ville</label>
+                            <input type="text" id="city" class="form-control" required placeholder="Biarritz">
+                        </div>
+                    </div>
+
+                    <h3 style="margin: 24px 0 16px; font-size: 1.1rem;">2. Informations Bancaires</h3>
+                    <div class="form-group">
+                        <label for="card-num">Numéro de Carte Bancaire</label>
+                        <input type="text" id="card-num" class="form-control" maxlength="19" required placeholder="4970 •••• •••• ••••">
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="card-exp">Expiration (MM/AA)</label>
+                            <input type="text" id="card-exp" class="form-control" maxlength="5" required placeholder="08/28">
+                        </div>
+                        <div class="form-group">
+                            <label for="card-cvc">Cryptogramme CVC</label>
+                            <input type="text" id="card-cvc" class="form-control" maxlength="3" required placeholder="382">
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn-primary w-full" style="margin-top: 16px;">
+                        Confirmer et Régler la Commande
+                    </button>
+                </form>
+            </section>
+
+            <!-- Récapitulatif de Commande Dynamique -->
+            <aside class="page-card" style="height: fit-content;">
+                <h3 style="margin-bottom: 20px; font-size: 1.1rem;">Votre Sélection</h3>
+                <div id="checkout-items-list" style="display: flex; flex-direction: column; gap: 14px; margin-bottom: 20px;">
+                    <!-- Injecté en JavaScript -->
+                </div>
+                <div style="border-top: 1px solid var(--color-border); padding-top: 14px;">
+                    <div class="cart-summary-line">
+                        <span>Sous-total HT</span>
+                        <span id="co-subtotal">0.00 €</span>
+                    </div>
+                    <div class="cart-summary-line">
+                        <span>TVA estimée (20%)</span>
+                        <span id="co-tax">0.00 €</span>
+                    </div>
+                    <div class="cart-summary-line">
+                        <span>Livraison Océan Neutre Carbone</span>
+                        <span style="color: var(--color-foam-teal); font-weight: 700;">Gratuite</span>
+                    </div>
+                    <div class="cart-summary-line total-line">
+                        <span>Total TTC</span>
+                        <strong id="co-total">0.00 €</strong>
+                    </div>
+                </div>
+            </aside>
+        </div>
+    </main>
+
+    <script>
+        // Lecture et rendu du panier local
+        const cart = JSON.parse(localStorage.getItem("aura_cart_v1")) || [];
+        const container = document.getElementById("checkout-items-list");
+        
+        let total = 0;
+        if (cart.length === 0) {
+            container.innerHTML = "<p style='color: var(--color-text-muted); font-size: 0.9rem;'>Votre panier est vide. Veuillez ajouter un article depuis l'accueil.</p>";
+        } else {
+            cart.forEach(item => {
+                total += item.price * item.qty;
+                const row = document.createElement("div");
+                row.style.display = "flex";
+                row.style.justifyContent = "space-between";
+                row.style.alignItems = "center";
+                row.style.fontSize = "0.85rem";
+                row.innerHTML = `
+                    <div>
+                        <strong>${item.name}</strong> (${item.size}) x${item.qty}
+                    </div>
+                    <div>${(item.price * item.qty).toFixed(2)} €</div>
+                `;
+                container.appendChild(row);
+            });
+        }
+
+        const subtotal = total / 1.20;
+        const tax = total - subtotal;
+        document.getElementById("co-subtotal").textContent = subtotal.toFixed(2) + " €";
+        document.getElementById("co-tax").textContent = tax.toFixed(2) + " €";
+        document.getElementById("co-total").textContent = total.toFixed(2) + " €";
+
+        function simulatePayment(method) {
+            if (cart.length === 0) return alert("Votre panier est vide.");
+            alert("Authentification biométrique réussie avec " + method + ". Commande #SURF-" + Math.floor(Math.random()*90000 + 10000) + " confirmée !");
+            localStorage.removeItem("aura_cart_v1");
+            window.location.href = "index.html";
+        }
+
+        function handleFormCheckout(e) {
+            e.preventDefault();
+            if (cart.length === 0) return alert("Votre panier est vide.");
+            alert("Paiement validé par 3D-Secure ! Vos équipements sont en cours de préparation dans notre atelier de Biarritz.");
+            localStorage.removeItem("aura_cart_v1");
+            window.location.href = "index.html";
+        }
+    </script>
+</body>
+</html>
