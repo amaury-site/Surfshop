@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guide des Tailles & Litrage • AURA SURF</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <header class="site-header">
+        <div class="header-container">
+            <a href="index.html" class="brand-logo">
+                <span>AURA</span><span class="brand-badge">FIT LAB</span>
+            </a>
+            <a href="index.html" class="nav-link">← Retour au Catalogue</a>
+        </div>
+    </header>
+
+    <main class="page-container">
+        <div class="page-header">
+            <span class="hero-tag">Ajustement Morphologique & Flottabilité</span>
+            <h1>Guide des Tailles & Volume 3D</h1>
+            <p style="color: var(--color-text-muted); margin-top: 8px;">Une combinaison doit être ajustée comme une seconde peau pour éviter les entrées d'eau et garantir l'isolation thermique.</p>
+        </div>
+
+        <!-- Calculateur Interactif de Flottabilité Surf -->
+        <section class="page-card">
+            <h2 style="font-size: 1.4rem; color: var(--color-ocean-deep); margin-bottom: 12px;">Calculateur de Litrage de Planche (Volume Ratio)</h2>
+            <p style="font-size: 0.9rem; color: var(--color-text-muted); margin-bottom: 20px;">Indiquez votre poids et votre niveau de pratique pour obtenir la recommandation hydrodynamique de votre planche :</p>
+            
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                <div>
+                    <label style="font-weight: 700; font-size: 0.85rem;">Votre Poids (kg) :</label>
+                    <input type="number" id="calc-weight" class="form-control" value="75" min="40" max="120" style="margin-top: 6px;">
+                </div>
+                <div>
+                    <label style="font-weight: 700; font-size: 0.85rem;">Niveau de Pratique :</label>
+                    <select id="calc-level" class="form-control" style="margin-top: 6px;">
+                        <option value="0.36">Expert (Flottabilité affûtée / 0.36 L/kg)</option>
+                        <option value="0.42" selected>Intermédiaire (Équilibre maniabilité & rame / 0.42 L/kg)</option>
+                        <option value="0.55">Débutant / Évolution (Confort & prise de vague / 0.55 L/kg)</option>
+                    </select>
+                </div>
+            </div>
+            
+            <button class="btn-primary" style="margin-top: 20px; width: fit-content;" onclick="calculateSurfVolume()">
+                Calculer mon Volume Recommandé
+            </button>
+            
+            <div id="volume-result" style="margin-top: 16px; padding: 14px; background: var(--color-foam-light); border-radius: var(--radius-sm); font-weight: 700; color: var(--color-ocean-dark); display: none;"></div>
+        </section>
+
+        <!-- Grille des Tailles Néoprène Homme & Unisexe -->
+        <section class="page-card">
+            <h2 style="font-size: 1.4rem; color: var(--color-ocean-deep); margin-bottom: 12px;">Grille de Correspondance Combinaisons Néoprène</h2>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Taille AURA</th>
+                        <th>Stature (cm)</th>
+                        <th>Poids (kg)</th>
+                        <th>Tour de Poitrine (cm)</th>
+                        <th>Tour de Taille (cm)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>XS</strong></td>
+                        <td>165 - 170</td>
+                        <td>55 - 63</td>
+                        <td>86 - 91</td>
+                        <td>71 - 76</td>
+                    </tr>
+                    <tr>
+                        <td><strong>S</strong></td>
+                        <td>170 - 175</td>
+                        <td>61 - 70</td>
+                        <td>91 - 97</td>
+                        <td>76 - 81</td>
+                    </tr>
+                    <tr>
+                        <td><strong>M</strong></td>
+                        <td>175 - 180</td>
+                        <td>68 - 77</td>
+                        <td>97 - 102</td>
+                        <td>81 - 86</td>
+                    </tr>
+                    <tr>
+                        <td><strong>L</strong></td>
+                        <td>180 - 185</td>
+                        <td>77 - 86</td>
+                        <td>102 - 107</td>
+                        <td>86 - 91</td>
+                    </tr>
+                    <tr>
+                        <td><strong>XL</strong></td>
+                        <td>185 - 192</td>
+                        <td>86 - 98</td>
+                        <td>107 - 114</td>
+                        <td>91 - 99</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+    </main>
+
+    <script>
+        function calculateSurfVolume() {
+            const w = parseFloat(document.getElementById("calc-weight").value);
+            const factor = parseFloat(document.getElementById("calc-level").value);
+            const vol = (w * factor).toFixed(1);
+            const res = document.getElementById("volume-result");
+            res.style.display = "block";
+            res.innerHTML = `Volume hydrodynamique conseillé : <strong>${vol} Litres</strong> (ex: Shortboard Thruster 5'11" pour ${vol}L).`;
+        }
+    </script>
+</body>
+</html>
