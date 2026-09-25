@@ -1,10 +1,10 @@
 /**
- * AURA SURF STUDIO - Architecture E-Commerce & Pipeline WebAR
- * Traitement modulaire côté client (ES6) conforme aux standards W3C WebXR
+ * AURA SURF STUDIO - Logique E-Commerce & WebAR
+ * Synchronisation du catalogue, jauge Swell Slider, panier persistent et routage de paiement
  */
 
 // ==========================================================================
-// 1. BASE DE DONNÉES CATALOGUE TECHNIQUE
+// 1. BASE DE DONNÉES CATALOGUE TECHNIQUE SURF
 // ==========================================================================
 const SURF_CATALOG = [
     {
@@ -21,7 +21,7 @@ const SURF_CATALOG = [
             temperature: "10°C - 15°C (Eaux Froides)",
             weight: "1.150 kg"
         },
-        description: "Assemblage en néoprène à cellule fermée déperlant. Coutures cousues-collées galonnées (GBS) sur 100% des jonctions. Plastron frontal thermo-réflecteur pour une conservation calorifique optimale lors des sessions hivernales prolongées."
+        description: "Assemblage en néoprène calcaire à cellules étanches. Coutures cousues-collées galonnées (GBS). Plastron frontal thermo-réflecteur pour une conservation calorifique optimale lors des sessions hivernales."
     },
     {
         id: "prod-board-thruster",
@@ -37,7 +37,7 @@ const SURF_CATALOG = [
             temperature: "Toutes saisons",
             weight: "2.450 kg (Volume 29.5 L)"
         },
-        description: "Glaçage sous vide hybride carbone et fibre biaxiale. Ligne de rocker tendue conférant une relance immédiate en section creuse. Carène en concave simple évoluant vers un double concave prononcé aux dérives."
+        description: "Glaçage sous vide hybride carbone et fibre biaxiale. Ligne de rocker tendue conférant une relance immédiate en section creuse. Carène en concave simple évoluant vers un double concave aux ailerons."
     },
     {
         id: "prod-fins-carbon",
@@ -53,7 +53,7 @@ const SURF_CATALOG = [
             temperature: "Universelle",
             weight: "210 g (le set de 3)"
         },
-        description: "Profil hydrodynamique rigide développé pour maximiser l'accroche dans les courbes appuyées. Flex en tête d'aileron pour une restitution explosive de l'énergie en sortie de manœuvre."
+        description: "Profil hydrodynamique rigide développé pour maximiser l'accroche dans les courbes appuyées. Flex contrôlé en tête d'aileron pour une restitution explosive de l'énergie en sortie de bottom-turn."
     },
     {
         id: "prod-boardshort-pro",
@@ -69,7 +69,7 @@ const SURF_CATALOG = [
             temperature: "Eaux Chaudes (> 21°C)",
             weight: "140 g"
         },
-        description: "Traitement déperlant hydrophobe DWR à séchage rapide. Ceinture ergonomique soudée éliminant tout point d'échauffement contre la peau. Zéro couture à l'entrejambe."
+        description: "Traitement déperlant hydrophobe DWR assurant un séchage ultra-rapide. Ceinture plate soudée éliminant tout point d'échauffement sur la planche. Conception sans couture d'entrejambe."
     },
     {
         id: "prod-top-uv",
@@ -85,11 +85,11 @@ const SURF_CATALOG = [
             temperature: "18°C - 24°C",
             weight: "180 g"
         },
-        description: "Bouclier anti-abrasion haute flexibilité prévenant les irritations dues à la wax. Maille respirante sous les aisselles évacuant l'excédent de chaleur durant l'effort physique."
+        description: "Bouclier anti-abrasion haute flexibilité prévenant les frottements dus à la wax. Maille respirante sous les bras facilitant l'évacuation calorifique lors de la rame active."
     },
     {
         id: "prod-leash-comp",
-        name: "Leash Haute Précision Comp 6ft",
+        name: "Leash Compétition Uréthane 6ft",
         category: "accessoires",
         price: 36.00,
         sizes: ["Unique"],
@@ -101,11 +101,11 @@ const SURF_CATALOG = [
             temperature: "Toutes saisons",
             weight: "160 g"
         },
-        description: "Émerillons doubles à roulement fluide en acier inoxydable 316L. Manchette de cheville matelassée en néoprène fin avec système d'ouverture d'urgence rapide."
+        description: "Émerillons doubles fluides en acier inoxydable de qualité marine 316L. Manchette de cheville rembourrée en néoprène avec tirette de dégagement d'urgence."
     },
     {
         id: "prod-wax-eco",
-        name: "Pack Pain de Wax Organique & Peigne",
+        name: "Pack Pain de Wax Bio & Peigne",
         category: "accessoires",
         price: 15.00,
         sizes: ["Unique"],
@@ -117,7 +117,7 @@ const SURF_CATALOG = [
             temperature: "Eaux Froides (9°C - 14°C)",
             weight: "85 g x 2"
         },
-        description: "Formule biodégradable exempte de dérivés pétrochimiques. Pouvoir d'accroche supérieur sous forme de billes denses. Livré avec un peigne ergonomique en bambou issu de forêts gérées durablement."
+        description: "Formule biodégradable sans dérivés de pétrole. Création de perles d'accroche régulières sous le pied. Livré avec un peigne ergonomique en bois durable."
     }
 ];
 
@@ -137,7 +137,7 @@ const AppState = {
 };
 
 // ==========================================================================
-// 3. GESTION DU STOCKAGE PERSISTANT DU PANIER (LOCALSTORAGE)
+// 3. PERSISTANCE DU PANIER (LOCALSTORAGE)
 // ==========================================================================
 function saveCartToStorage() {
     localStorage.setItem("aura_cart_v1", JSON.stringify(AppState.cart));
@@ -166,7 +166,7 @@ function addToCart(productId, size) {
     }
 
     saveCartToStorage();
-    showToastNotification(`Ajouté au panier : ${product.name} (${size})`);
+    showToastNotification(`Ajouté au Quiver : ${product.name} (${size})`);
 }
 
 function updateCartQuantity(index, delta) {
@@ -178,21 +178,20 @@ function updateCartQuantity(index, delta) {
 }
 
 // ==========================================================================
-// 4. RENDU GRAPHIQUE DES PRODUITS & FILTRES
+// 4. RENDU DYNAMIQUE DU CATALOGUE ET FILTRES SURF
 // ==========================================================================
 function renderProducts() {
     const grid = document.getElementById("products-grid");
     grid.innerHTML = "";
 
-    // Application du pipeline de filtrage
+    // Application du pipeline de tri et de filtrage
     let filtered = SURF_CATALOG.filter(item => {
-        const matchesCategory = (AppState.filters.category === "all") || (item.category === AppState.filters.category);
+        const matchesCat = (AppState.filters.category === "all") || (item.category === AppState.filters.category);
         const matchesPrice = item.price <= AppState.filters.maxPrice;
         const matchesSize = (AppState.filters.size === "all") || item.sizes.includes(AppState.filters.size);
-        return matchesCategory && matchesPrice && matchesSize;
+        return matchesCat && matchesPrice && matchesSize;
     });
 
-    // Application du tri
     if (AppState.filters.sort === "price-asc") {
         filtered.sort((a, b) => a.price - b.price);
     } else if (AppState.filters.sort === "price-desc") {
@@ -201,9 +200,9 @@ function renderProducts() {
 
     if (filtered.length === 0) {
         grid.innerHTML = `
-            <div style="grid-column: 1/-1; text-align: center; padding: 60px 0; color: var(--color-slate-500);">
-                <p style="font-size: 1.1rem; font-weight: 500;">Aucun équipement ne correspond à vos critères de sélection.</p>
-                <button class="pill" style="margin-top: 14px;" onclick="resetFilters()">Réinitialiser les filtres</button>
+            <div style="grid-column: 1/-1; text-align: center; padding: 60px 0; color: var(--color-text-muted);">
+                <p style="font-size: 1.1rem; font-weight: 600;">Aucun équipement disponible pour cette configuration de houle.</p>
+                <button class="tag-btn" style="margin-top: 14px;" onclick="resetFilters()">Réinitialiser les filtres</button>
             </div>
         `;
         return;
@@ -215,20 +214,20 @@ function renderProducts() {
         card.innerHTML = `
             <div class="card-media">
                 <img src="${product.image}" alt="${product.name}" loading="lazy">
-                <span class="badge-ar-support">
-                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <span class="ar-chip">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="vertical-align: middle; margin-right: 2px;">
                         <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
                     </svg>
                     3D / AR
                 </span>
             </div>
-            <div class="card-body">
+            <div class="card-info">
                 <span class="card-category">${product.category}</span>
                 <h3 class="card-title">${product.name}</h3>
                 <p class="card-price">${product.price.toFixed(2)} €</p>
-                <div class="card-actions">
-                    <button class="btn-secondary" onclick="openProductModal('${product.id}')">Examiner en 3D</button>
-                    <button class="btn-quick-add" aria-label="Ajouter directement" onclick="quickAddDefaultSize('${product.id}')">
+                <div class="card-action-bar">
+                    <button class="btn-inspect" onclick="openProductModal('${product.id}')">Inspecter en 3D</button>
+                    <button class="btn-quick-cart" aria-label="Ajouter au quiver" onclick="quickAddDefaultSize('${product.id}')">
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
                             <line x1="12" y1="5" x2="12" y2="19"></line>
                             <line x1="5" y1="12" x2="19" y2="12"></line>
@@ -248,19 +247,22 @@ function resetFilters() {
     AppState.filters.sort = "featured";
 
     document.getElementById("price-filter").value = 950;
-    document.getElementById("price-val").textContent = "950";
+    document.getElementById("price-val").textContent = "950 €";
     document.getElementById("size-filter").value = "all";
     document.getElementById("sort-select").value = "featured";
 
-    document.querySelectorAll(".pill").forEach(p => {
-        p.classList.toggle("active", p.dataset.filterCat === "all");
+    document.querySelectorAll(".tag-btn").forEach(btn => {
+        btn.classList.toggle("active", btn.dataset.filterCat === "all");
+    });
+    document.querySelectorAll(".nav-link").forEach(lnk => {
+        lnk.classList.toggle("active", lnk.dataset.category === "all");
     });
 
     renderProducts();
 }
 
 // ==========================================================================
-// 5. GESTION DE LA MODALE 3D ET RÉALITÉ AUGMENTÉE
+// 5. GESTION DE LA MODALE 3D / AR
 // ==========================================================================
 function openProductModal(productId) {
     const product = SURF_CATALOG.find(p => p.id === productId);
@@ -269,18 +271,15 @@ function openProductModal(productId) {
     AppState.activeModalProduct = product;
     AppState.selectedSize = product.sizes[0];
 
-    // Injection des données textuelles
     document.getElementById("modal-product-category").textContent = product.category;
     document.getElementById("modal-product-title").textContent = product.name;
     document.getElementById("modal-product-price").textContent = `${product.price.toFixed(2)} €`;
     document.getElementById("modal-product-desc").textContent = product.description;
 
-    // Fiche technique
     document.getElementById("modal-spec-material").textContent = product.specs.material;
     document.getElementById("modal-spec-temp").textContent = product.specs.temperature;
     document.getElementById("modal-spec-weight").textContent = product.specs.weight;
 
-    // Rendu des sélecteurs de gabarit
     const sizesContainer = document.getElementById("modal-sizes-container");
     sizesContainer.innerHTML = "";
     product.sizes.forEach(size => {
@@ -295,16 +294,14 @@ function openProductModal(productId) {
         sizesContainer.appendChild(sizeBtn);
     });
 
-    // Chargement dynamique du composant 3D
     const viewer = document.getElementById("main-model-viewer");
     viewer.setAttribute("src", product.modelGlb);
     if (product.modelUsdz) {
         viewer.setAttribute("ios-src", product.modelUsdz);
     } else {
-        viewer.removeAttribute("ios-src"); // Déclenchement de la conversion dynamique sur Safari
+        viewer.removeAttribute("ios-src");
     }
 
-    // Affichage modale
     const modal = document.getElementById("product-modal");
     modal.classList.add("active");
     modal.setAttribute("aria-hidden", "false");
@@ -316,8 +313,7 @@ function closeProductModal() {
     modal.classList.remove("active");
     modal.setAttribute("aria-hidden", "true");
     document.body.style.overflow = "";
-    
-    // Libération du contexte graphique WebGL
+
     const viewer = document.getElementById("main-model-viewer");
     viewer.removeAttribute("src");
 }
@@ -330,7 +326,7 @@ function quickAddDefaultSize(productId) {
 }
 
 // ==========================================================================
-// 6. SYNCHRONISATION DE L'INTERFACE UTILISATEUR DU PANIER
+// 6. SYNCHRONISATION DU PANIER & TOTAUX
 // ==========================================================================
 function updateCartUI() {
     const totalCount = AppState.cart.reduce((acc, item) => acc + item.qty, 0);
@@ -342,35 +338,34 @@ function updateCartUI() {
 
     if (AppState.cart.length === 0) {
         list.innerHTML = `
-            <div style="text-align: center; margin: auto; color: var(--color-slate-500);">
-                <p>Votre panier est vide.</p>
-                <span style="font-size: 0.8rem;">Ajoutez des pièces depuis l'atelier.</span>
+            <div style="text-align: center; margin: auto; color: var(--color-text-muted);">
+                <p style="font-weight: 600;">Votre quiver est vide.</p>
+                <span style="font-size: 0.82rem;">Sélectionnez vos pièces dans l'atelier.</span>
             </div>
         `;
     } else {
         AppState.cart.forEach((item, index) => {
-            const itemElement = document.createElement("div");
-            itemElement.className = "cart-item-card";
-            itemElement.innerHTML = `
+            const row = document.createElement("div");
+            row.className = "cart-item-card";
+            row.innerHTML = `
                 <img src="${item.image}" alt="${item.name}">
                 <div>
-                    <h4 class="cart-item-title">${item.name}</h4>
-                    <p class="cart-item-meta">Taille : <strong>${item.size}</strong> • ${(item.price).toFixed(2)} €</p>
-                    <div class="cart-qty-ctrl">
-                        <button class="cart-qty-btn" onclick="updateCartQuantity(${index}, -1)">-</button>
-                        <span style="font-size: 0.85rem; font-weight: 600;">${item.qty}</span>
-                        <button class="cart-qty-btn" onclick="updateCartQuantity(${index}, 1)">+</button>
+                    <h4 style="font-size: 0.88rem; font-weight: 700; color: var(--color-ocean-deep);">${item.name}</h4>
+                    <p style="font-size: 0.78rem; color: var(--color-text-muted);">Taille : <strong>${item.size}</strong> • ${item.price.toFixed(2)} €</p>
+                    <div style="display: flex; align-items: center; gap: 8px; margin-top: 6px;">
+                        <button style="width: 22px; height: 22px; border: 1px solid var(--color-border); background: #FFF; border-radius: 4px; cursor: pointer; font-weight: 700;" onclick="updateCartQuantity(${index}, -1)">-</button>
+                        <span style="font-size: 0.85rem; font-weight: 700;">${item.qty}</span>
+                        <button style="width: 22px; height: 22px; border: 1px solid var(--color-border); background: #FFF; border-radius: 4px; cursor: pointer; font-weight: 700;" onclick="updateCartQuantity(${index}, 1)">+</button>
                     </div>
                 </div>
-                <div style="font-weight: 700; font-size: 0.9rem;">
+                <div style="font-weight: 800; font-size: 0.92rem; color: var(--color-ocean-deep);">
                     ${(item.price * item.qty).toFixed(2)} €
                 </div>
             `;
-            list.appendChild(itemElement);
+            list.appendChild(row);
         });
     }
 
-    // Calculs financiers automatisés (HT, TVA 20%, TTC)
     const totalTTC = AppState.cart.reduce((acc, item) => acc + (item.price * item.qty), 0);
     const subtotalHT = totalTTC / 1.20;
     const tax = totalTTC - subtotalHT;
@@ -381,12 +376,18 @@ function updateCartUI() {
 }
 
 // ==========================================================================
-// 7. SYSTÈME DE TOASTS & INTERACTIONS GLOBALES
+// 7. SYSTÈME DE TOASTS ET ÉCOUTEURS D'ÉVÉNEMENTS
 // ==========================================================================
 function showToastNotification(message) {
     const hub = document.getElementById("toast-container");
     const toast = document.createElement("div");
-    toast.className = "toast";
+    toast.style.background = "var(--color-ocean-deep)";
+    toast.style.color = "#FFF";
+    toast.style.fontSize = "0.85rem";
+    toast.style.fontWeight = "600";
+    toast.style.padding = "12px 18px";
+    toast.style.borderRadius = "var(--radius-sm)";
+    toast.style.boxShadow = "var(--shadow-surf)";
     toast.textContent = message;
     hub.appendChild(toast);
 
@@ -395,63 +396,61 @@ function showToastNotification(message) {
         toast.style.transform = "translateY(10px)";
         toast.style.transition = "all 0.25s ease";
         setTimeout(() => toast.remove(), 250);
-    }, 3200);
+    }, 3000);
 }
 
-// Initialisation des écouteurs d'événements au chargement du DOM
 document.addEventListener("DOMContentLoaded", () => {
     renderProducts();
     updateCartUI();
 
-    // Filtres par Catégorie (Boutons Pill)
-    document.querySelectorAll(".pill").forEach(button => {
-        button.addEventListener("click", () => {
-            document.querySelectorAll(".pill").forEach(p => p.classList.remove("active"));
-            button.classList.add("active");
-            AppState.filters.category = button.dataset.filterCat;
+    // Filtres Catégories (Boutons Tags)
+    document.querySelectorAll(".tag-btn").forEach(btn => {
+        btn.addEventListener("click", () => {
+            document.querySelectorAll(".tag-btn").forEach(b => b.classList.remove("active"));
+            btn.classList.add("active");
+            AppState.filters.category = btn.dataset.filterCat;
             renderProducts();
         });
     });
 
-    // Navigation de l'en-tête (Synchronisée avec les pills)
-    document.querySelectorAll(".nav-link").forEach(navBtn => {
-        navBtn.addEventListener("click", () => {
-            document.querySelectorAll(".nav-link").forEach(n => n.classList.remove("active"));
-            navBtn.classList.add("active");
-            const cat = navBtn.dataset.category;
+    // Navigation de l'en-tête (Desktop Nav)
+    document.querySelectorAll(".nav-link[data-category]").forEach(lnk => {
+        lnk.addEventListener("click", () => {
+            document.querySelectorAll(".nav-link").forEach(l => l.classList.remove("active"));
+            lnk.classList.add("active");
+            const cat = lnk.dataset.category;
             AppState.filters.category = cat;
 
-            // Met à jour la sélection correspondante
-            document.querySelectorAll(".pill").forEach(p => {
-                p.classList.toggle("active", p.dataset.filterCat === cat);
+            document.querySelectorAll(".tag-btn").forEach(tb => {
+                tb.classList.toggle("active", tb.dataset.filterCat === cat);
             });
 
             renderProducts();
         });
     });
 
-    // Curseur de Prix
+    // Curseur Swell Slider (Filtre Prix)
     const priceSlider = document.getElementById("price-filter");
     priceSlider.addEventListener("input", (e) => {
         const val = parseFloat(e.target.value);
         AppState.filters.maxPrice = val;
-        document.getElementById("price-val").textContent = val;
+        document.getElementById("price-val").textContent = `${val} €`;
         renderProducts();
     });
 
-    // Sélecteur de Taille
+    // Sélecteur de gabarit
     document.getElementById("size-filter").addEventListener("change", (e) => {
         AppState.filters.size = e.target.value;
         renderProducts();
     });
 
-    // Sélecteur de Tri
+    // Sélecteur de tri
     document.getElementById("sort-select").addEventListener("change", (e) => {
         AppState.filters.sort = e.target.value;
         renderProducts();
     });
 
-    // Interactions de la Modale
+    // Modale 3D
     document.getElementById("modal-close-btn").addEventListener("click", closeProductModal);
     document.getElementById("product-modal").addEventListener("click", (e) => {
         if (e.target.id === "product-modal") closeProductModal();
@@ -465,7 +464,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-    // Tiroir Panier (Cart Drawer)
+    // Tiroir Latéral du Panier
     const cartToggle = document.getElementById("cart-toggle-btn");
     const cartClose = document.getElementById("cart-close-btn");
     const backdrop = document.getElementById("cart-backdrop");
@@ -479,12 +478,12 @@ document.addEventListener("DOMContentLoaded", () => {
     cartClose.addEventListener("click", () => toggleCartDrawer(false));
     backdrop.addEventListener("click", () => toggleCartDrawer(false));
 
-    // Déclencheur Checkout de Démonstration
+    // Déclencheur vers la page de paiement sécurisé checkout.html
     document.getElementById("checkout-trigger-btn").addEventListener("click", () => {
         if (AppState.cart.length === 0) {
-            showToastNotification("Votre sélection est vide.");
+            showToastNotification("Votre quiver est vide. Ajoutez un article avant de payer.");
             return;
         }
-        alert("Redirection vers la passerelle de paiement sécurisée A2A / Apple Pay.");
+        window.location.href = "checkout.html";
     });
 });
