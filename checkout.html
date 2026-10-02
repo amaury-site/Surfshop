@@ -62,7 +62,7 @@
             content: "";
             position: absolute;
             top: 50%;
-            width: 42%;
+            width: 40%;
             height: 1px;
             background: var(--color-border);
         }
@@ -80,7 +80,7 @@
             <a href="index.html" class="brand-logo">
                 <span>AURA</span><span class="brand-badge">CHECKOUT</span>
             </a>
-            <a href="index.html" class="nav-link">← Retour à l'Atelier</a>
+            <a href="index.html" class="nav-link">&larr; Retour à l'Atelier</a>
         </div>
     </header>
 
@@ -94,12 +94,12 @@
             <!-- Formulaire de Livraison et de Règlement -->
             <section class="page-card">
                 <button type="button" class="apple-pay-btn" onclick="simulatePayment('Apple Pay')">
-                    Payer avec Pay
+                    Payer avec Apple Pay
                 </button>
                 <div class="divider">OU PAR CARTE BANCAIRE</div>
 
                 <form id="payment-form" onsubmit="handleFormCheckout(event)">
-                    <h3 style="margin-bottom: 16px; font-size: 1.1rem;">1. Coordonnées & Livraison</h3>
+                    <h3 style="margin-bottom: 16px; font-size: 1.1rem;">1. Coordonnées &amp; Livraison</h3>
                     <div class="form-row">
                         <div class="form-group">
                             <label for="firstname">Prénom</label>
@@ -111,12 +111,12 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="email">Adresse E-mail (Confirmation de commande)</label>
+                        <label for="email">Adresse E-mail (Confirmation &amp; Suivi WMS)</label>
                         <input type="email" id="email" class="form-control" required placeholder="alex.dupont@surf.fr">
                     </div>
                     <div class="form-group">
                         <label for="address">Adresse de livraison</label>
-                        <input type="text" id="address" class="form-control" required placeholder="14 Avenue de la Plage">
+                        <input type="text" id="address" class="form-control" required placeholder="14 Avenue de la Côte des Basques">
                     </div>
                     <div class="form-row">
                         <div class="form-group">
@@ -132,7 +132,7 @@
                     <h3 style="margin: 24px 0 16px; font-size: 1.1rem;">2. Informations Bancaires</h3>
                     <div class="form-group">
                         <label for="card-num">Numéro de Carte Bancaire</label>
-                        <input type="text" id="card-num" class="form-control" maxlength="19" required placeholder="4970 •••• •••• ••••">
+                        <input type="text" id="card-num" class="form-control" maxlength="19" required placeholder="4970 &bull;&bull;&bull;&bull; &bull;&bull;&bull;&bull; &bull;&bull;&bull;&bull;">
                     </div>
                     <div class="form-row">
                         <div class="form-group">
@@ -154,9 +154,8 @@
             <!-- Récapitulatif de Commande Dynamique -->
             <aside class="page-card" style="height: fit-content;">
                 <h3 style="margin-bottom: 20px; font-size: 1.1rem;">Votre Sélection</h3>
-                <div id="checkout-items-list" style="display: flex; flex-direction: column; gap: 14px; margin-bottom: 20px;">
-                    <!-- Injecté en JavaScript -->
-                </div>
+                <div id="checkout-items-list" style="display: flex; flex-direction: column; gap: 14px; margin-bottom: 20px;"></div>
+                
                 <div style="border-top: 1px solid var(--color-border); padding-top: 14px;">
                     <div class="cart-summary-line">
                         <span>Sous-total HT</span>
@@ -168,7 +167,7 @@
                     </div>
                     <div class="cart-summary-line">
                         <span>Livraison Océan Neutre Carbone</span>
-                        <span style="color: var(--color-foam-teal); font-weight: 700;">Gratuite</span>
+                        <span id="co-shipping" style="color: var(--color-foam-teal); font-weight: 700;">Gratuite</span>
                     </div>
                     <div class="cart-summary-line total-line">
                         <span>Total TTC</span>
@@ -180,13 +179,12 @@
     </main>
 
     <script>
-        // Lecture et rendu du panier local
         const cart = JSON.parse(localStorage.getItem("aura_cart_v1")) || [];
         const container = document.getElementById("checkout-items-list");
         
         let total = 0;
         if (cart.length === 0) {
-            container.innerHTML = "<p style='color: var(--color-text-muted); font-size: 0.9rem;'>Votre panier est vide. Veuillez ajouter un article depuis l'accueil.</p>";
+            container.innerHTML = "<p style='color: var(--color-text-muted); font-size: 0.9rem;'>Votre quiver est vide. Veuillez ajouter un article depuis l'accueil.</p>";
         } else {
             cart.forEach(item => {
                 total += item.price * item.qty;
@@ -212,16 +210,16 @@
         document.getElementById("co-total").textContent = total.toFixed(2) + " €";
 
         function simulatePayment(method) {
-            if (cart.length === 0) return alert("Votre panier est vide.");
-            alert("Authentification biométrique réussie avec " + method + ". Commande #SURF-" + Math.floor(Math.random()*90000 + 10000) + " confirmée !");
+            if (cart.length === 0) return alert("Votre quiver est vide.");
+            alert("Règlement validé par " + method + " ! Commande #SURF-" + Math.floor(Math.random()*90000 + 10000) + " transmise au WMS de Biarritz.");
             localStorage.removeItem("aura_cart_v1");
             window.location.href = "index.html";
         }
 
         function handleFormCheckout(e) {
             e.preventDefault();
-            if (cart.length === 0) return alert("Votre panier est vide.");
-            alert("Paiement validé par 3D-Secure ! Vos équipements sont en cours de préparation dans notre atelier de Biarritz.");
+            if (cart.length === 0) return alert("Votre quiver est vide.");
+            alert("Paiement 3D-Secure certifié ! Vos équipements sont en cours de préparation dans notre atelier.");
             localStorage.removeItem("aura_cart_v1");
             window.location.href = "index.html";
         }
