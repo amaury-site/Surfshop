@@ -1,10 +1,10 @@
 /**
- * AURA SURF STUDIO - Logique E-Commerce & WebAR
- * Synchronisation du catalogue, jauge Swell Slider, panier persistent et routage de paiement
+ * AURA SURF STUDIO - Logique E-Commerce, WebAR & Système d'Information
+ * Synchronisation du catalogue, inventaire WMS par taille, calculs franco et interactions 3D
  */
 
 // ==========================================================================
-// 1. BASE DE DONNÉES CATALOGUE TECHNIQUE SURF
+// 1. BASE DE DONNÉES CATALOGUE AVEC STOCKS WMS & SPÉCIFICATIONS TEXTILES
 // ==========================================================================
 const SURF_CATALOG = [
     {
@@ -13,15 +13,18 @@ const SURF_CATALOG = [
         category: "combinaisons",
         price: 389.00,
         sizes: ["XS", "S", "M", "L", "XL"],
+        stock: { "XS": 3, "S": 5, "M": 0, "L": 4, "XL": 2 }, // Taille M en rupture pour simuler le stock WMS
+        fit: "Coupe Compression Seconde Peau",
         image: "https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=600&q=80",
         modelGlb: "https://raw.githubusercontent.com/KhronosGroup/glTF-Sample-Assets/main/Models/MaterialsVariantsShoe/glTF-Binary/MaterialsVariantsShoe.glb",
         modelUsdz: "",
         specs: {
             material: "Néoprène Calcaire Yamamoto 4/3mm",
             temperature: "10°C - 15°C (Eaux Froides)",
-            weight: "1.150 kg"
+            weight: "1.150 kg",
+            care: "Rincer à l'eau douce, séchage cintre large à l'ombre"
         },
-        description: "Assemblage en néoprène calcaire à cellules étanches. Coutures cousues-collées galonnées (GBS). Plastron frontal thermo-réflecteur pour une conservation calorifique optimale lors des sessions hivernales."
+        description: "Assemblage en néoprène calcaire à cellules étanches. Coutures cousues-collées galonnées (GBS). Plastron frontal thermo-réflecteur pour une conservation calorifique maximale lors des sessions hivernales."
     },
     {
         id: "prod-board-thruster",
@@ -29,13 +32,16 @@ const SURF_CATALOG = [
         category: "planches",
         price: 749.00,
         sizes: ["5'11", "6'2"],
+        stock: { "5'11": 2, "6'2": 3 },
+        fit: "Hydrodynamique Haute Performance",
         image: "https://images.unsplash.com/photo-1502680390469-be75c86b636f?auto=format&fit=crop&w=600&q=80",
         modelGlb: "https://raw.githubusercontent.com/KhronosGroup/glTF-Sample-Assets/main/Models/ToyCar/glTF-Binary/ToyCar.glb",
         modelUsdz: "",
         specs: {
             material: "Noyau EPS Usiné CNC & Résine Époxy",
             temperature: "Toutes saisons",
-            weight: "2.450 kg (Volume 29.5 L)"
+            weight: "2.450 kg (Volume 29.5 L)",
+            care: "Housse réfléchissante, éviter l'exposition en plein soleil"
         },
         description: "Glaçage sous vide hybride carbone et fibre biaxiale. Ligne de rocker tendue conférant une relance immédiate en section creuse. Carène en concave simple évoluant vers un double concave aux ailerons."
     },
@@ -45,15 +51,18 @@ const SURF_CATALOG = [
         category: "accessoires",
         price: 119.00,
         sizes: ["M", "L"],
+        stock: { "M": 6, "L": 4 },
+        fit: "Gabarit Moyen à Lourd (65 - 85 kg)",
         image: "https://images.unsplash.com/photo-1537519646099-335112f03225?auto=format&fit=crop&w=600&q=80",
         modelGlb: "https://raw.githubusercontent.com/KhronosGroup/glTF-Sample-Assets/main/Models/MaterialsVariantsShoe/glTF-Binary/MaterialsVariantsShoe.glb",
         modelUsdz: "",
         specs: {
             material: "Fibre de Carbone Sergé & Résine RTM",
             temperature: "Universelle",
-            weight: "210 g (le set de 3)"
+            weight: "210 g (le set de 3)",
+            care: "Vérifier l'absence de sable dans les boîtiers"
         },
-        description: "Profil hydrodynamique rigide développé pour maximiser l'accroche dans les courbes appuyées. Flex contrôlé en tête d'aileron pour une restitution explosive de l'énergie en sortie de bottom-turn."
+        description: "Profil rigide développé pour maximiser l'accroche dans les courbes appuyées. Flex en tête d'aileron pour une restitution dynamique de la vitesse en sortie de courbe."
     },
     {
         id: "prod-boardshort-pro",
@@ -61,15 +70,18 @@ const SURF_CATALOG = [
         category: "combinaisons",
         price: 79.00,
         sizes: ["S", "M", "L", "XL"],
+        stock: { "S": 3, "M": 8, "L": 5, "XL": 2 },
+        fit: "Coupe Droite Anti-Irritation",
         image: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=600&q=80",
         modelGlb: "https://raw.githubusercontent.com/KhronosGroup/glTF-Sample-Assets/main/Models/ToyCar/glTF-Binary/ToyCar.glb",
         modelUsdz: "",
         specs: {
             material: "Polyester Recyclé 4-Way Stretch (88%)",
             temperature: "Eaux Chaudes (> 21°C)",
-            weight: "140 g"
+            weight: "140 g",
+            care: "Lavage machine 30°C sans assouplissant"
         },
-        description: "Traitement déperlant hydrophobe DWR assurant un séchage ultra-rapide. Ceinture plate soudée éliminant tout point d'échauffement sur la planche. Conception sans couture d'entrejambe."
+        description: "Traitement déperlant DWR à séchage rapide. Ceinture plate sans couture éliminant les points de frottement contre la wax de la planche."
     },
     {
         id: "prod-top-uv",
@@ -77,15 +89,18 @@ const SURF_CATALOG = [
         category: "combinaisons",
         price: 49.00,
         sizes: ["XS", "S", "M", "L", "XL"],
+        stock: { "XS": 4, "S": 6, "M": 7, "L": 0, "XL": 3 },
+        fit: "Coupe Ajustée Athlétique",
         image: "https://images.unsplash.com/photo-1506929562872-bb421503ef21?auto=format&fit=crop&w=600&q=80",
         modelGlb: "https://raw.githubusercontent.com/KhronosGroup/glTF-Sample-Assets/main/Models/MaterialsVariantsShoe/glTF-Binary/MaterialsVariantsShoe.glb",
         modelUsdz: "",
         specs: {
             material: "Lycra Élasthanne Bloqueur UVA/UVB",
             temperature: "18°C - 24°C",
-            weight: "180 g"
+            weight: "180 g",
+            care: "Rinçage immédiat après contact avec l'eau salée"
         },
-        description: "Bouclier anti-abrasion haute flexibilité prévenant les frottements dus à la wax. Maille respirante sous les bras facilitant l'évacuation calorifique lors de la rame active."
+        description: "Bouclier anti-abrasion haute flexibilité prévenant les rougeurs. Panneaux latéraux respirants évacuant l'excédent thermique lors des phases de rame soutenues."
     },
     {
         id: "prod-leash-comp",
@@ -93,15 +108,18 @@ const SURF_CATALOG = [
         category: "accessoires",
         price: 36.00,
         sizes: ["Unique"],
+        stock: { "Unique": 12 },
+        fit: "Vagues de 0.5m à 2.0m",
         image: "https://images.unsplash.com/photo-1455729552865-3658a5d39692?auto=format&fit=crop&w=600&q=80",
         modelGlb: "https://raw.githubusercontent.com/KhronosGroup/glTF-Sample-Assets/main/Models/ToyCar/glTF-Binary/ToyCar.glb",
         modelUsdz: "",
         specs: {
             material: "Uréthane Extrudé 6mm & Inox Marine",
             temperature: "Toutes saisons",
-            weight: "160 g"
+            weight: "160 g",
+            care: "Stocker déroulé, sans boucle serrée"
         },
-        description: "Émerillons doubles fluides en acier inoxydable de qualité marine 316L. Manchette de cheville rembourrée en néoprène avec tirette de dégagement d'urgence."
+        description: "Émerillons doubles fluides en acier inoxydable 316L. Manchette de cheville rembourrée en néoprène doux avec boucle d'ouverture rapide d'urgence."
     },
     {
         id: "prod-wax-eco",
@@ -109,20 +127,23 @@ const SURF_CATALOG = [
         category: "accessoires",
         price: 15.00,
         sizes: ["Unique"],
+        stock: { "Unique": 25 },
+        fit: "Universel Tous Ponts",
         image: "https://images.unsplash.com/photo-1515238152791-8216bfdf89a7?auto=format&fit=crop&w=600&q=80",
         modelGlb: "https://raw.githubusercontent.com/KhronosGroup/glTF-Sample-Assets/main/Models/MaterialsVariantsShoe/glTF-Binary/MaterialsVariantsShoe.glb",
         modelUsdz: "",
         specs: {
             material: "Cire d'Abeille Bio & Résine de Pin",
             temperature: "Eaux Froides (9°C - 14°C)",
-            weight: "85 g x 2"
+            weight: "85 g x 2",
+            care: "Conserver dans son étui à l'abri de la chaleur"
         },
-        description: "Formule biodégradable sans dérivés de pétrole. Création de perles d'accroche régulières sous le pied. Livré avec un peigne ergonomique en bois durable."
+        description: "Formule biodégradable sans dérivés pétrochimiques. Création de perles d'accroche régulières et adhérentes. Livré avec un peigne ergonomique en bambou."
     }
 ];
 
 // ==========================================================================
-// 2. ÉTAT GLOBAL DE L'APPLICATION (APPLICATION STATE)
+// 2. ÉTAT GLOBAL DE L'APPLICATION
 // ==========================================================================
 const AppState = {
     filters: {
@@ -137,7 +158,7 @@ const AppState = {
 };
 
 // ==========================================================================
-// 3. PERSISTANCE DU PANIER (LOCALSTORAGE)
+// 3. PERSISTANCE ET CALCULS DU PANIER
 // ==========================================================================
 function saveCartToStorage() {
     localStorage.setItem("aura_cart_v1", JSON.stringify(AppState.cart));
@@ -147,6 +168,11 @@ function saveCartToStorage() {
 function addToCart(productId, size) {
     const product = SURF_CATALOG.find(item => item.id === productId);
     if (!product) return;
+
+    if (product.stock[size] === 0) {
+        showToastNotification(`La taille ${size} est actuellement épuisée.`);
+        return;
+    }
 
     const existingIndex = AppState.cart.findIndex(
         entry => entry.id === productId && entry.size === size
@@ -177,14 +203,18 @@ function updateCartQuantity(index, delta) {
     saveCartToStorage();
 }
 
+function removeCartItem(index) {
+    AppState.cart.splice(index, 1);
+    saveCartToStorage();
+}
+
 // ==========================================================================
-// 4. RENDU DYNAMIQUE DU CATALOGUE ET FILTRES SURF
+// 4. RENDU DYNAMIQUE DU CATALOGUE ET DES FILTRES
 // ==========================================================================
 function renderProducts() {
     const grid = document.getElementById("products-grid");
     grid.innerHTML = "";
 
-    // Application du pipeline de tri et de filtrage
     let filtered = SURF_CATALOG.filter(item => {
         const matchesCat = (AppState.filters.category === "all") || (item.category === AppState.filters.category);
         const matchesPrice = item.price <= AppState.filters.maxPrice;
@@ -202,7 +232,7 @@ function renderProducts() {
         grid.innerHTML = `
             <div style="grid-column: 1/-1; text-align: center; padding: 60px 0; color: var(--color-text-muted);">
                 <p style="font-size: 1.1rem; font-weight: 600;">Aucun équipement disponible pour cette configuration de houle.</p>
-                <button class="tag-btn" style="margin-top: 14px;" onclick="resetFilters()">Réinitialiser les filtres</button>
+                <button type="button" class="tag-btn" style="margin-top: 14px;" onclick="resetFilters()">Réinitialiser les filtres</button>
             </div>
         `;
         return;
@@ -226,8 +256,8 @@ function renderProducts() {
                 <h3 class="card-title">${product.name}</h3>
                 <p class="card-price">${product.price.toFixed(2)} €</p>
                 <div class="card-action-bar">
-                    <button class="btn-inspect" onclick="openProductModal('${product.id}')">Inspecter en 3D</button>
-                    <button class="btn-quick-cart" aria-label="Ajouter au quiver" onclick="quickAddDefaultSize('${product.id}')">
+                    <button type="button" class="btn-inspect" onclick="openProductModal('${product.id}')">Inspecter en 3D</button>
+                    <button type="button" class="btn-quick-cart" aria-label="Ajouter au quiver" onclick="quickAddDefaultSize('${product.id}')">
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
                             <line x1="12" y1="5" x2="12" y2="19"></line>
                             <line x1="5" y1="12" x2="19" y2="12"></line>
@@ -254,7 +284,7 @@ function resetFilters() {
     document.querySelectorAll(".tag-btn").forEach(btn => {
         btn.classList.toggle("active", btn.dataset.filterCat === "all");
     });
-    document.querySelectorAll(".nav-link").forEach(lnk => {
+    document.querySelectorAll(".nav-link[data-category]").forEach(lnk => {
         lnk.classList.toggle("active", lnk.dataset.category === "all");
     });
 
@@ -262,38 +292,51 @@ function resetFilters() {
 }
 
 // ==========================================================================
-// 5. GESTION DE LA MODALE 3D / AR
+// 5. GESTION DE LA MODALE 3D, DES STOCKS ET DU CONFORT TEXTILE
 // ==========================================================================
 function openProductModal(productId) {
     const product = SURF_CATALOG.find(p => p.id === productId);
     if (!product) return;
 
     AppState.activeModalProduct = product;
-    AppState.selectedSize = product.sizes[0];
+
+    // Définir la première taille disponible en stock par défaut
+    const firstAvailableSize = product.sizes.find(s => product.stock[s] > 0) || product.sizes[0];
+    AppState.selectedSize = firstAvailableSize;
 
     document.getElementById("modal-product-category").textContent = product.category;
     document.getElementById("modal-product-title").textContent = product.name;
     document.getElementById("modal-product-price").textContent = `${product.price.toFixed(2)} €`;
     document.getElementById("modal-product-desc").textContent = product.description;
+    document.getElementById("modal-fit-badge").textContent = `Coupe : ${product.fit}`;
 
     document.getElementById("modal-spec-material").textContent = product.specs.material;
     document.getElementById("modal-spec-temp").textContent = product.specs.temperature;
     document.getElementById("modal-spec-weight").textContent = product.specs.weight;
+    document.getElementById("modal-spec-care").textContent = product.specs.care;
 
+    // Rendu des boutons de taille avec contrôle de disponibilité WMS
     const sizesContainer = document.getElementById("modal-sizes-container");
     sizesContainer.innerHTML = "";
+
     product.sizes.forEach(size => {
+        const inStock = product.stock[size] > 0;
         const sizeBtn = document.createElement("button");
-        sizeBtn.className = `size-btn ${size === AppState.selectedSize ? "selected" : ""}`;
-        sizeBtn.textContent = size;
-        sizeBtn.addEventListener("click", () => {
-            document.querySelectorAll(".size-btn").forEach(b => b.classList.remove("selected"));
-            sizeBtn.classList.add("selected");
-            AppState.selectedSize = size;
-        });
+        sizeBtn.type = "button";
+        sizeBtn.className = `size-btn ${size === AppState.selectedSize ? "selected" : ""} ${!inStock ? "disabled" : ""}`;
+        sizeBtn.textContent = size + (!inStock ? " (Épuisé)" : "");
+        
+        if (inStock) {
+            sizeBtn.addEventListener("click", () => {
+                document.querySelectorAll(".size-btn").forEach(b => b.classList.remove("selected"));
+                sizeBtn.classList.add("selected");
+                AppState.selectedSize = size;
+            });
+        }
         sizesContainer.appendChild(sizeBtn);
     });
 
+    // Chargement du modèle 3D
     const viewer = document.getElementById("main-model-viewer");
     viewer.setAttribute("src", product.modelGlb);
     if (product.modelUsdz) {
@@ -321,12 +364,17 @@ function closeProductModal() {
 function quickAddDefaultSize(productId) {
     const product = SURF_CATALOG.find(p => p.id === productId);
     if (product) {
-        addToCart(product.id, product.sizes[0]);
+        const available = product.sizes.find(s => product.stock[s] > 0);
+        if (available) {
+            addToCart(product.id, available);
+        } else {
+            showToastNotification("Article actuellement en rupture de stock.");
+        }
     }
 }
 
 // ==========================================================================
-// 6. SYNCHRONISATION DU PANIER & TOTAUX
+// 6. SYNCHRONISATION DU PANIER & FRANCO DE PORT
 // ==========================================================================
 function updateCartUI() {
     const totalCount = AppState.cart.reduce((acc, item) => acc + item.qty, 0);
@@ -353,13 +401,16 @@ function updateCartUI() {
                     <h4 style="font-size: 0.88rem; font-weight: 700; color: var(--color-ocean-deep);">${item.name}</h4>
                     <p style="font-size: 0.78rem; color: var(--color-text-muted);">Taille : <strong>${item.size}</strong> • ${item.price.toFixed(2)} €</p>
                     <div style="display: flex; align-items: center; gap: 8px; margin-top: 6px;">
-                        <button style="width: 22px; height: 22px; border: 1px solid var(--color-border); background: #FFF; border-radius: 4px; cursor: pointer; font-weight: 700;" onclick="updateCartQuantity(${index}, -1)">-</button>
+                        <button type="button" style="width: 22px; height: 22px; border: 1px solid var(--color-border); background: #FFF; border-radius: 4px; cursor: pointer; font-weight: 700;" onclick="updateCartQuantity(${index}, -1)">-</button>
                         <span style="font-size: 0.85rem; font-weight: 700;">${item.qty}</span>
-                        <button style="width: 22px; height: 22px; border: 1px solid var(--color-border); background: #FFF; border-radius: 4px; cursor: pointer; font-weight: 700;" onclick="updateCartQuantity(${index}, 1)">+</button>
+                        <button type="button" style="width: 22px; height: 22px; border: 1px solid var(--color-border); background: #FFF; border-radius: 4px; cursor: pointer; font-weight: 700;" onclick="updateCartQuantity(${index}, 1)">+</button>
                     </div>
                 </div>
-                <div style="font-weight: 800; font-size: 0.92rem; color: var(--color-ocean-deep);">
-                    ${(item.price * item.qty).toFixed(2)} €
+                <div style="text-align: right;">
+                    <button type="button" style="background: none; border: none; color: #94A3B8; cursor: pointer; font-size: 0.8rem; margin-bottom: 4px;" onclick="removeCartItem(${index})" aria-label="Supprimer l'article">&times;</button>
+                    <div style="font-weight: 800; font-size: 0.92rem; color: var(--color-ocean-deep);">
+                        ${(item.price * item.qty).toFixed(2)} €
+                    </div>
                 </div>
             `;
             list.appendChild(row);
@@ -373,10 +424,25 @@ function updateCartUI() {
     document.getElementById("cart-subtotal").textContent = `${subtotalHT.toFixed(2)} €`;
     document.getElementById("cart-tax").textContent = `${tax.toFixed(2)} €`;
     document.getElementById("cart-total").textContent = `${totalTTC.toFixed(2)} €`;
+
+    // Calcul de la jauge de livraison gratuite (Franco à 100€)
+    const threshold = 100.0;
+    const progressFill = document.getElementById("shipping-progress-fill");
+    const progressText = document.getElementById("shipping-progress-text");
+
+    if (totalTTC >= threshold) {
+        progressFill.style.width = "100%";
+        progressText.textContent = "Livraison neutre en carbone offerte !";
+    } else {
+        const remaining = (threshold - totalTTC).toFixed(2);
+        const percent = Math.min((totalTTC / threshold) * 100, 100);
+        progressFill.style.width = `${percent}%`;
+        progressText.textContent = `Plus que ${remaining} € pour débloquer la livraison gratuite`;
+    }
 }
 
 // ==========================================================================
-// 7. SYSTÈME DE TOASTS ET ÉCOUTEURS D'ÉVÉNEMENTS
+// 7. TOASTS, MENU MOBILE & INITIALISATION
 // ==========================================================================
 function showToastNotification(message) {
     const hub = document.getElementById("toast-container");
@@ -403,7 +469,7 @@ document.addEventListener("DOMContentLoaded", () => {
     renderProducts();
     updateCartUI();
 
-    // Filtres Catégories (Boutons Tags)
+    // Filtres Catégories
     document.querySelectorAll(".tag-btn").forEach(btn => {
         btn.addEventListener("click", () => {
             document.querySelectorAll(".tag-btn").forEach(b => b.classList.remove("active"));
@@ -413,7 +479,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
-    // Navigation de l'en-tête (Desktop Nav)
+    // Navigation Bureau
     document.querySelectorAll(".nav-link[data-category]").forEach(lnk => {
         lnk.addEventListener("click", () => {
             document.querySelectorAll(".nav-link").forEach(l => l.classList.remove("active"));
@@ -429,7 +495,16 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
-    // Curseur Swell Slider (Filtre Prix)
+    // Menu Mobile Burger
+    const mobileMenuBtn = document.getElementById("mobile-menu-btn");
+    const mobileNavDrawer = document.getElementById("mobile-nav-drawer");
+    if (mobileMenuBtn && mobileNavDrawer) {
+        mobileMenuBtn.addEventListener("click", () => {
+            mobileNavDrawer.classList.toggle("open");
+        });
+    }
+
+    // Curseur Prix Swell Slider
     const priceSlider = document.getElementById("price-filter");
     priceSlider.addEventListener("input", (e) => {
         const val = parseFloat(e.target.value);
@@ -438,13 +513,12 @@ document.addEventListener("DOMContentLoaded", () => {
         renderProducts();
     });
 
-    // Sélecteur de gabarit
+    // Sélecteurs de tri et de taille
     document.getElementById("size-filter").addEventListener("change", (e) => {
         AppState.filters.size = e.target.value;
         renderProducts();
     });
 
-    // Sélecteur de tri
     document.getElementById("sort-select").addEventListener("change", (e) => {
         AppState.filters.sort = e.target.value;
         renderProducts();
@@ -464,7 +538,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-    // Tiroir Latéral du Panier
+    // Tiroir Panier
     const cartToggle = document.getElementById("cart-toggle-btn");
     const cartClose = document.getElementById("cart-close-btn");
     const backdrop = document.getElementById("cart-backdrop");
@@ -478,10 +552,10 @@ document.addEventListener("DOMContentLoaded", () => {
     cartClose.addEventListener("click", () => toggleCartDrawer(false));
     backdrop.addEventListener("click", () => toggleCartDrawer(false));
 
-    // Déclencheur vers la page de paiement sécurisé checkout.html
+    // Redirection vers le paiement
     document.getElementById("checkout-trigger-btn").addEventListener("click", () => {
         if (AppState.cart.length === 0) {
-            showToastNotification("Votre quiver est vide. Ajoutez un article avant de payer.");
+            showToastNotification("Votre quiver est vide. Ajoutez un article avant de régler.");
             return;
         }
         window.location.href = "checkout.html";
