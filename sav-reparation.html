@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Atelier Réparation &amp; Retours • AURA SURF</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <header class="site-header">
+        <div class="header-container">
+            <a href="index.html" class="brand-logo">
+                <span>AURA</span><span class="brand-badge">CARE LAB</span>
+            </a>
+            <a href="index.html" class="nav-link">&larr; Retour à l'Atelier</a>
+        </div>
+    </header>
+
+    <main class="page-container">
+        <div class="page-header">
+            <span class="hero-tag">Circularité &amp; Rassurance Client</span>
+            <h1>Atelier Réparation &amp; Retours Simplifiés</h1>
+            <p style="color: var(--color-text-muted); margin-top: 8px;">Prolonger la durée de vie de vos équipements et garantir un échange sans friction en cas d'erreur de taille.</p>
+        </div>
+
+        <section class="page-card">
+            <h2 style="font-size: 1.35rem; color: var(--color-ocean-deep); margin-bottom: 12px;">1. Retours Gratuits sous 30 Jours (Anti-Risque Taille)</h2>
+            <p style="font-size: 0.95rem; color: var(--color-text-muted); line-height: 1.6; margin-bottom: 16px;">
+                Si votre combinaison ou votre top UV ne convient pas parfaitement à votre morphologie lors du premier essayage à sec, vous disposez de 30 jours pour effectuer un échange de taille sans frais de port.
+            </p>
+            <div style="background: var(--color-foam-light); padding: 16px; border-radius: var(--radius-sm); font-size: 0.85rem; color: var(--color-ocean-dark);">
+                <strong>Procédure de retour WMS :</strong> Générez votre étiquette prépayée depuis votre e-mail de confirmation, indiquez le motif pour nourrir nos algorithmes de fit, et déposez votre colis dans un point relais.
+            </div>
+        </section>
+
+        <section class="page-card">
+            <h2 style="font-size: 1.35rem; color: var(--color-ocean-deep); margin-bottom: 12px;">2. Garantie Coutures 3 Ans &amp; Atelier Biarritz</h2>
+            <p style="font-size: 0.95rem; color: var(--color-text-muted); line-height: 1.6;">
+                Un accroc d'aileron ou un galon décollé ? Plutôt que de jeter, envoyez votre combinaison à notre atelier basque. Nous réparons le néoprène à la colle néoprène noire polymérisée et réappliquons un galon étanche thermo-soudé.
+            </p>
+        </section>
+
+        <section class="page-card">
+            <h2 style="font-size: 1.35rem; color: var(--color-ocean-deep); margin-bottom: 12px;">3. Déclarer une Réparation ou un Échange</h2>
+            <form onsubmit="event.preventDefault(); alert('Dossier SAV enregistré ! Notre atelier logistique vous contacte sous 24h avec votre bon d\'expédition.');">
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 14px;">
+                    <div>
+                        <label for="order-ref" style="font-size: 0.8rem; font-weight: 700; text-transform: uppercase;">N° de Commande</label>
+                        <input type="text" id="order-ref" required placeholder="#SURF-XXXXX" style="width: 100%; padding: 10px; border: 1px solid var(--color-border); border-radius: var(--radius-sm); margin-top: 4px;">
+                    </div>
+                    <div>
+                        <label for="action-type" style="font-size: 0.8rem; font-weight: 700; text-transform: uppercase;">Type de Demande</label>
+                        <select id="action-type" style="width: 100%; padding: 10px; border: 1px solid var(--color-border); border-radius: var(--radius-sm); margin-top: 4px;">
+                            <option>Échange de taille (Mauvais fit)</option>
+                            <option>Réparation de couture sous garantie</option>
+                            <option>Recyclage fin de vie</option>
+                        </select>
+                    </div>
+                </div>
+                <button type="submit" class="btn-primary" style="width: fit-content;">Soumettre à l'Atelier</button>
+            </form>
+        </section>
+    </main>
+</body>
+</html>
