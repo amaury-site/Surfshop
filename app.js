@@ -4,7 +4,7 @@
  */
 
 // ==========================================================================
-// 1. BASE DE DONNÉES CATALOGUE AVEC STOCKS WMS & SPÉCIFICATIONS TEXTILES
+// 1. BASE DE DONNÉES CATALOGUE AVEC IMAGES PRODUITS RÉELLES
 // ==========================================================================
 const SURF_CATALOG = [
     {
@@ -13,9 +13,10 @@ const SURF_CATALOG = [
         category: "combinaisons",
         price: 389.00,
         sizes: ["XS", "S", "M", "L", "XL"],
-        stock: { "XS": 3, "S": 5, "M": 0, "L": 4, "XL": 2 }, // Taille M en rupture pour simuler le stock WMS
+        stock: { "XS": 3, "S": 5, "M": 0, "L": 4, "XL": 2 },
         fit: "Coupe Compression Seconde Peau",
-        image: "https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=600&q=80",
+        // Remplacez par "assets/images/combinaison-43.jpg" après avoir placé votre photo dans GitHub
+        image: "https://images.unsplash.com/photo-1502680390469-be75c86b636f?auto=format&fit=crop&w=800&q=80",
         modelGlb: "https://raw.githubusercontent.com/KhronosGroup/glTF-Sample-Assets/main/Models/MaterialsVariantsShoe/glTF-Binary/MaterialsVariantsShoe.glb",
         modelUsdz: "",
         specs: {
@@ -34,7 +35,7 @@ const SURF_CATALOG = [
         sizes: ["5'11", "6'2"],
         stock: { "5'11": 2, "6'2": 3 },
         fit: "Hydrodynamique Haute Performance",
-        image: "https://images.unsplash.com/photo-1502680390469-be75c86b636f?auto=format&fit=crop&w=600&q=80",
+        image: "https://images.unsplash.com/photo-1531722564168-6c8d35704d9c?auto=format&fit=crop&w=800&q=80",
         modelGlb: "https://raw.githubusercontent.com/KhronosGroup/glTF-Sample-Assets/main/Models/ToyCar/glTF-Binary/ToyCar.glb",
         modelUsdz: "",
         specs: {
@@ -53,7 +54,7 @@ const SURF_CATALOG = [
         sizes: ["M", "L"],
         stock: { "M": 6, "L": 4 },
         fit: "Gabarit Moyen à Lourd (65 - 85 kg)",
-        image: "https://images.unsplash.com/photo-1537519646099-335112f03225?auto=format&fit=crop&w=600&q=80",
+        image: "https://images.unsplash.com/photo-1563299796-17596ed6b017?auto=format&fit=crop&w=800&q=80",
         modelGlb: "https://raw.githubusercontent.com/KhronosGroup/glTF-Sample-Assets/main/Models/MaterialsVariantsShoe/glTF-Binary/MaterialsVariantsShoe.glb",
         modelUsdz: "",
         specs: {
@@ -72,7 +73,7 @@ const SURF_CATALOG = [
         sizes: ["S", "M", "L", "XL"],
         stock: { "S": 3, "M": 8, "L": 5, "XL": 2 },
         fit: "Coupe Droite Anti-Irritation",
-        image: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=600&q=80",
+        image: "https://images.unsplash.com/photo-1565084888279-aca607ecce0c?auto=format&fit=crop&w=800&q=80",
         modelGlb: "https://raw.githubusercontent.com/KhronosGroup/glTF-Sample-Assets/main/Models/ToyCar/glTF-Binary/ToyCar.glb",
         modelUsdz: "",
         specs: {
@@ -91,7 +92,7 @@ const SURF_CATALOG = [
         sizes: ["XS", "S", "M", "L", "XL"],
         stock: { "XS": 4, "S": 6, "M": 7, "L": 0, "XL": 3 },
         fit: "Coupe Ajustée Athlétique",
-        image: "https://images.unsplash.com/photo-1506929562872-bb421503ef21?auto=format&fit=crop&w=600&q=80",
+        image: "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&w=800&q=80",
         modelGlb: "https://raw.githubusercontent.com/KhronosGroup/glTF-Sample-Assets/main/Models/MaterialsVariantsShoe/glTF-Binary/MaterialsVariantsShoe.glb",
         modelUsdz: "",
         specs: {
@@ -110,7 +111,7 @@ const SURF_CATALOG = [
         sizes: ["Unique"],
         stock: { "Unique": 12 },
         fit: "Vagues de 0.5m à 2.0m",
-        image: "https://images.unsplash.com/photo-1455729552865-3658a5d39692?auto=format&fit=crop&w=600&q=80",
+        image: "https://images.unsplash.com/photo-1508873696983-2df57046475a?auto=format&fit=crop&w=800&q=80",
         modelGlb: "https://raw.githubusercontent.com/KhronosGroup/glTF-Sample-Assets/main/Models/ToyCar/glTF-Binary/ToyCar.glb",
         modelUsdz: "",
         specs: {
@@ -129,7 +130,7 @@ const SURF_CATALOG = [
         sizes: ["Unique"],
         stock: { "Unique": 25 },
         fit: "Universel Tous Ponts",
-        image: "https://images.unsplash.com/photo-1515238152791-8216bfdf89a7?auto=format&fit=crop&w=600&q=80",
+        image: "https://images.unsplash.com/photo-1473186578172-c141e6798cf4?auto=format&fit=crop&w=800&q=80",
         modelGlb: "https://raw.githubusercontent.com/KhronosGroup/glTF-Sample-Assets/main/Models/MaterialsVariantsShoe/glTF-Binary/MaterialsVariantsShoe.glb",
         modelUsdz: "",
         specs: {
@@ -292,7 +293,7 @@ function resetFilters() {
 }
 
 // ==========================================================================
-// 5. GESTION DE LA MODALE 3D, DES STOCKS ET DU CONFORT TEXTILE
+// 5. MODALE 3D ET GESTION DES TAILLES
 // ==========================================================================
 function openProductModal(productId) {
     const product = SURF_CATALOG.find(p => p.id === productId);
@@ -300,7 +301,6 @@ function openProductModal(productId) {
 
     AppState.activeModalProduct = product;
 
-    // Définir la première taille disponible en stock par défaut
     const firstAvailableSize = product.sizes.find(s => product.stock[s] > 0) || product.sizes[0];
     AppState.selectedSize = firstAvailableSize;
 
@@ -315,7 +315,6 @@ function openProductModal(productId) {
     document.getElementById("modal-spec-weight").textContent = product.specs.weight;
     document.getElementById("modal-spec-care").textContent = product.specs.care;
 
-    // Rendu des boutons de taille avec contrôle de disponibilité WMS
     const sizesContainer = document.getElementById("modal-sizes-container");
     sizesContainer.innerHTML = "";
 
@@ -336,7 +335,6 @@ function openProductModal(productId) {
         sizesContainer.appendChild(sizeBtn);
     });
 
-    // Chargement du modèle 3D
     const viewer = document.getElementById("main-model-viewer");
     viewer.setAttribute("src", product.modelGlb);
     if (product.modelUsdz) {
@@ -374,7 +372,7 @@ function quickAddDefaultSize(productId) {
 }
 
 // ==========================================================================
-// 6. SYNCHRONISATION DU PANIER & FRANCO DE PORT
+// 6. SYNCHRONISATION DU PANIER
 // ==========================================================================
 function updateCartUI() {
     const totalCount = AppState.cart.reduce((acc, item) => acc + item.qty, 0);
@@ -425,7 +423,6 @@ function updateCartUI() {
     document.getElementById("cart-tax").textContent = `${tax.toFixed(2)} €`;
     document.getElementById("cart-total").textContent = `${totalTTC.toFixed(2)} €`;
 
-    // Calcul de la jauge de livraison gratuite (Franco à 100€)
     const threshold = 100.0;
     const progressFill = document.getElementById("shipping-progress-fill");
     const progressText = document.getElementById("shipping-progress-text");
@@ -442,7 +439,7 @@ function updateCartUI() {
 }
 
 // ==========================================================================
-// 7. TOASTS, MENU MOBILE & INITIALISATION
+// 7. TOASTS & INITIALISATION
 // ==========================================================================
 function showToastNotification(message) {
     const hub = document.getElementById("toast-container");
@@ -469,7 +466,6 @@ document.addEventListener("DOMContentLoaded", () => {
     renderProducts();
     updateCartUI();
 
-    // Filtres Catégories
     document.querySelectorAll(".tag-btn").forEach(btn => {
         btn.addEventListener("click", () => {
             document.querySelectorAll(".tag-btn").forEach(b => b.classList.remove("active"));
@@ -479,7 +475,6 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
-    // Navigation Bureau
     document.querySelectorAll(".nav-link[data-category]").forEach(lnk => {
         lnk.addEventListener("click", () => {
             document.querySelectorAll(".nav-link").forEach(l => l.classList.remove("active"));
@@ -495,7 +490,6 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
-    // Menu Mobile Burger
     const mobileMenuBtn = document.getElementById("mobile-menu-btn");
     const mobileNavDrawer = document.getElementById("mobile-nav-drawer");
     if (mobileMenuBtn && mobileNavDrawer) {
@@ -504,7 +498,6 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // Curseur Prix Swell Slider
     const priceSlider = document.getElementById("price-filter");
     priceSlider.addEventListener("input", (e) => {
         const val = parseFloat(e.target.value);
@@ -513,7 +506,6 @@ document.addEventListener("DOMContentLoaded", () => {
         renderProducts();
     });
 
-    // Sélecteurs de tri et de taille
     document.getElementById("size-filter").addEventListener("change", (e) => {
         AppState.filters.size = e.target.value;
         renderProducts();
@@ -524,7 +516,6 @@ document.addEventListener("DOMContentLoaded", () => {
         renderProducts();
     });
 
-    // Modale 3D
     document.getElementById("modal-close-btn").addEventListener("click", closeProductModal);
     document.getElementById("product-modal").addEventListener("click", (e) => {
         if (e.target.id === "product-modal") closeProductModal();
@@ -538,7 +529,6 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-    // Tiroir Panier
     const cartToggle = document.getElementById("cart-toggle-btn");
     const cartClose = document.getElementById("cart-close-btn");
     const backdrop = document.getElementById("cart-backdrop");
@@ -552,7 +542,6 @@ document.addEventListener("DOMContentLoaded", () => {
     cartClose.addEventListener("click", () => toggleCartDrawer(false));
     backdrop.addEventListener("click", () => toggleCartDrawer(false));
 
-    // Redirection vers le paiement
     document.getElementById("checkout-trigger-btn").addEventListener("click", () => {
         if (AppState.cart.length === 0) {
             showToastNotification("Votre quiver est vide. Ajoutez un article avant de régler.");
