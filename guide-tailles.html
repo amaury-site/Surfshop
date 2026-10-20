@@ -3,117 +3,136 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Guide des Tailles &amp; Litrage &bull; AURA SURF</title>
+    <title>Guide des tailles et du volume · AURA SURF</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="pages.css">
 </head>
 <body>
+<header class="site-header">
+    <div class="header-container">
+        <a href="index.html" class="brand-logo">AURA<span class="brand-badge">GUIDE</span></a>
+        <a href="index.html#catalogue" class="nav-link">&larr; Retour au catalogue</a>
+    </div>
+</header>
 
-    <header class="site-header">
-        <div class="header-container">
-            <a href="index.html" class="brand-logo">
-                <span>AURA</span><span class="brand-badge">FIT LAB</span>
-            </a>
-            <a href="index.html" class="nav-link">&larr; Retour au Catalogue</a>
+<main class="page-container">
+    <div class="page-header">
+        <span class="hero-tag">Taille, épaisseur, volume</span>
+        <h1>Bien choisir son équipement</h1>
+        <p class="lead">Une combinaison doit coller comme une seconde peau pour limiter les entrées d'eau. Une planche doit porter votre poids sans freiner vos manœuvres. Trois outils pour choisir.</p>
+    </div>
+
+    <section class="page-card">
+        <h2>1. Ma taille de combinaison</h2>
+        <p style="margin-bottom:18px">Indiquez votre taille et votre poids. Valable pour les combinaisons, le shorty et le top UV.</p>
+        <div class="form-row">
+            <div class="form-group"><label for="f-height">Taille (cm)</label><input type="number" id="f-height" class="form-control" value="178" min="140" max="210"></div>
+            <div class="form-group"><label for="f-weight">Poids (kg)</label><input type="number" id="f-weight" class="form-control" value="72" min="40" max="140"></div>
         </div>
-    </header>
+        <button type="button" id="btn-size" class="btn-primary btn-inline">Trouver ma taille</button>
+        <div id="size-result" class="result-box" hidden aria-live="polite"></div>
 
-    <main class="page-container">
-        <div class="page-header">
-            <span class="hero-tag">Ajustement Morphologique &amp; Flottabilité</span>
-            <h1>Guide des Tailles &amp; Volume 3D</h1>
-            <p style="color: var(--color-text-muted); margin-top: 8px;">Une combinaison doit être ajustée comme une seconde peau pour éviter les entrées d'eau et garantir l'isolation thermique.</p>
-        </div>
+        <table class="data-table" style="margin-top:28px">
+            <thead><tr><th scope="col">Taille</th><th scope="col">Stature (cm)</th><th scope="col">Poids (kg)</th><th scope="col">Poitrine (cm)</th><th scope="col">Taille (cm)</th></tr></thead>
+            <tbody>
+                <tr><td><strong>XS</strong></td><td>165 – 170</td><td>55 – 63</td><td>86 – 91</td><td>71 – 76</td></tr>
+                <tr><td><strong>S</strong></td><td>170 – 175</td><td>61 – 70</td><td>91 – 97</td><td>76 – 81</td></tr>
+                <tr><td><strong>M</strong></td><td>175 – 180</td><td>68 – 77</td><td>97 – 102</td><td>81 – 86</td></tr>
+                <tr><td><strong>L</strong></td><td>180 – 185</td><td>77 – 86</td><td>102 – 107</td><td>86 – 91</td></tr>
+                <tr><td><strong>XL</strong></td><td>185 – 192</td><td>86 – 98</td><td>107 – 114</td><td>91 – 99</td></tr>
+            </tbody>
+        </table>
+        <p class="note">Mesurez-vous en sous-vêtements, sans serrer le mètre. Entre deux tailles, choisissez la plus petite si vous surfez en eau froide, car le néoprène s'assouplit à l'eau.</p>
+    </section>
 
-        <!-- Calculateur Hydrodynamique -->
-        <section class="page-card">
-            <h2 style="font-size: 1.4rem; color: var(--color-ocean-deep); margin-bottom: 12px;">Calculateur de Litrage de Planche (Volume Ratio)</h2>
-            <p style="font-size: 0.9rem; color: var(--color-text-muted); margin-bottom: 20px;">Indiquez votre poids et votre niveau de pratique pour obtenir la recommandation hydrodynamique de votre planche :</p>
-            
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
-                <div>
-                    <label for="calc-weight" style="font-weight: 700; font-size: 0.85rem;">Votre Poids (kg) :</label>
-                    <input type="number" id="calc-weight" class="form-control" value="75" min="40" max="120" style="margin-top: 6px; width: 100%; padding: 10px; border: 1px solid var(--color-border); border-radius: var(--radius-sm);">
-                </div>
-                <div>
-                    <label for="calc-level" style="font-weight: 700; font-size: 0.85rem;">Niveau de Pratique :</label>
-                    <select id="calc-level" class="form-control" style="margin-top: 6px; width: 100%; padding: 10px; border: 1px solid var(--color-border); border-radius: var(--radius-sm);">
-                        <option value="0.36">Expert (Flottabilité affûtée / 0.36 L/kg)</option>
-                        <option value="0.42" selected>Intermédiaire (Équilibre maniabilité &amp; rame / 0.42 L/kg)</option>
-                        <option value="0.55">Débutant / Évolution (Confort &amp; prise de vague / 0.55 L/kg)</option>
-                    </select>
-                </div>
+    <section class="page-card">
+        <h2>2. Quelle épaisseur selon l'eau ?</h2>
+        <p style="margin-bottom:18px">Entrez la température de l'eau où vous surfez le plus souvent.</p>
+        <div class="form-group" style="max-width:260px"><label for="f-temp">Température de l'eau (°C)</label><input type="number" id="f-temp" class="form-control" value="14" min="0" max="35"></div>
+        <button type="button" id="btn-temp" class="btn-primary btn-inline">Voir la combinaison conseillée</button>
+        <div id="temp-result" class="result-box" hidden aria-live="polite"></div>
+        <table class="data-table" style="margin-top:24px">
+            <thead><tr><th scope="col">Combinaison</th><th scope="col">Eau</th><th scope="col">Pour qui ?</th></tr></thead>
+            <tbody>
+                <tr><td><strong>Shorty 2/2</strong></td><td>18 – 22 °C</td><td>Été, entre-saison douce</td></tr>
+                <tr><td><strong>Steamer 3/2</strong></td><td>14 – 18 °C</td><td>Printemps et automne</td></tr>
+                <tr><td><strong>Steamer 4/3</strong></td><td>10 – 15 °C</td><td>Hiver atlantique</td></tr>
+                <tr><td><strong>Hooded 5/4</strong></td><td>6 – 10 °C</td><td>Plein hiver, sessions longues</td></tr>
+            </tbody>
+        </table>
+    </section>
+
+    <section class="page-card">
+        <h2>3. Mon volume de planche</h2>
+        <p style="margin-bottom:18px">Le volume (en litres) dépend de votre poids et de votre niveau. Plus on est expérimenté, moins on a besoin de flottabilité.</p>
+        <div class="form-row">
+            <div class="form-group"><label for="v-weight">Poids (kg)</label><input type="number" id="v-weight" class="form-control" value="75" min="40" max="140"></div>
+            <div class="form-group"><label for="v-level">Niveau</label>
+                <select id="v-level" class="form-control">
+                    <option value="0.36">Confirmé (0,36 L/kg)</option>
+                    <option value="0.42" selected>Intermédiaire (0,42 L/kg)</option>
+                    <option value="0.55">Débutant (0,55 L/kg)</option>
+                </select>
             </div>
-            
-            <button type="button" class="btn-primary" style="margin-top: 20px; width: fit-content;" onclick="calculateSurfVolume()">
-                Calculer mon Volume Recommandé
-            </button>
-            
-            <div id="volume-result" style="margin-top: 16px; padding: 14px; background: var(--color-foam-light); border-radius: var(--radius-sm); font-weight: 700; color: var(--color-ocean-dark); display: none;"></div>
-        </section>
+        </div>
+        <button type="button" id="btn-vol" class="btn-primary btn-inline">Calculer mon volume</button>
+        <div id="volume-result" class="result-box" hidden aria-live="polite"></div>
+        <table class="data-table" style="margin-top:24px">
+            <thead><tr><th scope="col">Planche</th><th scope="col">Volume</th><th scope="col">Niveau conseillé</th></tr></thead>
+            <tbody>
+                <tr><td><strong>Longboard 9'0"</strong></td><td>68 L</td><td>Débutant, petites vagues</td></tr>
+                <tr><td><strong>Midlength 7'0"</strong></td><td>44 L</td><td>Intermédiaire, vagues moyennes</td></tr>
+                <tr><td><strong>Shortboard 5'11"</strong></td><td>29,5 L</td><td>Confirmé, vagues creuses</td></tr>
+            </tbody>
+        </table>
+    </section>
+</main>
 
-        <!-- Tableau des Tailles Néoprène -->
-        <section class="page-card">
-            <h2 style="font-size: 1.4rem; color: var(--color-ocean-deep); margin-bottom: 12px;">Grille de Correspondance Combinaisons Néoprène</h2>
-            <table class="data-table">
-                <thead>
-                    <tr>
-                        <th scope="col">Taille AURA</th>
-                        <th scope="col">Stature (cm)</th>
-                        <th scope="col">Poids (kg)</th>
-                        <th scope="col">Tour de Poitrine (cm)</th>
-                        <th scope="col">Tour de Taille (cm)</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><strong>XS</strong></td>
-                        <td>165 - 170</td>
-                        <td>55 - 63</td>
-                        <td>86 - 91</td>
-                        <td>71 - 76</td>
-                    </tr>
-                    <tr>
-                        <td><strong>S</strong></td>
-                        <td>170 - 175</td>
-                        <td>61 - 70</td>
-                        <td>91 - 97</td>
-                        <td>76 - 81</td>
-                    </tr>
-                    <tr>
-                        <td><strong>M</strong></td>
-                        <td>175 - 180</td>
-                        <td>68 - 77</td>
-                        <td>97 - 102</td>
-                        <td>81 - 86</td>
-                    </tr>
-                    <tr>
-                        <td><strong>L</strong></td>
-                        <td>180 - 185</td>
-                        <td>77 - 86</td>
-                        <td>102 - 107</td>
-                        <td>86 - 91</td>
-                    </tr>
-                    <tr>
-                        <td><strong>XL</strong></td>
-                        <td>185 - 192</td>
-                        <td>86 - 98</td>
-                        <td>107 - 114</td>
-                        <td>91 - 99</td>
-                    </tr>
-                </tbody>
-            </table>
-        </section>
-    </main>
+<script>
+const $ = id => document.getElementById(id);
+const show = (id, html) => { const el = $(id); el.innerHTML = html; el.hidden = false; };
+const num = id => parseFloat($(id).value.replace(",", "."));
+const link = '<a href="index.html#catalogue" style="color:inherit;font-weight:600">Voir le catalogue</a>';
 
-    <script>
-        function calculateSurfVolume() {
-            const w = parseFloat(document.getElementById("calc-weight").value);
-            const factor = parseFloat(document.getElementById("calc-level").value);
-            const vol = (w * factor).toFixed(1);
-            const res = document.getElementById("volume-result");
-            res.style.display = "block";
-            res.innerHTML = `Volume hydrodynamique conseillé : <strong>${vol} Litres</strong> (ex: Shortboard Thruster 5'11" pour ${vol}L).`;
-        }
-    </script>
+/* 1. Taille de combinaison */
+const SIZES = ["XS", "S", "M", "L", "XL"];
+$("btn-size").addEventListener("click", () => {
+    const h = num("f-height"), w = num("f-weight");
+    if (!(h > 0) || !(w > 0)) return show("size-result", "Renseignez votre taille et votre poids.");
+    const byHeight = Math.max(0, Math.min(4, Math.floor((h - 165) / 5)));
+    const byWeight = [63, 70, 77, 86].filter(t => w > t).length;
+    const idx = Math.max(byHeight, byWeight);
+    let msg = `Taille conseillée : <strong>${SIZES[idx]}</strong>.`;
+    if (byHeight !== byWeight) msg += ` Votre taille indique ${SIZES[byHeight]} et votre poids ${SIZES[byWeight]} : essayez les deux si possible.`;
+    if (h < 160 || h > 195 || w < 50 || w > 105) msg += " Votre morphologie sort de notre grille : contactez-nous avant de commander.";
+    show("size-result", msg + " " + link);
+});
+
+/* 2. Épaisseur */
+$("btn-temp").addEventListener("click", () => {
+    const t = num("f-temp");
+    if (isNaN(t)) return show("temp-result", "Indiquez une température.");
+    let msg;
+    if (t >= 22) msg = "Boardshort et <strong>top UV</strong> suffisent. Ajoutez le shorty 2/2 si vous surfez longtemps.";
+    else if (t >= 18) msg = "<strong>Shorty 2/2</strong> (ou steamer 3/2 si vous êtes frileux).";
+    else if (t >= 14) msg = "<strong>Steamer 3/2</strong>.";
+    else if (t >= 10) msg = "<strong>Steamer 4/3</strong>.";
+    else msg = "<strong>Hooded 5/4</strong> avec cagoule intégrée.";
+    show("temp-result", msg + " " + link);
+});
+
+/* 3. Volume de planche */
+const BOARDS = { "0.55": ["Longboard 9'0\"", 68], "0.42": ["Midlength 7'0\"", 44], "0.36": ["Shortboard 5'11\"", 29.5] };
+$("btn-vol").addEventListener("click", () => {
+    const w = num("v-weight"), k = $("v-level").value;
+    if (!(w >= 30)) return show("volume-result", "Indiquez un poids valide.");
+    const vol = w * parseFloat(k), [name, bv] = BOARDS[k];
+    let msg = `Volume conseillé : <strong>${vol.toFixed(1).replace(".", ",")} L</strong>. Planche AURA la plus adaptée : <strong>${name}</strong> (${String(bv).replace(".", ",")} L).`;
+    const gap = bv - vol;
+    if (gap > 8) msg += " Cette planche aura plus de volume que nécessaire : elle sera très stable, un peu moins vive.";
+    if (gap < -8) msg += " Cette planche a moins de volume que conseillé : elle demandera de ramer plus fort.";
+    show("volume-result", msg + " " + link);
+});
+</script>
 </body>
 </html>
