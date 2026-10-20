@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Atelier Réparation &amp; Retours • AURA SURF</title>
+    <title>Atelier Réparation &amp; Retours &bull; AURA SURF</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -43,18 +43,18 @@
 
         <section class="page-card">
             <h2 style="font-size: 1.35rem; color: var(--color-ocean-deep); margin-bottom: 12px;">3. Déclarer une Réparation ou un Échange</h2>
-            <form onsubmit="event.preventDefault(); alert('Dossier SAV enregistré ! Notre atelier logistique vous contacte sous 24h avec votre bon d\'expédition.');">
+            <form id="sav-form" onsubmit="handleSavSubmit(event)">
                 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 14px;">
                     <div>
-                        <label for="order-ref" style="font-size: 0.8rem; font-weight: 700; text-transform: uppercase;">N° de Commande</label>
+                        <label for="order-ref" style="font-size: 0.8rem; font-weight: 700; text-transform: uppercase;">N&deg; de Commande</label>
                         <input type="text" id="order-ref" required placeholder="#SURF-XXXXX" style="width: 100%; padding: 10px; border: 1px solid var(--color-border); border-radius: var(--radius-sm); margin-top: 4px;">
                     </div>
                     <div>
                         <label for="action-type" style="font-size: 0.8rem; font-weight: 700; text-transform: uppercase;">Type de Demande</label>
                         <select id="action-type" style="width: 100%; padding: 10px; border: 1px solid var(--color-border); border-radius: var(--radius-sm); margin-top: 4px;">
-                            <option>Échange de taille (Mauvais fit)</option>
-                            <option>Réparation de couture sous garantie</option>
-                            <option>Recyclage fin de vie</option>
+                            <option value="fit">Échange de taille (Mauvais fit)</option>
+                            <option value="repair">Réparation de couture sous garantie</option>
+                            <option value="recycle">Recyclage fin de vie</option>
                         </select>
                     </div>
                 </div>
@@ -62,5 +62,13 @@
             </form>
         </section>
     </main>
+
+    <script>
+        function handleSavSubmit(e) {
+            e.preventDefault();
+            alert("Dossier SAV enregistré ! Notre atelier logistique vous contacte sous 24h avec votre bon d'expédition.");
+            document.getElementById("sav-form").reset();
+        }
+    </script>
 </body>
 </html>
