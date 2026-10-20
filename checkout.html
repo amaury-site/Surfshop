@@ -91,7 +91,7 @@ const $ = id => document.getElementById(id);
 const list = $("checkout-items-list");
 const itemsTotal = cart.reduce((a, i) => a + i.price * i.qty, 0);
 if (!cart.length) {
-    list.innerHTML = '<p>Votre quiver est vide.</p><a href="index.html#catalogue" class="btn-primary" style="margin-top:14px">Choisir un produit</a>';
+    list.innerHTML = '<p>Votre panier est vide.</p><a href="index.html#catalogue" class="btn-primary" style="margin-top:14px">Choisir un produit</a>';
     $("pay-btn").disabled = true;
 } else {
     cart.forEach(i => {
