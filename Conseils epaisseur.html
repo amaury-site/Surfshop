@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quelle épaisseur de combinaison choisir ? · AURA SURF</title>
+    <meta name="description" content="Choisissez votre combinaison de surf, du shorty 2/2 à la 5/4, selon la température de l'eau, votre sensibilité au froid et la durée de vos sessions.">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="pages.css">
+</head>
+<body>
+<header class="site-header">
+    <div class="header-container">
+        <a href="index.html" class="brand-logo">AURA<span class="brand-badge">CONSEILS</span></a>
+        <a href="index.html#catalogue" class="nav-link">&larr; Retour au catalogue</a>
+    </div>
+</header>
+
+<main class="page-container">
+    <div class="page-header">
+        <span class="hero-tag">Combinaisons</span>
+        <h1>Quelle épaisseur selon l'eau ?</h1>
+        <p class="lead">Trop épaisse, la combinaison gêne la rame. Trop fine, la session s'arrête avant la fin de la marée. Réglez le curseur sur la température de votre spot.</p>
+    </div>
+
+    <section class="page-card">
+        <h2>Trouver ma combinaison</h2>
+        <div class="range-head">
+            <label for="t-water">Température de l'eau</label>
+            <output id="t-out" class="range-out" for="t-water">14 °C</output>
+        </div>
+        <input type="range" id="t-water" class="surf-range-slider" min="4" max="30" step="0.5" value="14">
+        <div class="slider-indicators" style="margin:8px 0 22px"><span>4 °C</span><span>17 °C</span><span>30 °C</span></div>
+
+        <div class="form-row">
+            <div class="form-group">
+                <label for="t-sens">Sensibilité au froid</label>
+                <select id="t-sens" class="form-control">
+                    <option value="-2">Frileux</option>
+                    <option value="0" selected>Dans la moyenne</option>
+                    <option value="2">Plutôt résistant</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="t-dur">Durée de vos sessions</label>
+                <select id="t-dur" class="form-control">
+                    <option value="1">Moins d'une heure</option>
+                    <option value="0" selected>Une à deux heures</option>
+                    <option value="-1">Plus de deux heures</option>
+                </select>
+            </div>
+        </div>
+
+        <div id="t-result" class="pick" aria-live="polite"></div>
+    </section>
+
+    <section class="page-card">
+        <h2>Les quatre épaisseurs</h2>
+        <p>Le premier chiffre est l'épaisseur du néoprène sur le torse, le second sur les bras et les jambes. Plus on s'éloigne du torse, plus on garde de souplesse.</p>
+        <table class="data-table">
+            <thead><tr><th scope="col">Combinaison</th><th scope="col">Eau conseillée</th><th scope="col">Points forts</th></tr></thead>
+            <tbody>
+                <tr><td><strong>Shorty 2/2</strong></td><td>18 à 22 °C</td><td>Liberté de mouvement, séchage rapide</td></tr>
+                <tr><td><strong>Steamer 3/2</strong></td><td>14 à 18 °C</td><td>La plus polyvalente, de mai à novembre</td></tr>
+                <tr><td><strong>Steamer 4/3</strong></td><td>10 à 14 °C</td><td>Plastron thermo-réflecteur pour l'hiver</td></tr>
+                <tr><td><strong>Hooded 5/4</strong></td><td>moins de 10 °C</td><td>Cagoule intégrée, protection maximale</td></tr>
+            </tbody>
+        </table>
+    </section>
+
+    <section class="page-card">
+        <h2>Et sur la côte atlantique ?</h2>
+        <p>Ordre de grandeur des températures moyennes de l'eau sur la côte basque, avec la combinaison que donne l'outil ci-dessus pour un profil moyen. Vérifiez toujours la température du jour sur votre spot : un coup de vent ou une eau fraîche remontée du fond peuvent la faire baisser de plusieurs degrés.</p>
+        <div id="month-grid" class="month-grid"></div>
+    </section>
+
+    <section class="page-card">
+        <h2>Bien l'essayer</h2>
+        <ol class="steps">
+            <li><div><strong>Collée, sans plis.</strong> Aux genoux, aux aisselles et dans le dos, le néoprène doit épouser le corps. Une poche d'air, c'est de l'eau froide qui circule.</div></li>
+            <li><div><strong>Mouvements libres.</strong> Faites le geste de ramer devant le miroir : si les épaules tirent, la taille est trop petite.</div></li>
+            <li><div><strong>Entre deux tailles.</strong> En eau froide, prenez la plus petite : le néoprène s'assouplit au contact de l'eau. Consultez la <a href="guide-tailles.html" class="link">grille des tailles</a>.</div></li>
+        </ol>
+    </section>
+
+    <section class="page-card">
+        <h2>Prendre soin de sa combinaison</h2>
+        <details><summary>Comment la rincer ?</summary><p>À l'eau douce après chaque session, à l'extérieur comme à l'intérieur, pour éliminer le sel et le sable qui usent les coutures.</p></details>
+        <details><summary>Comment la faire sécher ?</summary><p>Retournée d'abord, puis à l'endroit, sur un cintre large et à l'ombre. Le soleil direct et les sources de chaleur durcissent le néoprène.</p></details>
+        <details><summary>Peut-on la mettre en machine ?</summary><p>Non, un lavage à la main à l'eau tiède avec un produit doux suffit. Ne la pliez pas de manière serrée pour la ranger.</p></details>
+        <details><summary>Une couture se décolle, que faire ?</summary><p>Nos coutures sont garanties 3 ans : déclarez-le depuis la page <a href="sav-reparation.html#declaration" class="link">retours et réparation</a>.</p></details>
+        <a href="index.html#catalogue" class="btn-primary btn-inline" style="margin-top:22px">Voir les combinaisons</a>
+    </section>
+</main>
+
+<footer class="page-footer">
+    <nav aria-label="Informations légales">
+        <a href="contact.html">Contact</a>
+        <a href="cgv.html">CGV</a>
+        <a href="mentions-legales.html">Mentions légales</a>
+        <a href="confidentialite.html">Confidentialité</a>
+    </nav>
+    <p>&copy; 2026 AURA SURF STUDIO</p>
+</footer>
+
+<script>
+const $ = id => document.getElementById(id);
+const fmtT = t => String(t).replace(".", ",") + " °C";
+
+/* Même échelle que le guide des tailles */
+function recommend(t) {
+    if (t >= 22) return { name: "Top UV et boardshort", note: "L'eau est chaude : une protection solaire suffit." };
+    if (t >= 18) return { name: "Shorty 2/2", note: "Bras et jambes libres, avec une couche légère contre le vent." };
+    if (t >= 14) return { name: "Steamer 3/2", note: "La combinaison qui couvre le plus de saisons." };
+    if (t >= 10) return { name: "Steamer 4/3", note: "Pensée pour l'eau fraîche, avec plastron thermo-réflecteur." };
+    return { name: "Hooded 5/4", note: "Eau très froide : la cagoule intégrée limite la perte de chaleur par la tête." };
+}
+
+const LIMITS = [
+    [22, "entre un shorty 2/2 et la tenue d'été"],
+    [18, "entre un steamer 3/2 et un shorty 2/2"],
+    [14, "entre un steamer 4/3 et un steamer 3/2"],
+    [10, "entre une 5/4 à cagoule et un steamer 4/3"]
+];
+
+function render() {
+    const t = parseFloat($("t-water").value);
+    $("t-out").textContent = fmtT(t);
+    const adj = parseFloat($("t-sens").value) + parseFloat($("t-dur").value);
+    const eff = t + adj;
+    const r = recommend(eff);
+    const box = $("t-result");
+    box.innerHTML = "";
+
+    const label = document.createElement("p");
+    label.textContent = "Notre conseil";
+    const h = document.createElement("h3");
+    h.textContent = r.name;
+    const p = document.createElement("p");
+    p.textContent = r.note;
+    box.append(label, h, p);
+
+    const ul = document.createElement("ul");
+    if (adj !== 0) {
+        const li = document.createElement("li");
+        li.textContent = "Pour votre profil, on raisonne comme si l'eau était à " + fmtT(eff) + ".";
+        ul.appendChild(li);
+    }
+    const near = LIMITS.find(([lim]) => Math.abs(eff - lim) <= 1);
+    if (near) {
+        const li = document.createElement("li");
+        li.textContent = "Vous êtes à la limite " + near[1] + " : si vous hésitez, prenez l'épaisseur supérieure pour une session longue et l'inférieure pour une session dynamique.";
+        ul.appendChild(li);
+    }
+    if (ul.children.length) box.appendChild(ul);
+
+    const a = document.createElement("a");
+    a.href = "index.html#catalogue";
+    a.className = "btn-hero";
+    a.textContent = "Voir le catalogue";
+    box.appendChild(a);
+}
+["t-water", "t-sens", "t-dur"].forEach(id => $(id).addEventListener("input", render));
+render();
+
+/* Calendrier de l'eau, côte basque (valeurs moyennes indicatives) */
+const MONTHS = [["Janv.", 13], ["Févr.", 12], ["Mars", 12.5], ["Avr.", 13.5], ["Mai", 15], ["Juin", 17.5],
+                ["Juil.", 19.5], ["Août", 21], ["Sept.", 20.5], ["Oct.", 18.5], ["Nov.", 16], ["Déc.", 14.5]];
+const grid = $("month-grid");
+MONTHS.forEach(([m, t]) => {
+    const d = document.createElement("div");
+    d.className = "month";
+    const b = document.createElement("b"); b.textContent = m;
+    const s = document.createElement("strong"); s.textContent = fmtT(t);
+    const c = document.createElement("span"); c.textContent = recommend(t).name;
+    d.append(b, s, c);
+    grid.appendChild(d);
+});
+</script>
+</body>
+</html>
