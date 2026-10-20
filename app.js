@@ -215,6 +215,10 @@ function openProductModal(productId) {
     addBtn.disabled = !AppState.selectedSize;
     addBtn.textContent = AppState.selectedSize ? "Ajouter à mon Quiver" : "Épuisé";
 
+    const photo = document.getElementById("modal-product-photo");
+    photo.src = p.image;
+    photo.alt = p.name;
+
     const viewer = document.getElementById("main-model-viewer");
     viewer.setAttribute("src", p.modelGlb);
     p.modelUsdz ? viewer.setAttribute("ios-src", p.modelUsdz) : viewer.removeAttribute("ios-src");
