@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800" role="img" aria-label="Pain de wax bio et peigne">
+<defs>
+<linearGradient id="bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f6f8fb"/><stop offset="1" stop-color="#dbe1e9"/></linearGradient>
+<radialGradient id="spot" cx="50%" cy="38%" r="62%"><stop offset="0" stop-color="#fff" stop-opacity=".9"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient>
+<filter id="blur" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="14"/></filter>
+<linearGradient id="wx" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f7e29b"/><stop offset="1" stop-color="#dfb44a"/></linearGradient>
+<linearGradient id="bamboo" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#dcbc83"/><stop offset="1" stop-color="#b98f52"/></linearGradient>
+<pattern id="grid" width="30" height="30" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+<path d="M0,0 L30,0 M0,0 L0,30" stroke="#b9892a" stroke-opacity=".35" stroke-width="3" fill="none"/></pattern>
+</defs>
+<rect width="800" height="800" fill="url(#bg)"/>
+<rect width="800" height="800" fill="url(#spot)"/>
+
+<g transform="translate(0,-14)">
+<g transform="rotate(-7 400 380)">
+<rect x="236" y="286" width="340" height="212" rx="28" fill="#0b0d12" opacity=".22" filter="url(#blur)" transform="translate(10,16)"/>
+<rect x="230" y="270" width="340" height="212" rx="28" fill="url(#wx)"/>
+<rect x="230" y="270" width="340" height="212" rx="28" fill="url(#grid)"/>
+<rect x="246" y="286" width="308" height="180" rx="16" fill="none" stroke="#a97a1f" stroke-opacity=".55" stroke-width="3"/>
+<rect x="258" y="296" width="284" height="160" rx="10" fill="#f7e29b" fill-opacity=".92"/>
+<text x="400" y="372" text-anchor="middle" font-family="Helvetica Neue,Helvetica,Arial,sans-serif" font-size="58" font-weight="700" letter-spacing="10" fill="#7a5410">AURA</text>
+<text x="400" y="408" text-anchor="middle" font-family="Helvetica Neue,Helvetica,Arial,sans-serif" font-size="17" font-weight="700" letter-spacing="4" fill="#7a5410">WAX BIO</text>
+<text x="400" y="434" text-anchor="middle" font-family="Helvetica Neue,Helvetica,Arial,sans-serif" font-size="13" font-weight="600" letter-spacing="2" fill="#7a5410" opacity=".85">EAUX FROIDES 9-14°C</text>
+</g>
+<g transform="rotate(6 450 580)">
+<rect x="330" y="540" width="236" height="70" rx="10" fill="#0b0d12" opacity=".2" filter="url(#blur)" transform="translate(8,14)"/>
+<rect x="330" y="582" width="9.5" height="26" rx="2.5" fill="url(#bamboo)"/><rect x="347.5" y="582" width="9.5" height="26" rx="2.5" fill="url(#bamboo)"/><rect x="365" y="582" width="9.5" height="26" rx="2.5" fill="url(#bamboo)"/><rect x="382.5" y="582" width="9.5" height="26" rx="2.5" fill="url(#bamboo)"/><rect x="400" y="582" width="9.5" height="26" rx="2.5" fill="url(#bamboo)"/><rect x="417.5" y="582" width="9.5" height="26" rx="2.5" fill="url(#bamboo)"/><rect x="435" y="582" width="9.5" height="26" rx="2.5" fill="url(#bamboo)"/><rect x="452.5" y="582" width="9.5" height="26" rx="2.5" fill="url(#bamboo)"/><rect x="470" y="582" width="9.5" height="26" rx="2.5" fill="url(#bamboo)"/><rect x="487.5" y="582" width="9.5" height="26" rx="2.5" fill="url(#bamboo)"/><rect x="505" y="582" width="9.5" height="26" rx="2.5" fill="url(#bamboo)"/><rect x="522.5" y="582" width="9.5" height="26" rx="2.5" fill="url(#bamboo)"/><rect x="540" y="582" width="9.5" height="26" rx="2.5" fill="url(#bamboo)"/><rect x="557.5" y="582" width="9.5" height="26" rx="2.5" fill="url(#bamboo)"/>
+<rect x="324" y="524" width="248" height="66" rx="12" fill="url(#bamboo)"/>
+<path d="M336,544 L560,544 M336,558 L560,558 M336,572 L560,572" stroke="#8a6334" stroke-opacity=".3" stroke-width="2" fill="none"/>
+</g>
+</g>
+<text x="56" y="748" font-family="Helvetica Neue,Helvetica,Arial,sans-serif" font-size="22" font-weight="600" fill="#6e6e73" letter-spacing=".5">Cire bio et peigne en bambou</text>
+</svg>

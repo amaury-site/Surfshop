@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800" role="img" aria-label="Boardshort Mirage Stretch">
+<defs>
+<linearGradient id="bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f6f8fb"/><stop offset="1" stop-color="#dbe1e9"/></linearGradient>
+<radialGradient id="spot" cx="50%" cy="38%" r="62%"><stop offset="0" stop-color="#fff" stop-opacity=".9"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient>
+<filter id="blur" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="14"/></filter>
+<linearGradient id="fab" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#14598a"/><stop offset="1" stop-color="#0a2c4a"/></linearGradient>
+<linearGradient id="gloss" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".18"/><stop offset=".5" stop-color="#fff" stop-opacity="0"/></linearGradient>
+<path id="half" d="M400,238 L270,238 C262,238 257,244 256,252 L238,540 L378,540 C384,500 398,440 400,392 L400,238 Z"/>
+<g id="halfdet">
+<path d="M400,238 L270,238 C262,238 257,244 256,252 L255,276 L400,276 Z" fill="#0b0d12"/>
+<path d="M262,276 L244,520" stroke="#ff4b2b" stroke-width="10" fill="none"/>
+<path d="M246,380 C286,346 326,414 380,372" fill="none" stroke="#fff" stroke-opacity=".22" stroke-width="3"/>
+<path d="M243,430 C283,396 323,464 380,422" fill="none" stroke="#fff" stroke-opacity=".16" stroke-width="3"/>
+<path d="M240,480 C280,446 320,514 380,472" fill="none" stroke="#fff" stroke-opacity=".12" stroke-width="3"/>
+<path d="M240,520 L380,520" stroke="#fff" stroke-opacity=".3" stroke-width="2"/>
+<circle cx="381" cy="258" r="5" fill="#d7dbe2"/>
+<path d="M384,264 C378,310 366,340 352,372" fill="none" stroke="#ff4b2b" stroke-width="5" stroke-linecap="round"/>
+<circle cx="352" cy="376" r="7" fill="#ff4b2b"/>
+</g>
+<clipPath id="clip"><use href="#half"/><use href="#half" transform="translate(800,0) scale(-1,1)"/></clipPath>
+</defs>
+<rect width="800" height="800" fill="url(#bg)"/>
+<rect width="800" height="800" fill="url(#spot)"/>
+<ellipse cx="400" cy="650" rx="200" ry="13" fill="#0b0d12" opacity=".2" filter="url(#blur)"/>
+<g transform="translate(-160,-149) scale(1.4)">
+<use href="#half" fill="url(#fab)"/><use href="#half" fill="url(#fab)" transform="translate(800,0) scale(-1,1)"/>
+<g clip-path="url(#clip)"><use href="#halfdet"/><use href="#halfdet" transform="translate(800,0) scale(-1,1)"/><rect width="800" height="800" fill="url(#gloss)"/></g>
+<text x="400" y="610" text-anchor="middle" font-family="Helvetica Neue,Helvetica,Arial,sans-serif" font-size="12" font-weight="700" letter-spacing="6" fill="#8a93a3">MIRAGE STRETCH 19"</text>
+</g>
+</svg>

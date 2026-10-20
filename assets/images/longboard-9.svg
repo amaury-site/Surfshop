@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800" role="img" aria-label="Longboard 9'0">
+<defs>
+<linearGradient id="bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f6f8fb"/><stop offset="1" stop-color="#dbe1e9"/></linearGradient>
+<radialGradient id="spot" cx="50%" cy="38%" r="62%"><stop offset="0" stop-color="#fff" stop-opacity=".9"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient>
+<filter id="blur" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="14"/></filter>
+<linearGradient id="deck" gradientUnits="userSpaceOnUse" x1="-73.0" y1="0" x2="73.0" y2="0">
+<stop offset="0" stop-color="#cbd3dd"/><stop offset=".3" stop-color="#ffffff"/><stop offset=".7" stop-color="#ffffff"/><stop offset="1" stop-color="#cbd3dd"/></linearGradient>
+<pattern id="carbon" width="10" height="10" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+<rect width="10" height="10" fill="#15171d"/><rect width="5" height="5" fill="#20232b"/><rect x="5" y="5" width="5" height="5" fill="#20232b"/></pattern>
+<path id="outline" d="M0,0 L26,9.9 L34,19.7 L39.6,29.6 L44,39.4 L47.6,49.3 L50.7,59.1 L53.4,69 L55.8,78.9 L57.9,88.7 L59.7,98.6 L61.4,108.4 L62.9,118.3 L64.2,128.1 L65.4,138 L66.5,147.9 L67.4,157.7 L68.3,167.6 L69.1,177.4 L69.8,187.3 L70.3,197.1 L70.9,207 L71.3,216.9 L71.7,226.7 L72,236.6 L72.3,246.4 L72.5,256.3 L72.7,266.1 L72.8,276 L72.9,285.9 L73,295.7 L73,305.6 L73,315.4 L73,325.3 L73,335.1 L72.9,345 L72.8,354.9 L72.7,364.7 L72.6,374.6 L72.4,384.4 L72.2,394.3 L71.9,404.1 L71.6,414 L71.2,423.9 L70.8,433.7 L70.3,443.6 L69.8,453.4 L69.2,463.3 L68.6,473.1 L67.8,483 L67.1,492.9 L66.2,502.7 L65.3,512.6 L64.3,522.4 L63.2,532.3 L62,542.1 L60.7,552 L59.3,561.9 L57.8,571.7 L56.1,581.6 L54.3,591.4 L52.3,601.3 L50.1,611.1 L47.7,621 L45,630.9 L41.9,640.7 L38.3,650.6 L34.1,660.4 L28.8,670.3 L21.5,680.1 L0,690 L-0,690 L-21.5,680.1 L-28.8,670.3 L-34.1,660.4 L-38.3,650.6 L-41.9,640.7 L-45,630.9 L-47.7,621 L-50.1,611.1 L-52.3,601.3 L-54.3,591.4 L-56.1,581.6 L-57.8,571.7 L-59.3,561.9 L-60.7,552 L-62,542.1 L-63.2,532.3 L-64.3,522.4 L-65.3,512.6 L-66.2,502.7 L-67.1,492.9 L-67.8,483 L-68.6,473.1 L-69.2,463.3 L-69.8,453.4 L-70.3,443.6 L-70.8,433.7 L-71.2,423.9 L-71.6,414 L-71.9,404.1 L-72.2,394.3 L-72.4,384.4 L-72.6,374.6 L-72.7,364.7 L-72.8,354.9 L-72.9,345 L-73,335.1 L-73,325.3 L-73,315.4 L-73,305.6 L-73,295.7 L-72.9,285.9 L-72.8,276 L-72.7,266.1 L-72.5,256.3 L-72.3,246.4 L-72,236.6 L-71.7,226.7 L-71.3,216.9 L-70.9,207 L-70.3,197.1 L-69.8,187.3 L-69.1,177.4 L-68.3,167.6 L-67.4,157.7 L-66.5,147.9 L-65.4,138 L-64.2,128.1 L-62.9,118.3 L-61.4,108.4 L-59.7,98.6 L-57.9,88.7 L-55.8,78.9 L-53.4,69 L-50.7,59.1 L-47.6,49.3 L-44,39.4 L-39.6,29.6 L-34,19.7 L-26,9.9 L-0,0 Z"/>
+<clipPath id="bclip"><use href="#outline"/></clipPath>
+</defs>
+<rect width="800" height="800" fill="url(#bg)"/>
+<rect width="800" height="800" fill="url(#spot)"/>
+
+<g transform="translate(400,400) rotate(11) translate(0,-345)">
+<use href="#outline" fill="#0b0d12" opacity=".22" filter="url(#blur)" transform="translate(18,20)"/>
+<use href="#outline" fill="url(#deck)"/>
+<g clip-path="url(#bclip)">
+<rect x="-73.0" y="593.4" width="146" height="100.60000000000001" fill="#c99a66"/>
+<rect x="-3.5" y="20.7" width="7" height="669.3" fill="#b98a5b"/>
+<rect x="-36.54" y="82.8" width="3" height="593.4" fill="#c9a272"/>
+<rect x="33.54" y="82.8" width="3" height="593.4" fill="#c9a272"/>
+<use href="#outline" fill="none" stroke="#0a84ff" stroke-opacity=".28" stroke-width="22"/>
+<use href="#outline" fill="none" stroke="#ffffff" stroke-opacity=".5" stroke-width="2"/>
+</g>
+<use href="#outline" fill="none" stroke="#0b0d12" stroke-opacity=".25" stroke-width="1.5"/>
+<g transform="translate(0,414) rotate(90)"><text text-anchor="middle" font-family="Helvetica Neue,Helvetica,Arial,sans-serif" font-size="34" font-weight="700" letter-spacing="12" fill="#0b0d12">AURA</text></g>
+<circle cx="0" cy="656" r="7" fill="none" stroke="#6e6e73" stroke-width="2.5"/>
+</g>
+<text x="56" y="748" font-family="Helvetica Neue,Helvetica,Arial,sans-serif" font-size="22" font-weight="600" fill="#6e6e73" letter-spacing=".5">9'0" · 68 L</text>
+</svg>
