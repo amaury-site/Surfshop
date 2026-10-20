@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Choisir sa planche de surf · AURA SURF</title>
+    <meta name="description" content="Longboard 9'0, midlength 7'0 ou shortboard 5'11 : trouvez la planche adaptée à votre niveau, votre poids et vos vagues.">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="pages.css">
+</head>
+<body>
+<header class="site-header">
+    <div class="header-container">
+        <a href="index.html" class="brand-logo">AURA<span class="brand-badge">CONSEILS</span></a>
+        <a href="index.html#catalogue" class="nav-link">&larr; Retour au catalogue</a>
+    </div>
+</header>
+
+<main class="page-container">
+    <div class="page-header">
+        <span class="hero-tag">Planches</span>
+        <h1>Quelle planche pour vous ?</h1>
+        <p class="lead">Trois longueurs, trois façons de surfer. Répondez à trois questions pour savoir par laquelle commencer.</p>
+    </div>
+
+    <section class="page-card">
+        <h2>Trouver ma planche</h2>
+        <div class="form-row">
+            <div class="form-group">
+                <label for="b-level">Votre niveau</label>
+                <select id="b-level" class="form-control">
+                    <option value="debutant">Débutant : j'apprends à me lever</option>
+                    <option value="inter" selected>Intermédiaire : je descends la vague et je tourne</option>
+                    <option value="confirme">Confirmé : j'enchaîne les manœuvres</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="b-weight">Votre poids (kg)</label>
+                <input type="number" id="b-weight" class="form-control" value="75" min="30" max="200" inputmode="numeric">
+                <small class="form-error" id="b-error" role="alert"></small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="b-wave">Les vagues que vous surfez le plus</label>
+            <select id="b-wave" class="form-control">
+                <option value="small">Petites et molles, moins d'un mètre</option>
+                <option value="medium" selected>Moyennes, d'un mètre à un mètre cinquante</option>
+                <option value="hollow">Creuses et puissantes, plus d'un mètre cinquante</option>
+            </select>
+        </div>
+        <div id="b-result" class="pick" aria-live="polite"></div>
+    </section>
+
+    <section class="page-card">
+        <h2>Trois longueurs, trois styles</h2>
+        <p>Plus la planche est longue, plus elle porte et plus elle ramène de vagues. Plus elle est courte, plus elle tourne vite, mais plus elle demande de technique.</p>
+        <div class="length-chart" role="img" aria-label="Comparaison des longueurs : longboard 9 pieds, midlength 7 pieds, shortboard 5 pieds 11">
+            <div class="length-row"><span>Longboard</span><div class="length-bar" style="width:100%">9'0" · 68 L</div></div>
+            <div class="length-row"><span>Midlength</span><div class="length-bar" style="width:77.8%">7'0" · 44 L</div></div>
+            <div class="length-row"><span>Shortboard</span><div class="length-bar" style="width:65.7%">5'11" · 29,5 L</div></div>
+        </div>
+    </section>
+
+    <section class="page-card">
+        <h2>Comparatif</h2>
+        <table class="data-table">
+            <thead><tr><th scope="col">Planche</th><th scope="col">Volume</th><th scope="col">Poids</th><th scope="col">Niveau</th><th scope="col">Vagues</th><th scope="col">Prix</th></tr></thead>
+            <tbody>
+                <tr><td><strong>Longboard 9'0"</strong></td><td>68 L</td><td>5,9 kg</td><td>Débutant à confirmé</td><td>Petites vagues</td><td>679 €</td></tr>
+                <tr><td><strong>Midlength 7'0"</strong></td><td>44 L</td><td>3,4 kg</td><td>Intermédiaire</td><td>Vagues moyennes</td><td>619 €</td></tr>
+                <tr><td><strong>Shortboard 5'11"</strong></td><td>29,5 L</td><td>2,45 kg</td><td>Confirmé</td><td>Vagues creuses</td><td>749 €</td></tr>
+            </tbody>
+        </table>
+        <p class="note">Pour calculer un volume précis à partir de votre poids, utilisez le <a href="guide-tailles.html" class="link">guide des tailles</a>.</p>
+    </section>
+
+    <section class="page-card">
+        <h2>Questions fréquentes</h2>
+        <details><summary>Le volume, c'est quoi ?</summary><p>C'est la quantité de matière de la planche, en litres : plus elle est élevée, plus la planche flotte et facilite la rame. Un débutant a besoin de plus de volume qu'un surfeur confirmé du même poids.</p></details>
+        <details><summary>Faut-il un leash ?</summary><p>Oui, quelle que soit la planche. Il vous évite de perdre votre planche et protège les autres surfeurs. Prenez une longueur proche de celle de la planche.</p></details>
+        <details><summary>Comment entretenir ma planche ?</summary><p>Rangez-la dans sa housse réfléchissante et évitez de la laisser en plein soleil, notamment dans une voiture. Rincez-la à l'eau douce et vérifiez de temps en temps l'état du glaçage.</p></details>
+        <details><summary>Je ne trouve pas mon niveau.</summary><p>Si vous hésitez entre deux niveaux, prenez la planche la plus longue : elle vous fera progresser plus vite en vous donnant plus de vagues.</p></details>
+        <a href="index.html#catalogue" class="btn-primary btn-inline" style="margin-top:22px">Voir les planches</a>
+    </section>
+</main>
+
+<footer class="page-footer">
+    <nav aria-label="Informations légales">
+        <a href="contact.html">Contact</a>
+        <a href="cgv.html">CGV</a>
+        <a href="mentions-legales.html">Mentions légales</a>
+        <a href="confidentialite.html">Confidentialité</a>
+    </nav>
+    <p>&copy; 2026 AURA SURF STUDIO</p>
+</footer>
+
+<script>
+const $ = id => document.getElementById(id);
+const fmtL = n => String(n).replace(".", ",") + " L";
+
+/* Mêmes données que le catalogue */
+const BOARDS = {
+    long:  { name: "Longboard 9'0\"",  vol: 68,   price: 679, text: "Il flotte beaucoup, rame facilement et prend les vagues tôt." },
+    mid:   { name: "Midlength 7'0\"",  vol: 44,   price: 619, text: "Le compromis entre la stabilité du longboard et la vivacité du shortboard." },
+    short: { name: "Shortboard 5'11\"", vol: 29.5, price: 749, text: "Vive et précise, faite pour tourner court dans les sections creuses." }
+};
+const FACTOR = { debutant: 0.55, inter: 0.42, confirme: 0.36 }; // litres par kg, comme le guide des tailles
+
+function advise(level, wave, weight) {
+    let main, alt = null;
+    const notes = [];
+
+    if (level === "debutant") {
+        main = "long";
+        notes.push("Beaucoup de volume pour ramer et vous lever plus facilement.");
+        if (wave === "hollow") notes.push("Les vagues creuses sont trop puissantes pour débuter : attendez des conditions plus petites et plus douces.");
+        if (wave === "medium") alt = "mid";
+    } else if (level === "inter") {
+        main = "mid";
+        if (wave === "small") { alt = "long"; notes.push("Dans les petites vagues, le longboard vous donnera encore plus de vagues."); }
+        if (wave === "medium") alt = "short";
+        if (wave === "hollow") { alt = "short"; notes.push("Dans les vagues creuses, passez au shortboard seulement si vous vous sentez à l'aise."); }
+    } else {
+        if (wave === "small") { main = "mid"; alt = "long"; notes.push("Dans les petites vagues, un shortboard manque de glisse."); }
+        else { main = "short"; alt = "mid"; }
+    }
+
+    /* Contrôle du volume par rapport au poids */
+    const wanted = weight * FACTOR[level];
+    if (BOARDS[main].vol < wanted * 0.85 && main !== "long") {
+        const old = main;
+        notes.push("Le " + BOARDS[old].name + " (" + fmtL(BOARDS[old].vol) + ") a moins de volume que les " + fmtL(Math.round(wanted * 10) / 10) + " conseillés pour votre poids.");
+        if (old === "short") { main = "mid"; alt = "short"; notes.push("Le midlength est plus adapté à votre gabarit."); }
+    }
+    return { main, alt, notes, wanted };
+}
+
+function render() {
+    const weight = parseFloat($("b-weight").value);
+    const err = $("b-error"), input = $("b-weight"), box = $("b-result");
+    box.innerHTML = "";
+    if (!(weight >= 30 && weight <= 200)) {
+        err.textContent = "Indiquez un poids entre 30 et 200 kg.";
+        input.classList.add("invalid");
+        return;
+    }
+    err.textContent = "";
+    input.classList.remove("invalid");
+
+    const r = advise($("b-level").value, $("b-wave").value, weight);
+    const b = BOARDS[r.main];
+
+    const label = document.createElement("p"); label.textContent = "Notre conseil";
+    const h = document.createElement("h3"); h.textContent = b.name;
+    const p = document.createElement("p"); p.textContent = b.text;
+    const meta = document.createElement("div"); meta.className = "meta";
+    [fmtL(b.vol), b.price + " €", "Volume conseillé pour vous : " + fmtL(Math.round(r.wanted * 10) / 10)].forEach(t => {
+        const s = document.createElement("span"); s.textContent = t; meta.appendChild(s);
+    });
+    box.append(label, h, p, meta);
+
+    if (r.notes.length) {
+        const ul = document.createElement("ul");
+        r.notes.forEach(n => { const li = document.createElement("li"); li.textContent = n; ul.appendChild(li); });
+        box.appendChild(ul);
+    }
+    if (r.alt) {
+        const a = document.createElement("p");
+        a.textContent = "Autre option : " + BOARDS[r.alt].name + ".";
+        box.appendChild(a);
+    }
+    const link = document.createElement("a");
+    link.href = "index.html#catalogue"; link.className = "btn-hero"; link.style.marginTop = "14px"; link.textContent = "Voir les planches";
+    box.appendChild(link);
+}
+["b-level", "b-weight", "b-wave"].forEach(id => $(id).addEventListener("input", render));
+render();
+</script>
+</body>
+</html>
