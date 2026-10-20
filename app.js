@@ -1,352 +1,229 @@
 /**
- * AURA SURF STUDIO - Logique E-Commerce, WebAR & Système d'Information
- * Synchronisation du catalogue, inventaire WMS par taille, calculs franco et interactions 3D
+ * AURA SURF — Catalogue (3 gammes), panier, modale 3D/AR
+ * Corrections : panier corrompu, stock plafonné, tiroir hors portée, touche Échap, filtres dynamiques
  */
 
-// ==========================================================================
-// 1. BASE DE DONNÉES CATALOGUE AVEC IMAGES PRODUITS RÉELLES
-// ==========================================================================
+// 1. CATALOGUE ---------------------------------------------------------
+const GLB = "https://raw.githubusercontent.com/KhronosGroup/glTF-Sample-Assets/main/Models/";
+// Remplacez ces modèles de démonstration par vos propres fichiers .glb (ex: "assets/models/combi-43.glb")
+const MODEL_A = GLB + "MaterialsVariantsShoe/glTF-Binary/MaterialsVariantsShoe.glb";
+const MODEL_B = GLB + "ToyCar/glTF-Binary/ToyCar.glb";
+const img = id => `https://images.unsplash.com/${id}?auto=format&fit=crop&w=800&q=80`;
+const WS = ["XS", "S", "M", "L", "XL"];
+
 const SURF_CATALOG = [
-    {
-        id: "prod-wetsuit-43",
-        name: "Combinaison Pro Steamer 4/3mm",
-        category: "combinaisons",
-        price: 389.00,
-        sizes: ["XS", "S", "M", "L", "XL"],
-        stock: { "XS": 3, "S": 5, "M": 0, "L": 4, "XL": 2 },
-        fit: "Coupe Compression Seconde Peau",
-        // Remplacez par "assets/images/combinaison-43.jpg" après avoir placé votre photo dans GitHub
-        image: "https://images.unsplash.com/photo-1502680390469-be75c86b636f?auto=format&fit=crop&w=800&q=80",
-        modelGlb: "https://raw.githubusercontent.com/KhronosGroup/glTF-Sample-Assets/main/Models/MaterialsVariantsShoe/glTF-Binary/MaterialsVariantsShoe.glb",
-        modelUsdz: "",
-        specs: {
-            material: "Néoprène Calcaire Yamamoto 4/3mm",
-            temperature: "10°C - 15°C (Eaux Froides)",
-            weight: "1.150 kg",
-            care: "Rincer à l'eau douce, séchage cintre large à l'ombre"
-        },
-        description: "Assemblage en néoprène calcaire à cellules étanches. Coutures cousues-collées galonnées (GBS). Plastron frontal thermo-réflecteur pour une conservation calorifique maximale lors des sessions hivernales."
-    },
-    {
-        id: "prod-board-thruster",
-        name: "Shortboard Thruster Carbone 5'11\"",
-        category: "planches",
-        price: 749.00,
-        sizes: ["5'11", "6'2"],
-        stock: { "5'11": 2, "6'2": 3 },
-        fit: "Hydrodynamique Haute Performance",
-        image: "https://images.unsplash.com/photo-1531722564168-6c8d35704d9c?auto=format&fit=crop&w=800&q=80",
-        modelGlb: "https://raw.githubusercontent.com/KhronosGroup/glTF-Sample-Assets/main/Models/ToyCar/glTF-Binary/ToyCar.glb",
-        modelUsdz: "",
-        specs: {
-            material: "Noyau EPS Usiné CNC & Résine Époxy",
-            temperature: "Toutes saisons",
-            weight: "2.450 kg (Volume 29.5 L)",
-            care: "Housse réfléchissante, éviter l'exposition en plein soleil"
-        },
-        description: "Glaçage sous vide hybride carbone et fibre biaxiale. Ligne de rocker tendue conférant une relance immédiate en section creuse. Carène en concave simple évoluant vers un double concave aux ailerons."
-    },
-    {
-        id: "prod-fins-carbon",
-        name: "Ailerons Performance Tri-Fin (FCS II)",
-        category: "accessoires",
-        price: 119.00,
-        sizes: ["M", "L"],
-        stock: { "M": 6, "L": 4 },
-        fit: "Gabarit Moyen à Lourd (65 - 85 kg)",
-        image: "https://images.unsplash.com/photo-1563299796-17596ed6b017?auto=format&fit=crop&w=800&q=80",
-        modelGlb: "https://raw.githubusercontent.com/KhronosGroup/glTF-Sample-Assets/main/Models/MaterialsVariantsShoe/glTF-Binary/MaterialsVariantsShoe.glb",
-        modelUsdz: "",
-        specs: {
-            material: "Fibre de Carbone Sergé & Résine RTM",
-            temperature: "Universelle",
-            weight: "210 g (le set de 3)",
-            care: "Vérifier l'absence de sable dans les boîtiers"
-        },
-        description: "Profil rigide développé pour maximiser l'accroche dans les courbes appuyées. Flex en tête d'aileron pour une restitution dynamique de la vitesse en sortie de courbe."
-    },
-    {
-        id: "prod-boardshort-pro",
-        name: "Boardshort Mirage Stretch 19\"",
-        category: "combinaisons",
-        price: 79.00,
-        sizes: ["S", "M", "L", "XL"],
-        stock: { "S": 3, "M": 8, "L": 5, "XL": 2 },
-        fit: "Coupe Droite Anti-Irritation",
-        image: "https://images.unsplash.com/photo-1565084888279-aca607ecce0c?auto=format&fit=crop&w=800&q=80",
-        modelGlb: "https://raw.githubusercontent.com/KhronosGroup/glTF-Sample-Assets/main/Models/ToyCar/glTF-Binary/ToyCar.glb",
-        modelUsdz: "",
-        specs: {
-            material: "Polyester Recyclé 4-Way Stretch (88%)",
-            temperature: "Eaux Chaudes (> 21°C)",
-            weight: "140 g",
-            care: "Lavage machine 30°C sans assouplissant"
-        },
-        description: "Traitement déperlant DWR à séchage rapide. Ceinture plate sans couture éliminant les points de frottement contre la wax de la planche."
-    },
-    {
-        id: "prod-top-uv",
-        name: "Top UV Thermo-Régulant UPF 50+",
-        category: "combinaisons",
-        price: 49.00,
-        sizes: ["XS", "S", "M", "L", "XL"],
-        stock: { "XS": 4, "S": 6, "M": 7, "L": 0, "XL": 3 },
-        fit: "Coupe Ajustée Athlétique",
-        image: "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&w=800&q=80",
-        modelGlb: "https://raw.githubusercontent.com/KhronosGroup/glTF-Sample-Assets/main/Models/MaterialsVariantsShoe/glTF-Binary/MaterialsVariantsShoe.glb",
-        modelUsdz: "",
-        specs: {
-            material: "Lycra Élasthanne Bloqueur UVA/UVB",
-            temperature: "18°C - 24°C",
-            weight: "180 g",
-            care: "Rinçage immédiat après contact avec l'eau salée"
-        },
-        description: "Bouclier anti-abrasion haute flexibilité prévenant les rougeurs. Panneaux latéraux respirants évacuant l'excédent thermique lors des phases de rame soutenues."
-    },
-    {
-        id: "prod-leash-comp",
-        name: "Leash Compétition Uréthane 6ft",
-        category: "accessoires",
-        price: 36.00,
-        sizes: ["Unique"],
-        stock: { "Unique": 12 },
-        fit: "Vagues de 0.5m à 2.0m",
-        image: "https://images.unsplash.com/photo-1508873696983-2df57046475a?auto=format&fit=crop&w=800&q=80",
-        modelGlb: "https://raw.githubusercontent.com/KhronosGroup/glTF-Sample-Assets/main/Models/ToyCar/glTF-Binary/ToyCar.glb",
-        modelUsdz: "",
-        specs: {
-            material: "Uréthane Extrudé 6mm & Inox Marine",
-            temperature: "Toutes saisons",
-            weight: "160 g",
-            care: "Stocker déroulé, sans boucle serrée"
-        },
-        description: "Émerillons doubles fluides en acier inoxydable 316L. Manchette de cheville rembourrée en néoprène doux avec boucle d'ouverture rapide d'urgence."
-    },
-    {
-        id: "prod-wax-eco",
-        name: "Pack Pain de Wax Bio & Peigne",
-        category: "accessoires",
-        price: 15.00,
-        sizes: ["Unique"],
-        stock: { "Unique": 25 },
-        fit: "Universel Tous Ponts",
-        image: "https://images.unsplash.com/photo-1473186578172-c141e6798cf4?auto=format&fit=crop&w=800&q=80",
-        modelGlb: "https://raw.githubusercontent.com/KhronosGroup/glTF-Sample-Assets/main/Models/MaterialsVariantsShoe/glTF-Binary/MaterialsVariantsShoe.glb",
-        modelUsdz: "",
-        specs: {
-            material: "Cire d'Abeille Bio & Résine de Pin",
-            temperature: "Eaux Froides (9°C - 14°C)",
-            weight: "85 g x 2",
-            care: "Conserver dans son étui à l'abri de la chaleur"
-        },
-        description: "Formule biodégradable sans dérivés pétrochimiques. Création de perles d'accroche régulières et adhérentes. Livré avec un peigne ergonomique en bambou."
-    }
+    // GAMME 1 — Combinaisons
+    { id: "combi-32", name: "Combinaison Steamer 3/2mm", category: "combinaisons", price: 299, tagline: "Eaux tempérées, 14–18°C",
+      sizes: WS, stock: { XS: 3, S: 6, M: 5, L: 4, XL: 2 }, fit: "Seconde peau", image: img("photo-1502680390469-be75c86b636f"), modelGlb: MODEL_A,
+      specs: { material: "Néoprène calcaire 3/2mm, coutures GBS", temperature: "14°C – 18°C", weight: "1.020 kg", care: "Rincer à l'eau douce, sécher à l'ombre" },
+      description: "La polyvalente du printemps et de l'automne. Coutures cousues-collées galonnées et doublure thermique légère." },
+    { id: "combi-43", name: "Combinaison Steamer 4/3mm", category: "combinaisons", price: 389, tagline: "Eaux froides, 10–15°C",
+      sizes: WS, stock: { XS: 3, S: 5, M: 0, L: 4, XL: 2 }, fit: "Compression seconde peau", image: img("photo-1531722564168-6c8d35704d9c"), modelGlb: MODEL_A,
+      specs: { material: "Néoprène calcaire 4/3mm, plastron thermo-réflecteur", temperature: "10°C – 15°C", weight: "1.150 kg", care: "Rincer à l'eau douce, cintre large à l'ombre" },
+      description: "Conçue pour l'hiver atlantique. Plastron thermo-réflecteur et zip dorsal étanche pour garder la chaleur session après session." },
+    { id: "combi-54", name: "Combinaison Hooded 5/4mm", category: "combinaisons", price: 459, tagline: "Eaux très froides, < 10°C",
+      sizes: WS, stock: { XS: 1, S: 3, M: 4, L: 3, XL: 1 }, fit: "Ajustée avec cagoule intégrée", image: img("photo-1544367567-0f2fcb009e0b"), modelGlb: MODEL_A,
+      specs: { material: "Néoprène calcaire 5/4mm + cagoule, coutures GBS", temperature: "6°C – 10°C", weight: "1.480 kg", care: "Rincer à l'eau douce, ne pas plier" },
+      description: "Notre protection maximale pour les sessions de janvier. Cagoule intégrée et doublure en fibres thermiques à séchage rapide." },
+    { id: "shorty-22", name: "Shorty 2/2mm", category: "combinaisons", price: 179, tagline: "Eaux douces, 18–22°C",
+      sizes: WS, stock: { XS: 4, S: 6, M: 6, L: 3, XL: 2 }, fit: "Souple, manches et jambes courtes", image: img("photo-1565084888279-aca607ecce0c"), modelGlb: MODEL_A,
+      specs: { material: "Néoprène calcaire 2/2mm", temperature: "18°C – 22°C", weight: "620 g", care: "Rincer à l'eau douce" },
+      description: "La liberté de mouvement pour les sessions d'été et d'entre-saison, avec une protection légère contre le vent." },
+    // GAMME 2 — Planches
+    { id: "board-long-9", name: "Longboard 9'0\" Classic Glide", category: "planches", price: 679, tagline: "Glisse et fluidité, 68 L",
+      sizes: ["9'0"], stock: { "9'0": 3 }, fit: "Débutant à confirmé, petites vagues", image: img("photo-1508873696983-2df57046475a"), modelGlb: MODEL_B,
+      specs: { material: "Noyau PU/PE, glaçage époxy, 3 lattes de bois", temperature: "Toutes saisons", weight: "5.9 kg (Volume 68 L)", care: "Housse réfléchissante, éviter le plein soleil" },
+      description: "Rocker doux et nose généreux pour la glisse et le style. La planche idéale pour apprendre ou surfer les petites vagues." },
+    { id: "board-mid-7", name: "Midlength 7'0\" Allround", category: "planches", price: 619, tagline: "Polyvalence, 44 L",
+      sizes: ["7'0"], stock: { "7'0": 4 }, fit: "Intermédiaire, vagues moyennes", image: img("photo-1473186578172-c141e6798cf4"), modelGlb: MODEL_B,
+      specs: { material: "Noyau EPS, glaçage époxy, quad ou thruster", temperature: "Toutes saisons", weight: "3.4 kg (Volume 44 L)", care: "Housse réfléchissante, éviter le plein soleil" },
+      description: "Le compromis entre flottabilité du longboard et réactivité du shortboard. Rame facile, bon appui en courbe." },
+    { id: "board-short-511", name: "Shortboard 5'11\" Carbone", category: "planches", price: 749, tagline: "Performance, 29,5 L",
+      sizes: ["5'11"], stock: { "5'11": 2 }, fit: "Confirmé, vagues creuses", image: img("photo-1563299796-17596ed6b017"), modelGlb: MODEL_B,
+      specs: { material: "Noyau EPS usiné CNC, carbone & résine époxy", temperature: "Toutes saisons", weight: "2.450 kg (Volume 29,5 L)", care: "Housse réfléchissante, éviter le plein soleil" },
+      description: "Rocker tendu, carène en double concave et renforts carbone pour une relance immédiate dans la section creuse." },
+    // GAMME 3 — Top UV, boardshorts & accessoires
+    { id: "top-uv", name: "Top UV Thermo-Régulant UPF 50+", category: "accessoires", price: 49, tagline: "Protection solaire, 18–24°C",
+      sizes: WS, stock: { XS: 4, S: 6, M: 7, L: 0, XL: 3 }, fit: "Ajusté athlétique", image: img("photo-1544367567-0f2fcb009e0b"), modelGlb: MODEL_A,
+      specs: { material: "Lycra élasthanne anti-UVA/UVB", temperature: "18°C – 24°C", weight: "180 g", care: "Rincer après contact avec l'eau salée" },
+      description: "Anti-abrasion et anti-rougeurs, avec des panneaux latéraux respirants pour les longues phases de rame." },
+    { id: "boardshort", name: "Boardshort Mirage Stretch 19\"", category: "accessoires", price: 79, tagline: "Eaux chaudes, > 21°C",
+      sizes: ["S", "M", "L", "XL"], stock: { S: 3, M: 8, L: 5, XL: 2 }, fit: "Coupe droite anti-irritation", image: img("photo-1565084888279-aca607ecce0c"), modelGlb: MODEL_B,
+      specs: { material: "Polyester recyclé 4-way stretch (88%)", temperature: "> 21°C", weight: "140 g", care: "Machine 30°C sans assouplissant" },
+      description: "Traitement déperlant à séchage rapide, ceinture plate sans couture pour éviter les frottements sur la wax." },
+    { id: "leash", name: "Leash Compétition Uréthane 6ft", category: "accessoires", price: 36, tagline: "Vagues de 0,5 à 2 m",
+      sizes: ["Unique"], stock: { Unique: 12 }, fit: "Taille unique", image: img("photo-1508873696983-2df57046475a"), modelGlb: MODEL_B,
+      specs: { material: "Uréthane 6mm, émerillons inox 316L", temperature: "Toutes saisons", weight: "160 g", care: "Stocker déroulé" },
+      description: "Émerillons doubles fluides et manchette de cheville en néoprène avec boucle d'ouverture rapide." },
+    { id: "wax", name: "Pack Wax Bio & Peigne", category: "accessoires", price: 15, tagline: "Eaux froides, 9–14°C",
+      sizes: ["Unique"], stock: { Unique: 25 }, fit: "Universel", image: img("photo-1473186578172-c141e6798cf4"), modelGlb: MODEL_A,
+      specs: { material: "Cire d'abeille bio & résine de pin", temperature: "9°C – 14°C", weight: "85 g × 2", care: "Conserver à l'abri de la chaleur" },
+      description: "Formule biodégradable sans dérivés pétrochimiques, livrée avec un peigne en bambou." }
 ];
 
-// ==========================================================================
-// 2. ÉTAT GLOBAL DE L'APPLICATION
-// ==========================================================================
+// 2. ÉTAT --------------------------------------------------------------
+const CART_KEY = "aura_cart_v1"; // même clé que checkout.html
+function loadCart() {
+    try {
+        const raw = JSON.parse(localStorage.getItem(CART_KEY));
+        return Array.isArray(raw) ? raw.filter(i => i && i.id && i.size && i.qty > 0 && i.price >= 0) : [];
+    } catch (e) { return []; }
+}
 const AppState = {
-    filters: {
-        category: "all",
-        maxPrice: 950,
-        size: "all",
-        sort: "featured"
-    },
-    cart: JSON.parse(localStorage.getItem("aura_cart_v1")) || [],
-    activeModalProduct: null,
-    selectedSize: null
+    filters: { category: "all", maxPrice: 900, size: "all", sort: "featured" },
+    cart: loadCart(), activeModalProduct: null, selectedSize: null
 };
+const fmt = n => n.toFixed(2).replace(".", ",") + " €";
 
-// ==========================================================================
-// 3. PERSISTANCE ET CALCULS DU PANIER
-// ==========================================================================
-function saveCartToStorage() {
-    localStorage.setItem("aura_cart_v1", JSON.stringify(AppState.cart));
+// 3. PANIER ------------------------------------------------------------
+function saveCart() {
+    try { localStorage.setItem(CART_KEY, JSON.stringify(AppState.cart)); } catch (e) { /* stockage indisponible */ }
     updateCartUI();
 }
-
 function addToCart(productId, size) {
-    const product = SURF_CATALOG.find(item => item.id === productId);
-    if (!product) return;
-
-    if (product.stock[size] === 0) {
-        showToastNotification(`La taille ${size} est actuellement épuisée.`);
-        return;
-    }
-
-    const existingIndex = AppState.cart.findIndex(
-        entry => entry.id === productId && entry.size === size
-    );
-
-    if (existingIndex > -1) {
-        AppState.cart[existingIndex].qty += 1;
+    const p = SURF_CATALOG.find(i => i.id === productId);
+    if (!p) return;
+    const available = p.stock[size] || 0;
+    if (available === 0) return toast(`La taille ${size} est épuisée.`);
+    const line = AppState.cart.find(e => e.id === productId && e.size === size);
+    if (line) {
+        if (line.qty >= available) return toast(`Stock maximum atteint pour ${size} (${available}).`);
+        line.qty++;
     } else {
-        AppState.cart.push({
-            id: product.id,
-            name: product.name,
-            price: product.price,
-            size: size,
-            image: product.image,
-            qty: 1
-        });
+        AppState.cart.push({ id: p.id, name: p.name, price: p.price, size, image: p.image, qty: 1 });
     }
-
-    saveCartToStorage();
-    showToastNotification(`Ajouté au Quiver : ${product.name} (${size})`);
+    saveCart();
+    toast(`Ajouté au Quiver : ${p.name} (${size})`);
 }
-
 function updateCartQuantity(index, delta) {
-    AppState.cart[index].qty += delta;
-    if (AppState.cart[index].qty <= 0) {
-        AppState.cart.splice(index, 1);
-    }
-    saveCartToStorage();
+    const line = AppState.cart[index];
+    if (!line) return;
+    const p = SURF_CATALOG.find(i => i.id === line.id);
+    const max = p ? p.stock[line.size] : Infinity;
+    if (delta > 0 && line.qty >= max) return toast(`Stock maximum atteint (${max}).`);
+    line.qty += delta;
+    if (line.qty <= 0) AppState.cart.splice(index, 1);
+    saveCart();
+}
+function removeCartItem(index) { AppState.cart.splice(index, 1); saveCart(); }
+
+function toggleCartDrawer(open) {
+    const drawer = document.getElementById("cart-drawer");
+    drawer.classList.toggle("active", open);
+    drawer.setAttribute("aria-hidden", String(!open));
+    document.getElementById("cart-backdrop").classList.toggle("active", open);
 }
 
-function removeCartItem(index) {
-    AppState.cart.splice(index, 1);
-    saveCartToStorage();
+// 4. CATALOGUE & FILTRES ----------------------------------------------
+function buildSizeFilter() {
+    const sel = document.getElementById("size-filter");
+    const all = [...new Set(SURF_CATALOG.flatMap(p => p.sizes))];
+    all.forEach(s => sel.insertAdjacentHTML("beforeend", `<option value="${s}">${s === "Unique" ? "Taille unique" : s}</option>`));
 }
 
-// ==========================================================================
-// 4. RENDU DYNAMIQUE DU CATALOGUE ET DES FILTRES
-// ==========================================================================
 function renderProducts() {
     const grid = document.getElementById("products-grid");
-    grid.innerHTML = "";
+    const f = AppState.filters;
+    const list = SURF_CATALOG.filter(p =>
+        (f.category === "all" || p.category === f.category) &&
+        p.price <= f.maxPrice && (f.size === "all" || p.sizes.includes(f.size)));
+    if (f.sort === "price-asc") list.sort((a, b) => a.price - b.price);
+    if (f.sort === "price-desc") list.sort((a, b) => b.price - a.price);
 
-    let filtered = SURF_CATALOG.filter(item => {
-        const matchesCat = (AppState.filters.category === "all") || (item.category === AppState.filters.category);
-        const matchesPrice = item.price <= AppState.filters.maxPrice;
-        const matchesSize = (AppState.filters.size === "all") || item.sizes.includes(AppState.filters.size);
-        return matchesCat && matchesPrice && matchesSize;
-    });
-
-    if (AppState.filters.sort === "price-asc") {
-        filtered.sort((a, b) => a.price - b.price);
-    } else if (AppState.filters.sort === "price-desc") {
-        filtered.sort((a, b) => b.price - a.price);
-    }
-
-    if (filtered.length === 0) {
-        grid.innerHTML = `
-            <div style="grid-column: 1/-1; text-align: center; padding: 60px 0; color: var(--color-text-muted);">
-                <p style="font-size: 1.1rem; font-weight: 600;">Aucun équipement disponible pour cette configuration de houle.</p>
-                <button type="button" class="tag-btn" style="margin-top: 14px;" onclick="resetFilters()">Réinitialiser les filtres</button>
-            </div>
-        `;
+    if (!list.length) {
+        grid.innerHTML = `<div style="grid-column:1/-1;text-align:center;padding:72px 0;color:var(--color-text-muted)">
+            <p style="font-size:1.1rem;font-weight:600;color:#0b0d12">Aucun produit ne correspond à ces filtres.</p>
+            <button type="button" class="tag-btn" style="margin-top:16px" onclick="resetFilters()">Réinitialiser les filtres</button></div>`;
         return;
     }
-
-    filtered.forEach(product => {
-        const card = document.createElement("article");
-        card.className = "product-card";
-        card.innerHTML = `
+    grid.innerHTML = list.map(p => {
+        const total = Object.values(p.stock).reduce((a, b) => a + b, 0);
+        const low = total > 0 && total <= 4;
+        return `<article class="product-card">
             <div class="card-media">
-                <img src="${product.image}" alt="${product.name}" loading="lazy">
-                <span class="ar-chip">
-                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="vertical-align: middle; margin-right: 2px;">
-                        <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
-                    </svg>
-                    3D / AR
-                </span>
+                <img src="${p.image}" alt="${p.name}" loading="lazy" onerror="this.style.display='none'">
+                <span class="ar-chip">3D · AR</span>
+                ${total === 0 ? '<span class="stock-chip">Épuisé</span>' : low ? '<span class="stock-chip">Derniers exemplaires</span>' : ""}
             </div>
             <div class="card-info">
-                <span class="card-category">${product.category}</span>
-                <h3 class="card-title">${product.name}</h3>
-                <p class="card-price">${product.price.toFixed(2)} €</p>
+                <span class="card-category">${p.category}</span>
+                <h3 class="card-title">${p.name}</h3>
+                <p class="card-tagline">${p.tagline}</p>
+                <p class="card-price">${fmt(p.price)}</p>
                 <div class="card-action-bar">
-                    <button type="button" class="btn-inspect" onclick="openProductModal('${product.id}')">Inspecter en 3D</button>
-                    <button type="button" class="btn-quick-cart" aria-label="Ajouter au quiver" onclick="quickAddDefaultSize('${product.id}')">
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                            <line x1="12" y1="5" x2="12" y2="19"></line>
-                            <line x1="5" y1="12" x2="19" y2="12"></line>
-                        </svg>
+                    <button type="button" class="btn-inspect" onclick="openProductModal('${p.id}')">Voir en 3D</button>
+                    <button type="button" class="btn-quick-cart" aria-label="Ajouter ${p.name} au quiver" onclick="quickAddDefaultSize('${p.id}')">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg>
                     </button>
                 </div>
-            </div>
-        `;
-        grid.appendChild(card);
-    });
+            </div></article>`;
+    }).join("");
 }
 
-function resetFilters() {
-    AppState.filters.category = "all";
-    AppState.filters.maxPrice = 950;
-    AppState.filters.size = "all";
-    AppState.filters.sort = "featured";
-
-    document.getElementById("price-filter").value = 950;
-    document.getElementById("price-val").textContent = "950 €";
-    document.getElementById("size-filter").value = "all";
-    document.getElementById("sort-select").value = "featured";
-
-    document.querySelectorAll(".tag-btn").forEach(btn => {
-        btn.classList.toggle("active", btn.dataset.filterCat === "all");
-    });
-    document.querySelectorAll(".nav-link[data-category]").forEach(lnk => {
-        lnk.classList.toggle("active", lnk.dataset.category === "all");
-    });
-
+function setCategory(cat) {
+    AppState.filters.category = cat;
+    document.querySelectorAll(".tag-btn[data-filter-cat]").forEach(b => b.classList.toggle("active", b.dataset.filterCat === cat));
+    document.querySelectorAll(".nav-link[data-category]").forEach(l => l.classList.toggle("active", l.dataset.category === cat));
     renderProducts();
 }
 
-// ==========================================================================
-// 5. MODALE 3D ET GESTION DES TAILLES
-// ==========================================================================
+function resetFilters() {
+    Object.assign(AppState.filters, { category: "all", maxPrice: 900, size: "all", sort: "featured" });
+    document.getElementById("price-filter").value = 900;
+    document.getElementById("price-val").textContent = "900 €";
+    document.getElementById("size-filter").value = "all";
+    document.getElementById("sort-select").value = "featured";
+    setCategory("all");
+}
+
+// 5. MODALE 3D ---------------------------------------------------------
 function openProductModal(productId) {
-    const product = SURF_CATALOG.find(p => p.id === productId);
-    if (!product) return;
+    const p = SURF_CATALOG.find(i => i.id === productId);
+    if (!p) return;
+    AppState.activeModalProduct = p;
+    AppState.selectedSize = p.sizes.find(s => p.stock[s] > 0) || null;
 
-    AppState.activeModalProduct = product;
+    const set = (id, v) => { document.getElementById(id).textContent = v; };
+    set("modal-product-category", p.category);
+    set("modal-product-title", p.name);
+    set("modal-product-price", fmt(p.price));
+    set("modal-product-desc", p.description);
+    set("modal-fit-badge", `Coupe : ${p.fit}`);
+    set("modal-spec-material", p.specs.material);
+    set("modal-spec-temp", p.specs.temperature);
+    set("modal-spec-weight", p.specs.weight);
+    set("modal-spec-care", p.specs.care);
 
-    const firstAvailableSize = product.sizes.find(s => product.stock[s] > 0) || product.sizes[0];
-    AppState.selectedSize = firstAvailableSize;
-
-    document.getElementById("modal-product-category").textContent = product.category;
-    document.getElementById("modal-product-title").textContent = product.name;
-    document.getElementById("modal-product-price").textContent = `${product.price.toFixed(2)} €`;
-    document.getElementById("modal-product-desc").textContent = product.description;
-    document.getElementById("modal-fit-badge").textContent = `Coupe : ${product.fit}`;
-
-    document.getElementById("modal-spec-material").textContent = product.specs.material;
-    document.getElementById("modal-spec-temp").textContent = product.specs.temperature;
-    document.getElementById("modal-spec-weight").textContent = product.specs.weight;
-    document.getElementById("modal-spec-care").textContent = product.specs.care;
-
-    const sizesContainer = document.getElementById("modal-sizes-container");
-    sizesContainer.innerHTML = "";
-
-    product.sizes.forEach(size => {
-        const inStock = product.stock[size] > 0;
-        const sizeBtn = document.createElement("button");
-        sizeBtn.type = "button";
-        sizeBtn.className = `size-btn ${size === AppState.selectedSize ? "selected" : ""} ${!inStock ? "disabled" : ""}`;
-        sizeBtn.textContent = size + (!inStock ? " (Épuisé)" : "");
-        
-        if (inStock) {
-            sizeBtn.addEventListener("click", () => {
-                document.querySelectorAll(".size-btn").forEach(b => b.classList.remove("selected"));
-                sizeBtn.classList.add("selected");
-                AppState.selectedSize = size;
-            });
-        }
-        sizesContainer.appendChild(sizeBtn);
+    const box = document.getElementById("modal-sizes-container");
+    box.innerHTML = "";
+    p.sizes.forEach(size => {
+        const ok = p.stock[size] > 0;
+        const b = document.createElement("button");
+        b.type = "button";
+        b.className = "size-btn" + (size === AppState.selectedSize ? " selected" : "") + (ok ? "" : " disabled");
+        b.textContent = size + (ok ? "" : " (épuisé)");
+        b.disabled = !ok;
+        b.addEventListener("click", () => {
+            box.querySelectorAll(".size-btn").forEach(x => x.classList.remove("selected"));
+            b.classList.add("selected");
+            AppState.selectedSize = size;
+        });
+        box.appendChild(b);
     });
 
+    const addBtn = document.getElementById("modal-add-cart-btn");
+    addBtn.disabled = !AppState.selectedSize;
+    addBtn.textContent = AppState.selectedSize ? "Ajouter à mon Quiver" : "Épuisé";
+
     const viewer = document.getElementById("main-model-viewer");
-    viewer.setAttribute("src", product.modelGlb);
-    if (product.modelUsdz) {
-        viewer.setAttribute("ios-src", product.modelUsdz);
-    } else {
-        viewer.removeAttribute("ios-src");
-    }
+    viewer.setAttribute("src", p.modelGlb);
+    p.modelUsdz ? viewer.setAttribute("ios-src", p.modelUsdz) : viewer.removeAttribute("ios-src");
 
     const modal = document.getElementById("product-modal");
     modal.classList.add("active");
     modal.setAttribute("aria-hidden", "false");
     document.body.style.overflow = "hidden";
+    document.getElementById("modal-close-btn").focus();
 }
 
 function closeProductModal() {
@@ -354,173 +231,95 @@ function closeProductModal() {
     modal.classList.remove("active");
     modal.setAttribute("aria-hidden", "true");
     document.body.style.overflow = "";
-
-    const viewer = document.getElementById("main-model-viewer");
-    viewer.removeAttribute("src");
 }
 
 function quickAddDefaultSize(productId) {
-    const product = SURF_CATALOG.find(p => p.id === productId);
-    if (product) {
-        const available = product.sizes.find(s => product.stock[s] > 0);
-        if (available) {
-            addToCart(product.id, available);
-        } else {
-            showToastNotification("Article actuellement en rupture de stock.");
-        }
-    }
+    const p = SURF_CATALOG.find(i => i.id === productId);
+    const size = p && p.sizes.find(s => p.stock[s] > 0);
+    size ? addToCart(p.id, size) : toast("Article en rupture de stock.");
 }
 
-// ==========================================================================
-// 6. SYNCHRONISATION DU PANIER
-// ==========================================================================
+// 6. AFFICHAGE PANIER --------------------------------------------------
 function updateCartUI() {
-    const totalCount = AppState.cart.reduce((acc, item) => acc + item.qty, 0);
-    document.getElementById("cart-counter").textContent = totalCount;
-    document.getElementById("drawer-cart-count").textContent = totalCount;
+    const count = AppState.cart.reduce((a, i) => a + i.qty, 0);
+    document.getElementById("cart-counter").textContent = count;
+    document.getElementById("drawer-cart-count").textContent = count;
 
     const list = document.getElementById("cart-items-list");
-    list.innerHTML = "";
-
-    if (AppState.cart.length === 0) {
-        list.innerHTML = `
-            <div style="text-align: center; margin: auto; color: var(--color-text-muted);">
-                <p style="font-weight: 600;">Votre quiver est vide.</p>
-                <span style="font-size: 0.82rem;">Sélectionnez vos pièces dans l'atelier.</span>
+    list.innerHTML = AppState.cart.length ? AppState.cart.map((it, i) => `
+        <div class="cart-item-card">
+            <img src="${it.image}" alt="${it.name}" onerror="this.style.visibility='hidden'">
+            <div>
+                <h4 style="font-size:.88rem;font-weight:600">${it.name}</h4>
+                <p style="font-size:.78rem;color:var(--color-text-muted)">Taille ${it.size} · ${fmt(it.price)}</p>
+                <div style="display:flex;align-items:center;gap:10px;margin-top:8px">
+                    <button type="button" aria-label="Retirer une unité" style="width:26px;height:26px;border:1px solid var(--color-border);background:#fff;border-radius:50%;cursor:pointer" onclick="updateCartQuantity(${i},-1)">−</button>
+                    <span style="font-size:.85rem;font-weight:600">${it.qty}</span>
+                    <button type="button" aria-label="Ajouter une unité" style="width:26px;height:26px;border:1px solid var(--color-border);background:#fff;border-radius:50%;cursor:pointer" onclick="updateCartQuantity(${i},1)">+</button>
+                </div>
             </div>
-        `;
-    } else {
-        AppState.cart.forEach((item, index) => {
-            const row = document.createElement("div");
-            row.className = "cart-item-card";
-            row.innerHTML = `
-                <img src="${item.image}" alt="${item.name}">
-                <div>
-                    <h4 style="font-size: 0.88rem; font-weight: 700; color: var(--color-ocean-deep);">${item.name}</h4>
-                    <p style="font-size: 0.78rem; color: var(--color-text-muted);">Taille : <strong>${item.size}</strong> • ${item.price.toFixed(2)} €</p>
-                    <div style="display: flex; align-items: center; gap: 8px; margin-top: 6px;">
-                        <button type="button" style="width: 22px; height: 22px; border: 1px solid var(--color-border); background: #FFF; border-radius: 4px; cursor: pointer; font-weight: 700;" onclick="updateCartQuantity(${index}, -1)">-</button>
-                        <span style="font-size: 0.85rem; font-weight: 700;">${item.qty}</span>
-                        <button type="button" style="width: 22px; height: 22px; border: 1px solid var(--color-border); background: #FFF; border-radius: 4px; cursor: pointer; font-weight: 700;" onclick="updateCartQuantity(${index}, 1)">+</button>
-                    </div>
-                </div>
-                <div style="text-align: right;">
-                    <button type="button" style="background: none; border: none; color: #94A3B8; cursor: pointer; font-size: 0.8rem; margin-bottom: 4px;" onclick="removeCartItem(${index})" aria-label="Supprimer l'article">&times;</button>
-                    <div style="font-weight: 800; font-size: 0.92rem; color: var(--color-ocean-deep);">
-                        ${(item.price * item.qty).toFixed(2)} €
-                    </div>
-                </div>
-            `;
-            list.appendChild(row);
-        });
-    }
+            <div style="text-align:right">
+                <button type="button" aria-label="Supprimer l'article" style="background:none;border:none;color:#a1a1a6;cursor:pointer;font-size:1.1rem" onclick="removeCartItem(${i})">&times;</button>
+                <div style="font-weight:600;font-size:.92rem">${fmt(it.price * it.qty)}</div>
+            </div>
+        </div>`).join("") : `
+        <div style="text-align:center;margin:auto;color:var(--color-text-muted)">
+            <p style="font-weight:600;color:#0b0d12">Votre quiver est vide.</p>
+            <span style="font-size:.82rem">Ajoutez une combinaison, une planche ou un accessoire.</span>
+        </div>`;
 
-    const totalTTC = AppState.cart.reduce((acc, item) => acc + (item.price * item.qty), 0);
-    const subtotalHT = totalTTC / 1.20;
-    const tax = totalTTC - subtotalHT;
+    const ttc = AppState.cart.reduce((a, i) => a + i.price * i.qty, 0);
+    const ht = ttc / 1.2;
+    document.getElementById("cart-subtotal").textContent = fmt(ht);
+    document.getElementById("cart-tax").textContent = fmt(ttc - ht);
+    document.getElementById("cart-total").textContent = fmt(ttc);
 
-    document.getElementById("cart-subtotal").textContent = `${subtotalHT.toFixed(2)} €`;
-    document.getElementById("cart-tax").textContent = `${tax.toFixed(2)} €`;
-    document.getElementById("cart-total").textContent = `${totalTTC.toFixed(2)} €`;
-
-    const threshold = 100.0;
-    const progressFill = document.getElementById("shipping-progress-fill");
-    const progressText = document.getElementById("shipping-progress-text");
-
-    if (totalTTC >= threshold) {
-        progressFill.style.width = "100%";
-        progressText.textContent = "Livraison neutre en carbone offerte !";
-    } else {
-        const remaining = (threshold - totalTTC).toFixed(2);
-        const percent = Math.min((totalTTC / threshold) * 100, 100);
-        progressFill.style.width = `${percent}%`;
-        progressText.textContent = `Plus que ${remaining} € pour débloquer la livraison gratuite`;
-    }
+    const threshold = 100;
+    const fill = document.getElementById("shipping-progress-fill");
+    const text = document.getElementById("shipping-progress-text");
+    fill.style.width = Math.min(ttc / threshold * 100, 100) + "%";
+    text.textContent = ttc >= threshold ? "Livraison neutre en carbone offerte" : `Plus que ${fmt(threshold - ttc)} pour la livraison offerte`;
 }
 
-// ==========================================================================
-// 7. TOASTS & INITIALISATION
-// ==========================================================================
-function showToastNotification(message) {
-    const hub = document.getElementById("toast-container");
-    const toast = document.createElement("div");
-    toast.style.background = "var(--color-ocean-deep)";
-    toast.style.color = "#FFF";
-    toast.style.fontSize = "0.85rem";
-    toast.style.fontWeight = "600";
-    toast.style.padding = "12px 18px";
-    toast.style.borderRadius = "var(--radius-sm)";
-    toast.style.boxShadow = "var(--shadow-surf)";
-    toast.textContent = message;
-    hub.appendChild(toast);
-
-    setTimeout(() => {
-        toast.style.opacity = "0";
-        toast.style.transform = "translateY(10px)";
-        toast.style.transition = "all 0.25s ease";
-        setTimeout(() => toast.remove(), 250);
-    }, 3000);
+// 7. TOASTS, ANIMATIONS & INIT ----------------------------------------
+function toast(message) {
+    const el = document.createElement("div");
+    el.className = "toast";
+    el.textContent = message;
+    document.getElementById("toast-container").appendChild(el);
+    setTimeout(() => { el.style.transition = "opacity .25s"; el.style.opacity = "0"; setTimeout(() => el.remove(), 250); }, 3000);
 }
+const showToastNotification = toast; // compatibilité
 
 document.addEventListener("DOMContentLoaded", () => {
+    buildSizeFilter();
     renderProducts();
     updateCartUI();
 
-    document.querySelectorAll(".tag-btn").forEach(btn => {
-        btn.addEventListener("click", () => {
-            document.querySelectorAll(".tag-btn").forEach(b => b.classList.remove("active"));
-            btn.classList.add("active");
-            AppState.filters.category = btn.dataset.filterCat;
-            renderProducts();
-        });
-    });
+    document.querySelectorAll(".tag-btn[data-filter-cat]").forEach(b => b.addEventListener("click", () => setCategory(b.dataset.filterCat)));
+    document.querySelectorAll(".nav-link[data-category]").forEach(l => l.addEventListener("click", () => {
+        setCategory(l.dataset.category);
+        document.getElementById("catalogue").scrollIntoView();
+    }));
+    document.querySelectorAll(".collection-tile").forEach(t => t.addEventListener("click", () => {
+        setCategory(t.dataset.category);
+        document.getElementById("catalogue").scrollIntoView();
+    }));
 
-    document.querySelectorAll(".nav-link[data-category]").forEach(lnk => {
-        lnk.addEventListener("click", () => {
-            document.querySelectorAll(".nav-link").forEach(l => l.classList.remove("active"));
-            lnk.classList.add("active");
-            const cat = lnk.dataset.category;
-            AppState.filters.category = cat;
+    const burger = document.getElementById("mobile-menu-btn");
+    const drawer = document.getElementById("mobile-nav-drawer");
+    if (burger && drawer) burger.addEventListener("click", () => drawer.classList.toggle("open"));
 
-            document.querySelectorAll(".tag-btn").forEach(tb => {
-                tb.classList.toggle("active", tb.dataset.filterCat === cat);
-            });
-
-            renderProducts();
-        });
-    });
-
-    const mobileMenuBtn = document.getElementById("mobile-menu-btn");
-    const mobileNavDrawer = document.getElementById("mobile-nav-drawer");
-    if (mobileMenuBtn && mobileNavDrawer) {
-        mobileMenuBtn.addEventListener("click", () => {
-            mobileNavDrawer.classList.toggle("open");
-        });
-    }
-
-    const priceSlider = document.getElementById("price-filter");
-    priceSlider.addEventListener("input", (e) => {
-        const val = parseFloat(e.target.value);
-        AppState.filters.maxPrice = val;
-        document.getElementById("price-val").textContent = `${val} €`;
+    document.getElementById("price-filter").addEventListener("input", e => {
+        AppState.filters.maxPrice = parseFloat(e.target.value);
+        document.getElementById("price-val").textContent = `${e.target.value} €`;
         renderProducts();
     });
-
-    document.getElementById("size-filter").addEventListener("change", (e) => {
-        AppState.filters.size = e.target.value;
-        renderProducts();
-    });
-
-    document.getElementById("sort-select").addEventListener("change", (e) => {
-        AppState.filters.sort = e.target.value;
-        renderProducts();
-    });
+    document.getElementById("size-filter").addEventListener("change", e => { AppState.filters.size = e.target.value; renderProducts(); });
+    document.getElementById("sort-select").addEventListener("change", e => { AppState.filters.sort = e.target.value; renderProducts(); });
 
     document.getElementById("modal-close-btn").addEventListener("click", closeProductModal);
-    document.getElementById("product-modal").addEventListener("click", (e) => {
-        if (e.target.id === "product-modal") closeProductModal();
-    });
-
+    document.getElementById("product-modal").addEventListener("click", e => { if (e.target.id === "product-modal") closeProductModal(); });
     document.getElementById("modal-add-cart-btn").addEventListener("click", () => {
         if (AppState.activeModalProduct && AppState.selectedSize) {
             addToCart(AppState.activeModalProduct.id, AppState.selectedSize);
@@ -529,24 +328,17 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-    const cartToggle = document.getElementById("cart-toggle-btn");
-    const cartClose = document.getElementById("cart-close-btn");
-    const backdrop = document.getElementById("cart-backdrop");
-
-    function toggleCartDrawer(open) {
-        document.getElementById("cart-drawer").classList.toggle("active", open);
-        backdrop.classList.toggle("active", open);
-    }
-
-    cartToggle.addEventListener("click", () => toggleCartDrawer(true));
-    cartClose.addEventListener("click", () => toggleCartDrawer(false));
-    backdrop.addEventListener("click", () => toggleCartDrawer(false));
+    document.getElementById("cart-toggle-btn").addEventListener("click", () => toggleCartDrawer(true));
+    document.getElementById("cart-close-btn").addEventListener("click", () => toggleCartDrawer(false));
+    document.getElementById("cart-backdrop").addEventListener("click", () => toggleCartDrawer(false));
+    document.addEventListener("keydown", e => { if (e.key === "Escape") { closeProductModal(); toggleCartDrawer(false); } });
 
     document.getElementById("checkout-trigger-btn").addEventListener("click", () => {
-        if (AppState.cart.length === 0) {
-            showToastNotification("Votre quiver est vide. Ajoutez un article avant de régler.");
-            return;
-        }
+        if (!AppState.cart.length) return toast("Votre quiver est vide. Ajoutez un article avant de régler.");
         window.location.href = "checkout.html";
     });
+
+    // Apparition au scroll (uniquement les grands blocs)
+    const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } }), { threshold: .12 });
+    document.querySelectorAll(".reveal").forEach(el => io.observe(el));
 });
