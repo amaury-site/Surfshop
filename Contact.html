@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact · AURA SURF</title>
+    <meta name="description" content="Une question sur un produit, une commande ou un retour ? Écrivez à l'équipe AURA SURF.">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="pages.css">
+</head>
+<body>
+<header class="site-header">
+    <div class="header-container">
+        <a href="index.html" class="brand-logo">AURA<span class="brand-badge">CONTACT</span></a>
+        <a href="index.html" class="nav-link">&larr; Retour à la boutique</a>
+    </div>
+</header>
+
+<main class="page-container" style="max-width:1100px">
+    <div class="page-header">
+        <span class="hero-tag">Une question ?</span>
+        <h1>Écrivez-nous</h1>
+        <p class="lead">Nous répondons sous 24 h ouvrées. Pour un échange de taille ou une réparation, le <a href="sav-reparation.html#declaration" class="link">formulaire de retours</a> est plus rapide.</p>
+    </div>
+
+    <div class="contact-grid">
+        <section class="page-card">
+            <h2>Votre message</h2>
+            <div id="c-status" class="result-box" hidden role="status" aria-live="polite" style="margin-bottom:18px"></div>
+            <form id="contact-form" novalidate>
+                <div class="form-row">
+                    <div class="form-group"><label for="c-name">Nom</label><input id="c-name" class="form-control" autocomplete="name" placeholder="Alex Dupont"></div>
+                    <div class="form-group"><label for="c-email">Adresse e-mail</label><input id="c-email" type="email" class="form-control" autocomplete="email" placeholder="alex.dupont@exemple.fr"></div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="c-subject">Sujet</label>
+                        <select id="c-subject" class="form-control">
+                            <option>Question sur un produit</option>
+                            <option>Ma commande</option>
+                            <option>Échange, retour ou réparation</option>
+                            <option>Autre demande</option>
+                        </select>
+                    </div>
+                    <div class="form-group"><label for="c-order">Numéro de commande (facultatif)</label><input id="c-order" class="form-control" placeholder="#AURA-12345" autocomplete="off"></div>
+                </div>
+                <div class="form-group"><label for="c-message">Message</label><textarea id="c-message" class="form-control" rows="6" maxlength="1500" placeholder="Dites-nous en quoi nous pouvons vous aider."></textarea></div>
+                <button type="submit" class="btn-primary btn-inline">Envoyer</button>
+                <p class="note">Le bouton ouvre votre application de messagerie avec le message prêt à partir.</p>
+            </form>
+        </section>
+
+        <aside class="page-card">
+            <h2>Autres moyens</h2>
+            <ul class="info-list">
+                <li><strong>E-mail</strong><a id="mail-link" href="#">…</a></li>
+                <li><strong>Téléphone</strong><span class="fill">[numéro]</span></li>
+                <li><strong>Atelier de réparation</strong><span class="fill">[adresse de l'atelier de Biarritz]</span></li>
+                <li><strong>Horaires</strong><span class="fill">[jours et heures d'ouverture]</span></li>
+                <li><strong>Délai de réponse</strong>24 h ouvrées</li>
+            </ul>
+            <h3 style="margin-top:26px">Avant d'écrire</h3>
+            <ul class="info-list">
+                <li><a href="guide-tailles.html">Trouver ma taille et mon volume</a></li>
+                <li><a href="conseils-epaisseur.html">Choisir l'épaisseur de ma combinaison</a></li>
+                <li><a href="choisir-sa-planche.html">Choisir ma planche</a></li>
+                <li><a href="sav-reparation.html">Retours et réparation</a></li>
+            </ul>
+        </aside>
+    </div>
+
+    <section class="page-card" style="margin-top:20px">
+        <h2>Questions fréquentes</h2>
+        <details><summary>À partir de quel montant la livraison est-elle offerte ?</summary><p>À partir de 100 € TTC. En dessous, des frais de livraison s'appliquent et sont affichés avant le paiement.</p></details>
+        <details><summary>Quels moyens de paiement acceptez-vous ?</summary><p>Carte bancaire, Apple Pay et PayPal.</p></details>
+        <details><summary>Combien de temps ai-je pour échanger une taille ?</summary><p>30 jours à compter de la réception, pour un article essayé à sec et non porté dans l'eau. Rendez-vous sur la page <a href="sav-reparation.html" class="link">retours et réparation</a>.</p></details>
+        <details><summary>Comment fonctionne l'essayage en réalité augmentée ?</summary><p>Ouvrez la fiche d'un produit depuis un téléphone compatible, puis touchez « Voir chez moi en AR ». Le produit s'affiche à l'échelle réelle dans votre pièce.</p></details>
+        <details><summary>Où en est ma commande ?</summary><p>Un e-mail vous est envoyé à l'expédition. Si vous ne l'avez pas reçu, écrivez-nous avec votre numéro de commande.</p></details>
+        <details><summary>Comment exercer mes droits sur mes données ?</summary><p>Écrivez-nous via ce formulaire en précisant votre demande. Plus de détails dans la <a href="confidentialite.html" class="link">politique de confidentialité</a>.</p></details>
+    </section>
+</main>
+
+<footer class="page-footer">
+    <nav aria-label="Informations légales">
+        <a href="contact.html">Contact</a>
+        <a href="cgv.html">CGV</a>
+        <a href="mentions-legales.html">Mentions légales</a>
+        <a href="confidentialite.html">Confidentialité</a>
+    </nav>
+    <p>&copy; 2026 AURA SURF STUDIO</p>
+</footer>
+
+<script>
+/* À REMPLACER par votre vraie adresse de contact */
+const CONTACT_EMAIL = "contact@exemple.fr";
+
+const $ = id => document.getElementById(id);
+$("mail-link").textContent = CONTACT_EMAIL;
+$("mail-link").href = "mailto:" + CONTACT_EMAIL;
+
+function setError(id, msg) {
+    const el = $(id);
+    let err = $("err-" + id);
+    if (!err) {
+        err = document.createElement("small");
+        err.id = "err-" + id; err.className = "form-error"; err.setAttribute("role", "alert");
+        el.parentNode.appendChild(err);
+    }
+    el.classList.toggle("invalid", !!msg);
+    el.setAttribute("aria-invalid", String(!!msg));
+    err.textContent = msg || "";
+    return !msg;
+}
+
+$("contact-form").addEventListener("submit", e => {
+    e.preventDefault();
+    const name = $("c-name").value.trim(), email = $("c-email").value.trim();
+    const order = $("c-order").value.trim().toUpperCase(), msg = $("c-message").value.trim();
+
+    const checks = [
+        ["c-name", name.length >= 2 ? "" : "Indiquez votre nom."],
+        ["c-email", /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email) ? "" : "Adresse e-mail invalide."],
+        ["c-order", !order || /^#?AURA-\d{5}$/.test(order) ? "" : "Format attendu : #AURA-12345."],
+        ["c-message", msg.length >= 10 ? "" : "Écrivez au moins quelques mots (10 caractères)."]
+    ];
+    const results = checks.map(([id, m]) => [id, setError(id, m)]);
+    const firstBad = results.find(([, ok]) => !ok);
+    if (firstBad) return $(firstBad[0]).focus();
+
+    const subject = "[AURA SURF] " + $("c-subject").value;
+    const body = "Nom : " + name + "\nE-mail : " + email + (order ? "\nCommande : " + order : "") + "\n\n" + msg;
+    const status = $("c-status");
+    status.innerHTML = "";
+    status.append(document.createTextNode("Votre messagerie va s'ouvrir avec le message prêt à envoyer. Si rien ne se passe, écrivez-nous à "));
+    const a = document.createElement("a");
+    a.href = "mailto:" + CONTACT_EMAIL; a.textContent = CONTACT_EMAIL; a.className = "link";
+    status.append(a, document.createTextNode("."));
+    status.hidden = false;
+    window.location.href = "mailto:" + CONTACT_EMAIL + "?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body);
+});
+</script>
+</body>
+</html>
