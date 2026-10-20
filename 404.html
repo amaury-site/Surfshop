@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex">
+    <title>Page introuvable · AURA SURF</title>
+    <script>
+    /* GitHub Pages sert cette page depuis n'importe quelle adresse inconnue : on fixe la base des liens.
+       Site à la racine d'un domaine (domaine perso ou pseudo.github.io) : laissez "/".
+       Site de projet (https://pseudo.github.io/nom-du-depot/) : mettez "/nom-du-depot/". */
+    const SITE_BASE = "/";
+    const base = document.createElement("base");
+    base.href = SITE_BASE;
+    document.head.prepend(base);
+    </script>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="pages.css">
+    <style>
+        .lost{min-height:calc(100vh - 140px);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:48px 24px}
+        .lost-code{font-size:clamp(6rem,24vw,15rem);font-weight:700;letter-spacing:-.07em;line-height:.9;color:var(--color-ink)}
+        .lost h1{font-size:clamp(1.5rem,4vw,2.2rem);font-weight:700;letter-spacing:-.03em;margin:18px 0 8px}
+        .lost p{color:var(--color-text-muted);max-width:460px}
+        .lost-actions{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-top:28px}
+        .lost-actions .btn-primary,.lost-actions .btn-ghost{display:inline-block;width:auto}
+        .lost-actions .btn-ghost{border-color:var(--color-border);color:var(--color-ink)}
+        .lost-actions .btn-ghost:hover{background:#e3e6ea}
+    </style>
+</head>
+<body>
+<header class="site-header">
+    <div class="header-container">
+        <a href="index.html" class="brand-logo">AURA<span class="brand-badge">SURF</span></a>
+        <a href="index.html" class="nav-link">&larr; Accueil</a>
+    </div>
+</header>
+
+<main class="lost">
+    <div class="lost-code" aria-hidden="true">404</div>
+    <h1>Cette page n'existe pas</h1>
+    <p>L'adresse est peut-être mal saisie, ou la page a changé de place. Reprenez depuis un de ces points de départ.</p>
+    <div class="lost-actions">
+        <a href="index.html" class="btn-primary">Retour à l'accueil</a>
+        <a href="index.html#catalogue" class="btn-ghost">Voir le catalogue</a>
+        <a href="contact.html" class="btn-ghost">Nous contacter</a>
+    </div>
+</main>
+
+<footer class="page-footer">
+    <nav aria-label="Informations légales">
+        <a href="contact.html">Contact</a>
+        <a href="cgv.html">CGV</a>
+        <a href="mentions-legales.html">Mentions légales</a>
+        <a href="confidentialite.html">Confidentialité</a>
+    </nav>
+    <p>&copy; 2026 AURA SURF STUDIO</p>
+</footer>
+</body>
+</html>
