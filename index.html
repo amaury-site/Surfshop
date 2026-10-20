@@ -10,16 +10,16 @@
 </head>
 <body>
 
-    <!-- Bandeau Maritime Rassurance -->
+    <!-- Bandeau Maritime de Rassurance -->
     <aside class="announcement-bar" role="region" aria-label="Conditions d'expédition">
         <span>Session d'automne &bull; Expédition neutre en carbone offerte dès 100€ &bull; Essayage spatial 3D/AR 1:1</span>
     </aside>
 
-    <!-- Navigation Principale Flottante -->
+    <!-- Navigation Flottante -->
     <header class="site-header">
         <div class="header-container">
             <a href="index.html" class="brand-logo" aria-label="AURA SURF Accueil">
-                <span>AURA</span><span class="brand-badge">OCEAN LAB</span>
+                <span class="logo-mark">AURA</span><span class="brand-badge">OCEAN LAB</span>
             </a>
             
             <nav class="desktop-nav" aria-label="Menu principal">
@@ -34,7 +34,7 @@
 
             <div class="header-actions">
                 <button type="button" id="cart-toggle-btn" class="cart-btn" aria-label="Voir mon équipement sélectionné">
-                    <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                    <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
                         <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
                         <line x1="3" y1="6" x2="21" y2="6"></line>
                         <path d="M16 10a4 4 0 0 1-8 0"></path>
@@ -51,7 +51,6 @@
             </div>
         </div>
 
-        <!-- Menu Déroulant Mobile Tactile -->
         <div id="mobile-nav-drawer" class="mobile-nav-drawer">
             <a href="index.html" class="mobile-nav-link active">Atelier Complet</a>
             <a href="guide-tailles.html" class="mobile-nav-link">Guide des Tailles &amp; Litrage</a>
@@ -61,17 +60,39 @@
         </div>
     </header>
 
-    <!-- Hero Éditorial Style Surf Épuré -->
-    <section class="collection-hero">
-        <div class="hero-tag">Conception Biarritz &bull; Standards WebXR</div>
-        <h1>L'Atelier Océanique Augmenté.</h1>
-        <p>Matériaux biosourcés, néoprènes calcaire haute élasticité et planches profilées. Projetez vos équipements à échelle réelle avant votre prochaine session.</p>
+    <!-- Hero Cinématique Style Porsche / Apple avec Cliché d'Océan Haute Définition -->
+    <section class="hero-cinematic">
+        <div class="hero-media-wrapper">
+            <img src="https://images.unsplash.com/photo-1502680390469-be75c86b636f?auto=format&fit=crop&w=1920&q=85" alt="Océan Atlantique et vagues de surf" loading="eager">
+        </div>
+        <div class="hero-overlay"></div>
+        <div class="container hero-content">
+            <div class="hero-tag">Conception Biarritz &bull; Standards WebXR 2026</div>
+            <h1>L'Atelier Océanique Augmenté.</h1>
+            <p>Composants en carbone sergé, néoprène calcaire à cellules fermées et réactivité hydrodynamique. Projetez vos planches et combinaisons à l'échelle 1:1 dans votre salon.</p>
+        </div>
     </section>
 
-    <!-- Conteneur Principal : Filtres Surf & Grille Produits -->
+    <!-- Bandeau de Télémétrie Technique -->
+    <aside class="telemetry-strip" aria-label="Spécifications de la plateforme">
+        <div class="container telemetry-grid">
+            <div class="telemetry-item">
+                <strong>&lt; 0.8s</strong>
+                <span>Temps de chargement WebXR</span>
+            </div>
+            <div class="telemetry-item">
+                <strong>100%</strong>
+                <span>Échelle 1:1 Précision Métrique</span>
+            </div>
+            <div class="telemetry-item">
+                <strong>0% Pétrole</strong>
+                <span>Néoprène Calcaire Yamamoto</span>
+            </div>
+        </div>
+    </aside>
+
     <main class="container">
-        
-        <!-- Panneau de Contrôle & Swell Slider -->
+        <!-- Barre de Filtres & Jauge Swell -->
         <section class="filter-bar" aria-label="Filtres de recherche et budget">
             <div class="filter-top-row">
                 <div class="category-tags">
@@ -108,7 +129,6 @@
                 </div>
             </div>
 
-            <!-- Jauge de Marée / Swell Slider -->
             <div class="swell-filter-box">
                 <div class="swell-labels">
                     <span>Budget Maximum / Échelle de Houle :</span>
@@ -125,11 +145,11 @@
             </div>
         </section>
 
-        <!-- Grille de Distribution Produits -->
+        <!-- Grille Produits -->
         <section id="products-grid" class="products-grid" aria-label="Catalogue des équipements"></section>
     </main>
 
-    <!-- Modale 3D & Réalité Augmentée -->
+    <!-- Modale 3D / AR -->
     <div id="product-modal" class="modal-overlay" role="dialog" aria-modal="true" aria-hidden="true">
         <div class="modal-surface">
             <button type="button" id="modal-close-btn" class="modal-close" aria-label="Fermer la vue produit">&times;</button>
@@ -164,12 +184,11 @@
             <div class="modal-details-pane">
                 <span id="modal-product-category" class="card-category">Catégorie</span>
                 <h2 id="modal-product-title" class="card-title" style="font-size: 1.6rem;">Nom de l'équipement</h2>
-                <p id="modal-product-price" class="card-price" style="font-size: 1.35rem; color: var(--color-ocean-deep); margin-bottom: 8px;">0.00 €</p>
+                <p id="modal-product-price" class="card-price" style="font-size: 1.35rem; color: #0F172A; margin-bottom: 8px;">0.00 €</p>
                 
-                <!-- Indicateur de compression textile -->
                 <div id="modal-fit-badge" class="fit-indicator">Coupe : Régulière</div>
                 
-                <p id="modal-product-desc" style="font-size: 0.9rem; color: var(--color-text-muted); line-height: 1.55; margin-bottom: 16px;"></p>
+                <p id="modal-product-desc" style="font-size: 0.9rem; color: var(--color-slate-500); line-height: 1.55; margin-bottom: 16px;"></p>
                 
                 <div>
                     <div style="display: flex; justify-content: space-between; align-items: baseline;">
@@ -193,14 +212,13 @@
         </div>
     </div>
 
-    <!-- Tiroir Panier d'Achat (Off-Canvas Cart) -->
+    <!-- Tiroir Panier -->
     <aside id="cart-drawer" class="cart-drawer" aria-hidden="true" role="dialog" aria-label="Votre quiver de commande">
         <div class="cart-drawer-header">
-            <h3 style="font-size: 1.1rem; color: var(--color-ocean-deep);">Votre Quiver (<span id="drawer-cart-count">0</span>)</h3>
+            <h3 style="font-size: 1.1rem; color: #0F172A;">Votre Quiver (<span id="drawer-cart-count">0</span>)</h3>
             <button type="button" id="cart-close-btn" style="background: transparent; border: none; font-size: 1.6rem; cursor: pointer;">&times;</button>
         </div>
         
-        <!-- Barre de Progression Livraison Gratuite -->
         <div class="free-shipping-bar">
             <span id="shipping-progress-text">Livraison offerte dès 100 €</span>
             <div class="progress-track">
@@ -227,22 +245,21 @@
             <button type="button" id="checkout-trigger-btn" class="btn-primary w-full" style="margin-top: 14px;">
                 Passer au Paiement Sécurisé &rarr;
             </button>
-            <p style="font-size: 0.7rem; color: var(--color-text-muted); text-align: center; margin-top: 10px;">
-                Paiement chiffré SSL 256-bit &bull; Apple Pay &amp; Cartes Bancaires
+            <p style="font-size: 0.7rem; color: var(--color-slate-500); text-align: center; margin-top: 10px;">
+                Chiffrement TLS 1.3 &bull; Apple Pay, Visa, Mastercard, CB &amp; PayPal
             </p>
         </div>
     </aside>
     <div id="cart-backdrop" class="cart-backdrop"></div>
 
-    <!-- Hub Notifications Toast -->
     <div id="toast-container" class="toast-hub" aria-live="polite"></div>
 
-    <!-- Pied de Page de Marque & Navigation Réelle -->
+    <!-- Pied de Page de Marque -->
     <footer class="site-footer">
         <div class="container footer-grid">
             <div class="footer-col">
                 <span class="brand-logo" style="color: #FFF; margin-bottom: 12px; display: inline-flex;">
-                    <span>AURA</span><span class="brand-badge" style="background: rgba(255,255,255,0.15); color: #FFF;">SURF LAB</span>
+                    <span class="logo-mark">AURA</span><span class="brand-badge" style="background: rgba(255,255,255,0.15); color: #FFF;">SURF LAB</span>
                 </span>
                 <p style="color: #94A3B8; font-size: 0.85rem; max-width: 320px; line-height: 1.6;">
                     Équipements nautiques durables conçus sur la côte atlantique. Intégration des standards d'interopérabilité spatiale glTF et WebXR.
