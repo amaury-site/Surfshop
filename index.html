@@ -3,290 +3,205 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AURA SURF LAB &bull; Ingénierie Océanique &amp; Expérience Augmentée</title>
-    <!-- Moteur WebAR Google Model Viewer -->
+    <meta name="description" content="AURA Surf : combinaisons, planches de surf, top UV et accessoires, avec essayage 3D et réalité augmentée.">
+    <title>AURA SURF · Combinaisons, planches &amp; accessoires en 3D</title>
     <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.4.0/model-viewer.min.js"></script>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
-    <!-- Bandeau Maritime de Rassurance -->
-    <aside class="announcement-bar" role="region" aria-label="Conditions d'expédition">
-        <span>Session d'automne &bull; Expédition neutre en carbone offerte dès 100€ &bull; Essayage spatial 3D/AR 1:1</span>
+    <aside class="announcement-bar" aria-label="Conditions d'expédition">
+        Livraison neutre en carbone offerte dès 100 € · Retours gratuits sous 30 jours
     </aside>
 
-    <!-- Navigation Flottante -->
     <header class="site-header">
         <div class="header-container">
-            <a href="index.html" class="brand-logo" aria-label="AURA SURF Accueil">
-                <span class="logo-mark">AURA</span><span class="brand-badge">OCEAN LAB</span>
-            </a>
-            
+            <a href="index.html" class="brand-logo" aria-label="AURA SURF, accueil">AURA<span class="brand-badge">SURF</span></a>
+
             <nav class="desktop-nav" aria-label="Menu principal">
-                <button type="button" class="nav-link active" data-category="all">Tout l'Atelier</button>
+                <button type="button" class="nav-link active" data-category="all">Collection</button>
                 <button type="button" class="nav-link" data-category="combinaisons">Combinaisons</button>
                 <button type="button" class="nav-link" data-category="planches">Planches</button>
-                <button type="button" class="nav-link" data-category="accessoires">Accessoires</button>
-                <a href="guide-tailles.html" class="nav-link">Guide des Tailles</a>
+                <button type="button" class="nav-link" data-category="accessoires">Top UV &amp; Accessoires</button>
+                <a href="guide-tailles.html" class="nav-link">Guide des tailles</a>
                 <a href="tracabilite.html" class="nav-link">Traçabilité</a>
-                <a href="sav-reparation.html" class="nav-link">Atelier Réparation</a>
+                <a href="sav-reparation.html" class="nav-link">Réparation</a>
             </nav>
 
             <div class="header-actions">
-                <button type="button" id="cart-toggle-btn" class="cart-btn" aria-label="Voir mon équipement sélectionné">
-                    <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
-                        <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
-                        <line x1="3" y1="6" x2="21" y2="6"></line>
-                        <path d="M16 10a4 4 0 0 1-8 0"></path>
-                    </svg>
+                <button type="button" id="cart-toggle-btn" class="cart-btn" aria-label="Ouvrir mon quiver">
+                    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
                     <span>Quiver</span>
-                    <span id="cart-counter" class="cart-badge" aria-hidden="true">0</span>
+                    <span id="cart-counter" class="cart-badge">0</span>
                 </button>
-                
-                <button type="button" id="mobile-menu-btn" class="mobile-menu-toggle" aria-label="Ouvrir le menu mobile">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </button>
+                <button type="button" id="mobile-menu-btn" class="mobile-menu-toggle" aria-label="Ouvrir le menu"><span></span><span></span><span></span></button>
             </div>
         </div>
 
         <div id="mobile-nav-drawer" class="mobile-nav-drawer">
-            <a href="index.html" class="mobile-nav-link active">Atelier Complet</a>
-            <a href="guide-tailles.html" class="mobile-nav-link">Guide des Tailles &amp; Litrage</a>
-            <a href="tracabilite.html" class="mobile-nav-link">Traçabilité des Matières</a>
-            <a href="sav-reparation.html" class="mobile-nav-link">Atelier Réparation &amp; SAV</a>
-            <a href="checkout.html" class="mobile-nav-link">Passerelle de Paiement</a>
+            <a href="index.html" class="mobile-nav-link">Collection</a>
+            <a href="guide-tailles.html" class="mobile-nav-link">Guide des tailles &amp; litrage</a>
+            <a href="tracabilite.html" class="mobile-nav-link">Traçabilité des matières</a>
+            <a href="sav-reparation.html" class="mobile-nav-link">Réparation &amp; retours</a>
+            <a href="checkout.html" class="mobile-nav-link">Paiement</a>
         </div>
     </header>
 
-    <!-- Hero Cinématique Style Porsche / Apple avec Cliché d'Océan Haute Définition -->
     <section class="hero-cinematic">
         <div class="hero-media-wrapper">
-            <img src="https://images.unsplash.com/photo-1502680390469-be75c86b636f?auto=format&fit=crop&w=1920&q=85" alt="Océan Atlantique et vagues de surf" loading="eager">
+            <img src="https://images.unsplash.com/photo-1502680390469-be75c86b636f?auto=format&fit=crop&w=1920&q=85" alt="Vague de l'océan Atlantique au lever du jour" loading="eager" onerror="this.style.display='none'">
         </div>
         <div class="hero-overlay"></div>
         <div class="container hero-content">
-            <div class="hero-tag">Conception Biarritz &bull; Standards WebXR 2026</div>
-            <h1>L'Atelier Océanique Augmenté.</h1>
-            <p>Composants en carbone sergé, néoprène calcaire à cellules fermées et réactivité hydrodynamique. Projetez vos planches et combinaisons à l'échelle 1:1 dans votre salon.</p>
+            <div class="hero-tag">Conçu à Biarritz · Essayage 3D et réalité augmentée</div>
+            <h1>Surfez l'hiver.<br>Voyez avant d'acheter.</h1>
+            <p>Combinaisons en néoprène calcaire, planches du longboard au shortboard, top UV et accessoires. Posez chaque produit chez vous, à l'échelle 1:1.</p>
+            <div class="hero-actions">
+                <a href="#catalogue" class="btn-hero">Voir la collection</a>
+                <a href="guide-tailles.html" class="btn-ghost">Trouver ma taille</a>
+            </div>
         </div>
     </section>
 
-    <!-- Bandeau de Télémétrie Technique -->
-    <aside class="telemetry-strip" aria-label="Spécifications de la plateforme">
+    <aside class="telemetry-strip" aria-label="Nos engagements">
         <div class="container telemetry-grid">
-            <div class="telemetry-item">
-                <strong>&lt; 0.8s</strong>
-                <span>Temps de chargement WebXR</span>
-            </div>
-            <div class="telemetry-item">
-                <strong>100%</strong>
-                <span>Échelle 1:1 Précision Métrique</span>
-            </div>
-            <div class="telemetry-item">
-                <strong>0% Pétrole</strong>
-                <span>Néoprène Calcaire Yamamoto</span>
-            </div>
+            <div class="telemetry-item"><strong>2/2 → 5/4</strong><span>Quatre épaisseurs de combinaison, de 6°C à 22°C</span></div>
+            <div class="telemetry-item"><strong>5'11 → 9'0</strong><span>Trois planches : shortboard, midlength, longboard</span></div>
+            <div class="telemetry-item"><strong>0 % pétrole</strong><span>Néoprène calcaire sur toutes nos combinaisons</span></div>
         </div>
     </aside>
 
     <main class="container">
-        <!-- Barre de Filtres & Jauge Swell -->
-        <section class="filter-bar" aria-label="Filtres de recherche et budget">
+        <!-- Les 3 gammes -->
+        <section class="collections reveal" aria-label="Nos trois gammes">
+            <button type="button" class="collection-tile" data-category="combinaisons">
+                <h2>Combinaisons</h2><p>3/2, 4/3, 5/4 et shorty 2/2</p><span>Découvrir</span>
+            </button>
+            <button type="button" class="collection-tile" data-category="planches">
+                <h2>Planches</h2><p>Longboard 9', midlength 7', shortboard 5'11</p><span>Découvrir</span>
+            </button>
+            <button type="button" class="collection-tile" data-category="accessoires">
+                <h2>Top UV &amp; Accessoires</h2><p>Top UV, boardshorts, leash et wax</p><span>Découvrir</span>
+            </button>
+        </section>
+
+        <section id="catalogue" class="filter-bar" aria-label="Filtres">
             <div class="filter-top-row">
                 <div class="category-tags">
-                    <button type="button" class="tag-btn active" data-filter-cat="all">Toute la Collection</button>
-                    <button type="button" class="tag-btn" data-filter-cat="combinaisons">Néoprènes &amp; Lycras</button>
-                    <button type="button" class="tag-btn" data-filter-cat="planches">Planches Époxy</button>
-                    <button type="button" class="tag-btn" data-filter-cat="accessoires">Accessoires &amp; Dérives</button>
+                    <button type="button" class="tag-btn active" data-filter-cat="all">Tout</button>
+                    <button type="button" class="tag-btn" data-filter-cat="combinaisons">Combinaisons</button>
+                    <button type="button" class="tag-btn" data-filter-cat="planches">Planches</button>
+                    <button type="button" class="tag-btn" data-filter-cat="accessoires">Top UV &amp; Accessoires</button>
                 </div>
-
                 <div class="filter-dropdowns">
                     <div class="select-wrapper">
-                        <label for="size-filter">Gabarit :</label>
-                        <select id="size-filter">
-                            <option value="all">Tous gabarits</option>
-                            <option value="XS">XS</option>
-                            <option value="S">S</option>
-                            <option value="M">M</option>
-                            <option value="L">L</option>
-                            <option value="XL">XL</option>
-                            <option value="5'11">5'11&quot;</option>
-                            <option value="6'2">6'2&quot;</option>
-                            <option value="Unique">Taille Unique</option>
-                        </select>
+                        <label for="size-filter">Taille</label>
+                        <select id="size-filter"><option value="all">Toutes</option></select>
                     </div>
-
                     <div class="select-wrapper">
-                        <label for="sort-select">Trier :</label>
+                        <label for="sort-select">Trier</label>
                         <select id="sort-select">
-                            <option value="featured">Recommandés AURA</option>
-                            <option value="price-asc">Prix : Marée Basse &rarr; Haute</option>
-                            <option value="price-desc">Prix : Gros Swell d'abord</option>
+                            <option value="featured">Sélection AURA</option>
+                            <option value="price-asc">Prix croissant</option>
+                            <option value="price-desc">Prix décroissant</option>
                         </select>
                     </div>
                 </div>
             </div>
-
             <div class="swell-filter-box">
-                <div class="swell-labels">
-                    <span>Budget Maximum / Échelle de Houle :</span>
-                    <span id="price-val" class="swell-val-display">950 €</span>
-                </div>
-                <div class="range-wrap">
-                    <input type="range" id="price-filter" class="surf-range-slider" min="15" max="950" step="10" value="950" aria-label="Ajuster le budget">
-                </div>
-                <div class="slider-indicators">
-                    <span>Marée Basse (15 €)</span>
-                    <span>Houle Médium (450 €)</span>
-                    <span>Gros Swell (950 €)</span>
-                </div>
+                <div class="swell-labels"><span>Budget maximum</span><span id="price-val" class="swell-val-display">900 €</span></div>
+                <input type="range" id="price-filter" class="surf-range-slider" min="15" max="900" step="5" value="900" aria-label="Budget maximum">
+                <div class="slider-indicators"><span>15 €</span><span>450 €</span><span>900 €</span></div>
             </div>
         </section>
 
-        <!-- Grille Produits -->
-        <section id="products-grid" class="products-grid" aria-label="Catalogue des équipements"></section>
+        <section id="products-grid" class="products-grid" aria-label="Catalogue" aria-live="polite"></section>
     </main>
 
     <!-- Modale 3D / AR -->
-    <div id="product-modal" class="modal-overlay" role="dialog" aria-modal="true" aria-hidden="true">
+    <div id="product-modal" class="modal-overlay" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="modal-product-title">
         <div class="modal-surface">
-            <button type="button" id="modal-close-btn" class="modal-close" aria-label="Fermer la vue produit">&times;</button>
-            
+            <button type="button" id="modal-close-btn" class="modal-close" aria-label="Fermer">&times;</button>
             <div class="modal-viewer-pane">
-                <model-viewer id="main-model-viewer"
-                    src=""
-                    ios-src=""
-                    ar
-                    ar-modes="webxr scene-viewer quick-look"
-                    ar-scale="fixed"
-                    camera-controls
-                    touch-action="pan-y"
-                    auto-rotate
-                    rotation-per-second="18deg"
-                    shadow-intensity="1.2"
-                    exposure="1.0"
-                    alt="Inspection 3D AURA SURF"
-                    loading="lazy">
-                    
+                <model-viewer id="main-model-viewer" src="" ar ar-modes="webxr scene-viewer quick-look" ar-scale="fixed"
+                    camera-controls touch-action="pan-y" auto-rotate rotation-per-second="18deg"
+                    shadow-intensity="1.2" exposure="1.0" alt="Aperçu 3D du produit" loading="lazy">
                     <button type="button" slot="ar-button" class="custom-ar-trigger">
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
-                            <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
-                            <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
-                            <line x1="12" y1="22.08" x2="12" y2="12"></line>
-                        </svg>
-                        Projeter dans mon salon (AR)
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
+                        Voir chez moi en AR
                     </button>
                 </model-viewer>
             </div>
-            
             <div class="modal-details-pane">
                 <span id="modal-product-category" class="card-category">Catégorie</span>
-                <h2 id="modal-product-title" class="card-title" style="font-size: 1.6rem;">Nom de l'équipement</h2>
-                <p id="modal-product-price" class="card-price" style="font-size: 1.35rem; color: #0F172A; margin-bottom: 8px;">0.00 €</p>
-                
-                <div id="modal-fit-badge" class="fit-indicator">Coupe : Régulière</div>
-                
-                <p id="modal-product-desc" style="font-size: 0.9rem; color: var(--color-slate-500); line-height: 1.55; margin-bottom: 16px;"></p>
-                
+                <h2 id="modal-product-title" class="card-title" style="font-size:1.7rem;letter-spacing:-.03em">Produit</h2>
+                <p id="modal-product-price" class="card-price" style="font-size:1.3rem;margin-bottom:10px">0,00 €</p>
+                <div id="modal-fit-badge" class="fit-indicator">Coupe</div>
+                <p id="modal-product-desc" style="font-size:.92rem;color:var(--color-slate-500);line-height:1.6;margin-bottom:18px"></p>
                 <div>
-                    <div style="display: flex; justify-content: space-between; align-items: baseline;">
-                        <span style="font-size: 0.8rem; font-weight: 700; text-transform: uppercase;">Sélectionnez votre taille :</span>
-                        <a href="guide-tailles.html" target="_blank" style="font-size: 0.78rem; color: var(--color-ocean-blue); font-weight: 600;">Guide morphologique &nearr;</a>
+                    <div style="display:flex;justify-content:space-between;align-items:baseline">
+                        <span style="font-size:.82rem;font-weight:600">Choisir une taille</span>
+                        <a href="guide-tailles.html" target="_blank" rel="noopener" style="font-size:.78rem;color:var(--color-ocean-blue);font-weight:600;text-decoration:none">Guide des tailles</a>
                     </div>
                     <div id="modal-sizes-container" class="size-selector-grid"></div>
                 </div>
-
                 <div class="tech-spec-table">
-                    <div class="spec-row"><span>Matière Première</span><strong id="modal-spec-material">-</strong></div>
-                    <div class="spec-row"><span>Température d'Eau</span><strong id="modal-spec-temp">-</strong></div>
-                    <div class="spec-row"><span>Poids / Litrage</span><strong id="modal-spec-weight">-</strong></div>
-                    <div class="spec-row"><span>Entretien &amp; Soin</span><strong id="modal-spec-care">Rincer à l'eau douce</strong></div>
+                    <div class="spec-row"><span>Matière</span><strong id="modal-spec-material">-</strong></div>
+                    <div class="spec-row"><span>Température d'eau</span><strong id="modal-spec-temp">-</strong></div>
+                    <div class="spec-row"><span>Poids / Volume</span><strong id="modal-spec-weight">-</strong></div>
+                    <div class="spec-row"><span>Entretien</span><strong id="modal-spec-care">-</strong></div>
                 </div>
-
-                <button type="button" id="modal-add-cart-btn" class="btn-primary w-full">
-                    Ajouter à mon Quiver
-                </button>
+                <button type="button" id="modal-add-cart-btn" class="btn-primary w-full">Ajouter à mon Quiver</button>
             </div>
         </div>
     </div>
 
-    <!-- Tiroir Panier -->
-    <aside id="cart-drawer" class="cart-drawer" aria-hidden="true" role="dialog" aria-label="Votre quiver de commande">
+    <!-- Panier -->
+    <aside id="cart-drawer" class="cart-drawer" aria-hidden="true" role="dialog" aria-label="Mon quiver">
         <div class="cart-drawer-header">
-            <h3 style="font-size: 1.1rem; color: #0F172A;">Votre Quiver (<span id="drawer-cart-count">0</span>)</h3>
-            <button type="button" id="cart-close-btn" style="background: transparent; border: none; font-size: 1.6rem; cursor: pointer;">&times;</button>
+            <h3 style="font-size:1.1rem">Mon Quiver (<span id="drawer-cart-count">0</span>)</h3>
+            <button type="button" id="cart-close-btn" aria-label="Fermer le panier" style="background:none;border:none;font-size:1.6rem;cursor:pointer">&times;</button>
         </div>
-        
         <div class="free-shipping-bar">
             <span id="shipping-progress-text">Livraison offerte dès 100 €</span>
-            <div class="progress-track">
-                <div id="shipping-progress-fill" class="progress-fill" style="width: 0%;"></div>
-            </div>
+            <div class="progress-track"><div id="shipping-progress-fill" class="progress-fill" style="width:0%"></div></div>
         </div>
-
         <div id="cart-items-list" class="cart-items-container"></div>
-        
         <div class="cart-drawer-footer">
-            <div class="cart-summary-line">
-                <span>Sous-total HT</span>
-                <span id="cart-subtotal">0.00 €</span>
-            </div>
-            <div class="cart-summary-line">
-                <span>TVA estimée (20%)</span>
-                <span id="cart-tax">0.00 €</span>
-            </div>
-            <div class="cart-summary-line total-line">
-                <span>Total TTC</span>
-                <strong id="cart-total">0.00 €</strong>
-            </div>
-            
-            <button type="button" id="checkout-trigger-btn" class="btn-primary w-full" style="margin-top: 14px;">
-                Passer au Paiement Sécurisé &rarr;
-            </button>
-            <p style="font-size: 0.7rem; color: var(--color-slate-500); text-align: center; margin-top: 10px;">
-                Chiffrement TLS 1.3 &bull; Apple Pay, Visa, Mastercard, CB &amp; PayPal
-            </p>
+            <div class="cart-summary-line"><span>Sous-total HT</span><span id="cart-subtotal">0,00 €</span></div>
+            <div class="cart-summary-line"><span>TVA (20 %)</span><span id="cart-tax">0,00 €</span></div>
+            <div class="cart-summary-line total-line"><span>Total TTC</span><strong id="cart-total">0,00 €</strong></div>
+            <button type="button" id="checkout-trigger-btn" class="btn-primary w-full" style="margin-top:14px">Passer au paiement</button>
+            <p style="font-size:.7rem;color:var(--color-slate-500);text-align:center;margin-top:10px">Paiement chiffré · Apple Pay, Visa, Mastercard, CB et PayPal</p>
         </div>
     </aside>
     <div id="cart-backdrop" class="cart-backdrop"></div>
-
     <div id="toast-container" class="toast-hub" aria-live="polite"></div>
 
-    <!-- Pied de Page de Marque -->
     <footer class="site-footer">
         <div class="container footer-grid">
             <div class="footer-col">
-                <span class="brand-logo" style="color: #FFF; margin-bottom: 12px; display: inline-flex;">
-                    <span class="logo-mark">AURA</span><span class="brand-badge" style="background: rgba(255,255,255,0.15); color: #FFF;">SURF LAB</span>
-                </span>
-                <p style="color: #94A3B8; font-size: 0.85rem; max-width: 320px; line-height: 1.6;">
-                    Équipements nautiques durables conçus sur la côte atlantique. Intégration des standards d'interopérabilité spatiale glTF et WebXR.
-                </p>
+                <span class="brand-logo" style="margin-bottom:12px">AURA<span class="brand-badge">SURF</span></span>
+                <p style="font-size:.85rem;max-width:320px;line-height:1.6">Équipement de surf durable, conçu sur la côte atlantique.</p>
             </div>
             <div class="footer-col">
-                <h4>Navigation</h4>
+                <h4>Boutique</h4>
                 <ul>
-                    <li><a href="index.html">Atelier &amp; Catalogue 3D</a></li>
-                    <li><a href="tracabilite.html">Traçabilité &amp; Éco-Conception</a></li>
-                    <li><a href="guide-tailles.html">Calculateur de Litrage Surf</a></li>
-                    <li><a href="sav-reparation.html">Atelier Réparation &amp; SAV</a></li>
+                    <li><a href="index.html#catalogue">Catalogue 3D</a></li>
+                    <li><a href="guide-tailles.html">Guide des tailles</a></li>
+                    <li><a href="tracabilite.html">Traçabilité</a></li>
                 </ul>
             </div>
             <div class="footer-col">
-                <h4>Support &amp; Services</h4>
+                <h4>Service</h4>
                 <ul>
-                    <li><a href="guide-tailles.html">Guide des Tailles Néoprène</a></li>
-                    <li><a href="checkout.html">Passerelle de Paiement</a></li>
-                    <li><a href="sav-reparation.html">Retours Gratuits 30 Jours</a></li>
-                    <li><a href="tracabilite.html">Garantie Matière 3 Ans</a></li>
+                    <li><a href="sav-reparation.html">Retours gratuits 30 jours</a></li>
+                    <li><a href="sav-reparation.html">Réparation sous garantie</a></li>
+                    <li><a href="checkout.html">Paiement</a></li>
                 </ul>
             </div>
         </div>
-        <div class="footer-bottom container">
-            <p>&copy; 2026 AURA SURF STUDIO. Plateforme e-commerce textile &amp; glisse connectée.</p>
-        </div>
+        <div class="footer-bottom container"><p>&copy; 2026 AURA SURF STUDIO</p></div>
     </footer>
 
     <script src="app.js"></script>
