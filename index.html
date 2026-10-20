@@ -2,216 +2,359 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="AURA Surf : combinaisons, planches de surf, top UV et accessoires, avec essayage 3D et réalité augmentée.">
-    <title>AURA SURF · Combinaisons, planches &amp; accessoires en 3D</title>
-    <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.4.0/model-viewer.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="description" content="AURA SURF : combinaisons en néoprène calcaire, planches de surf, top UV et accessoires dessinés à Biarritz. Chaque produit en 3D et en réalité augmentée.">
+    <meta name="theme-color" content="#000000">
+    <title>AURA SURF · Combinaisons, planches et accessoires de surf</title>
+    <link rel="preload" href="assets/fonts/archivo-latin-wdth-normal.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="assets/photos/hero.jpg" as="image">
     <link rel="stylesheet" href="styles.css">
+    <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.4.0/model-viewer.min.js"></script>
 </head>
-<body>
+<body class="home">
+    <a class="skip-link" href="#catalogue">Aller à la collection</a>
 
-    <aside class="announcement-bar" aria-label="Conditions d'expédition">
-        Livraison neutre en carbone offerte dès 100 € · Retours gratuits sous 30 jours
-    </aside>
-
-    <header class="site-header">
+    <!-- En-tête ------------------------------------------------------------ -->
+    <header class="site-header" id="site-header">
         <div class="header-container">
-            <a href="index.html" class="brand-logo" aria-label="AURA SURF, accueil">AURA<span class="brand-badge">SURF</span></a>
+            <a href="index.html" class="brand-logo" aria-label="AURA SURF, accueil">AURA</a>
 
             <nav class="desktop-nav" aria-label="Menu principal">
-                <button type="button" class="nav-link active" data-category="all">Collection</button>
                 <button type="button" class="nav-link" data-category="combinaisons">Combinaisons</button>
                 <button type="button" class="nav-link" data-category="planches">Planches</button>
-                <button type="button" class="nav-link" data-category="accessoires">Top UV &amp; Accessoires</button>
-                <a href="guide-tailles.html" class="nav-link">Guide des tailles</a>
-                <a href="tracabilite.html" class="nav-link">Traçabilité</a>
-                <a href="sav-reparation.html" class="nav-link">Réparation</a>
+                <button type="button" class="nav-link" data-category="accessoires">Accessoires</button>
+                <a href="#epaisseur" class="nav-link">Quelle épaisseur ?</a>
+                <a href="guide-tailles.html" class="nav-link">Tailles</a>
+                <a href="sav-reparation.html" class="nav-link">Atelier</a>
             </nav>
 
             <div class="header-actions">
-                <button type="button" id="cart-toggle-btn" class="cart-btn" aria-label="Ouvrir mon quiver">
-                    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
-                    <span>Quiver</span>
-                    <span id="cart-counter" class="cart-badge">0</span>
+                <button type="button" id="cart-toggle-btn" class="cart-btn" aria-label="Ouvrir le panier" aria-controls="cart-drawer" aria-expanded="false">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M5 8h14l-1.2 11.2a2 2 0 0 1-2 1.8H8.2a2 2 0 0 1-2-1.8z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg>
+                    <span id="cart-counter" class="cart-badge" data-count="0">0</span>
                 </button>
-                <button type="button" id="mobile-menu-btn" class="mobile-menu-toggle" aria-label="Ouvrir le menu"><span></span><span></span><span></span></button>
+                <button type="button" id="mobile-menu-btn" class="menu-toggle" aria-label="Ouvrir le menu" aria-controls="mobile-menu" aria-expanded="false"><span></span><span></span></button>
             </div>
-        </div>
-
-        <div id="mobile-nav-drawer" class="mobile-nav-drawer">
-            <a href="index.html" class="mobile-nav-link">Collection</a>
-            <a href="guide-tailles.html" class="mobile-nav-link">Guide des tailles &amp; litrage</a>
-            <a href="tracabilite.html" class="mobile-nav-link">Traçabilité des matières</a>
-            <a href="sav-reparation.html" class="mobile-nav-link">Réparation &amp; retours</a>
-            <a href="checkout.html" class="mobile-nav-link">Paiement</a>
         </div>
     </header>
 
-    <section class="hero-cinematic">
-        <div class="hero-media-wrapper">
-            <img src="assets/photos/hero.jpg" alt="Surfeur dans une grosse vague de gros temps" width="1600" height="1059" loading="eager" onerror="this.style.display='none'">
-        </div>
-        <div class="hero-overlay"></div>
-        <div class="container hero-content">
-            <div class="hero-tag">Conçu à Biarritz · Essayage 3D et réalité augmentée</div>
-            <h1>Surfez l'hiver.<br>Voyez avant d'acheter.</h1>
-            <p>Combinaisons en néoprène calcaire, planches du longboard au shortboard, top UV et accessoires. Posez chaque produit chez vous, à l'échelle 1:1.</p>
-            <div class="hero-actions">
-                <a href="#catalogue" class="btn-hero">Voir la collection</a>
-                <a href="guide-tailles.html" class="btn-ghost">Trouver ma taille</a>
+    <div id="mobile-menu" class="mobile-menu" aria-hidden="true">
+        <nav aria-label="Menu mobile">
+            <button type="button" class="mobile-link" data-category="combinaisons">Combinaisons</button>
+            <button type="button" class="mobile-link" data-category="planches">Planches</button>
+            <button type="button" class="mobile-link" data-category="accessoires">Accessoires</button>
+            <a href="#epaisseur" class="mobile-link">Quelle épaisseur ?</a>
+            <a href="guide-tailles.html" class="mobile-link">Guide des tailles</a>
+            <a href="choisir-sa-planche.html" class="mobile-link">Choisir sa planche</a>
+            <a href="sav-reparation.html" class="mobile-link">Atelier et retours</a>
+            <a href="contact.html" class="mobile-link">Contact</a>
+        </nav>
+    </div>
+
+    <main id="main">
+        <!-- Ouverture ---------------------------------------------------------- -->
+        <section class="hero" id="hero" aria-labelledby="hero-title">
+            <div class="hero-media" aria-hidden="true">
+                <img src="assets/photos/hero.jpg" alt="" width="1600" height="1059" fetchpriority="high">
             </div>
-        </div>
-    </section>
-
-    <aside class="telemetry-strip" aria-label="Nos engagements">
-        <div class="container telemetry-grid">
-            <div class="telemetry-item"><strong>2/2 → 5/4</strong><span>Quatre épaisseurs de combinaison, de 6°C à 22°C</span></div>
-            <div class="telemetry-item"><strong>5'11 → 9'0</strong><span>Trois planches : shortboard, midlength, longboard</span></div>
-            <div class="telemetry-item"><strong>0 % pétrole</strong><span>Néoprène calcaire sur toutes nos combinaisons</span></div>
-        </div>
-    </aside>
-
-    <main class="container">
-        <!-- Les 3 gammes -->
-        <section class="collections reveal" aria-label="Nos trois gammes">
-            <button type="button" class="collection-tile" data-category="combinaisons" style="--photo:url('assets/photos/tile-combinaisons.jpg')">
-                <h2>Combinaisons</h2><p>3/2, 4/3, 5/4 et shorty 2/2</p><span>Découvrir</span>
-            </button>
-            <button type="button" class="collection-tile" data-category="planches" style="--photo:url('assets/photos/tile-planches.jpg')">
-                <h2>Planches</h2><p>Longboard 9', midlength 7', shortboard 5'11</p><span>Découvrir</span>
-            </button>
-            <button type="button" class="collection-tile" data-category="accessoires" style="--photo:url('assets/photos/tile-accessoires.jpg')">
-                <h2>Top UV &amp; Accessoires</h2><p>Top UV, boardshorts, leash et wax</p><span>Découvrir</span>
-            </button>
-        </section>
-
-        <section id="catalogue" class="filter-bar" aria-label="Filtres">
-            <div class="filter-top-row">
-                <div class="category-tags">
-                    <button type="button" class="tag-btn active" data-filter-cat="all">Tout</button>
-                    <button type="button" class="tag-btn" data-filter-cat="combinaisons">Combinaisons</button>
-                    <button type="button" class="tag-btn" data-filter-cat="planches">Planches</button>
-                    <button type="button" class="tag-btn" data-filter-cat="accessoires">Top UV &amp; Accessoires</button>
-                </div>
-                <div class="filter-dropdowns">
-                    <div class="select-wrapper">
-                        <label for="size-filter">Taille</label>
-                        <select id="size-filter"><option value="all">Toutes</option></select>
-                    </div>
-                    <div class="select-wrapper">
-                        <label for="sort-select">Trier</label>
-                        <select id="sort-select">
-                            <option value="featured">Sélection AURA</option>
-                            <option value="price-asc">Prix croissant</option>
-                            <option value="price-desc">Prix décroissant</option>
-                        </select>
-                    </div>
+            <div class="hero-content">
+                <h1 id="hero-title" class="hero-title">
+                    <span class="line" style="--i:0">Fait pour</span>
+                    <span class="line" style="--i:1">l'eau froide.</span>
+                </h1>
+                <p class="hero-lead">Combinaisons en néoprène calcaire, planches et accessoires dessinés à Biarritz. Posez chaque produit chez vous, à taille réelle, avant de l'acheter.</p>
+                <div class="hero-actions">
+                    <a href="#catalogue" class="btn btn-light">Découvrir la collection</a>
+                    <a href="#epaisseur" class="btn btn-outline-light">Trouver mon épaisseur</a>
                 </div>
             </div>
-            <div class="swell-filter-box">
-                <div class="swell-labels"><span>Budget maximum</span><span id="price-val" class="swell-val-display">900 €</span></div>
-                <input type="range" id="price-filter" class="surf-range-slider" min="15" max="900" step="5" value="900" aria-label="Budget maximum">
-                <div class="slider-indicators"><span>15 €</span><span>450 €</span><span>900 €</span></div>
+            <dl class="hero-facts">
+                <div><dt>Combinaisons</dt><dd>2/2 à 5/4 mm</dd></div>
+                <div><dt>Planches</dt><dd>5'11 à 9'0</dd></div>
+                <div><dt>Réparation</dt><dd>3 ans à Biarritz</dd></div>
+            </dl>
+        </section>
+
+        <!-- Showroom 3D piloté par le défilement ----------------------------- -->
+        <section class="showroom" id="showroom" aria-labelledby="showroom-title">
+            <div class="showroom-sticky">
+                <div class="showroom-head">
+                    <p class="kicker">Shortboard 5'11" Carbone</p>
+                    <h2 id="showroom-title" class="display-l">Chaque millimètre compte.</h2>
+                </div>
+
+                <model-viewer id="showroom-viewer" class="showroom-viewer" src="assets/models/board-short-511.glb"
+                    alt="Le shortboard 5'11 Carbone en 3D, vu sous plusieurs angles"
+                    camera-orbit="-40deg 72deg 80%" field-of-view="26deg" min-field-of-view="10deg"
+                    interpolation-decay="90" interaction-prompt="none" disable-zoom disable-pan
+                    shadow-intensity="1.1" shadow-softness=".9" exposure="1.05" environment-image="neutral" tone-mapping="aces" loading="lazy" reveal="auto">
+                </model-viewer>
+
+                <ol class="showroom-steps" aria-label="Caractéristiques">
+                    <li class="step" data-step="0">
+                        <strong class="step-value">29,5 L</strong>
+                        <span class="step-text">Le volume réparti sur 1,80 m pour ramer sans effort et décoller tôt.</span>
+                    </li>
+                    <li class="step" data-step="1">
+                        <strong class="step-value">2,45 kg</strong>
+                        <span class="step-text">Noyau EPS usiné, peau carbone et époxy : la planche relance au moindre appui.</span>
+                    </li>
+                    <li class="step" data-step="2">
+                        <strong class="step-value">3 ailerons</strong>
+                        <span class="step-text">Double concave sous les pieds : l'eau est canalisée, la planche tient dans le creux.</span>
+                    </li>
+                </ol>
+
+                <div class="showroom-foot">
+                    <div class="showroom-progress" aria-hidden="true"><span id="showroom-bar"></span></div>
+                    <button type="button" class="btn btn-light btn-small" data-open-product="board-short-511">Voir le shortboard, 749 €</button>
+                </div>
             </div>
         </section>
 
-        <section id="products-grid" class="products-grid" aria-label="Catalogue" aria-live="polite"></section>
+        <!-- Sélecteur d'épaisseur ------------------------------------------- -->
+        <section class="thermo" id="epaisseur" aria-labelledby="thermo-title">
+            <div class="wrap">
+                <header class="section-head">
+                    <h2 id="thermo-title" class="display-l">Quelle épaisseur pour votre eau ?</h2>
+                    <p class="section-lead">Réglez la température de l'eau où vous surfez. La combinaison adaptée s'affiche.</p>
+                </header>
+
+                <div class="thermo-grid">
+                    <div class="thermo-control">
+                        <output id="thermo-out" class="thermo-readout" for="thermo-range" aria-live="polite"><span id="thermo-num">12</span><small>°C</small></output>
+                        <label for="thermo-range" class="sr-only">Température de l'eau en degrés Celsius</label>
+                        <input type="range" id="thermo-range" class="thermo-range" min="6" max="26" step="1" value="12">
+                        <ol class="thermo-scale" aria-label="Plages de température par produit">
+                            <li data-band="combi-54" style="--from:0;--to:20"><span>5/4 mm</span><small>moins de 10°C</small></li>
+                            <li data-band="combi-43" style="--from:20;--to:40"><span>4/3 mm</span><small>10 à 14°C</small></li>
+                            <li data-band="combi-32" style="--from:40;--to:60"><span>3/2 mm</span><small>14 à 18°C</small></li>
+                            <li data-band="shorty-22" style="--from:60;--to:80"><span>Shorty</span><small>18 à 22°C</small></li>
+                            <li data-band="top-uv" style="--from:80;--to:100"><span>Top UV</span><small>plus de 22°C</small></li>
+                        </ol>
+                        <p class="thermo-place" id="thermo-place">Côte basque en avril.</p>
+                    </div>
+
+                    <article class="thermo-pick" id="thermo-pick" aria-live="polite">
+                        <div class="pick-media"><img id="pick-img" src="assets/images/combinaison-43.jpg" alt="" width="900" height="900"></div>
+                        <div class="pick-body">
+                            <p class="pick-band" id="pick-band">Pour 10 à 15°C</p>
+                            <h3 id="pick-name" class="pick-name">Combinaison Steamer 4/3mm</h3>
+                            <p id="pick-desc" class="pick-desc"></p>
+                            <p id="pick-price" class="pick-price">389 €</p>
+                            <div class="pick-actions">
+                                <button type="button" class="btn btn-dark" id="pick-open">Voir en 3D</button>
+                                <button type="button" class="btn btn-quiet" id="pick-add">Ajouter au panier</button>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- Trois familles --------------------------------------------------- -->
+        <section class="families" aria-labelledby="families-title">
+            <div class="wrap">
+                <header class="section-head">
+                    <h2 id="families-title" class="display-l">Trois familles, un seul atelier.</h2>
+                </header>
+                <div class="families-grid">
+                    <button type="button" class="family family-tall" data-category="planches" style="--photo:url('assets/photos/tile-planches.jpg')">
+                        <span class="family-name">Planches</span>
+                        <span class="family-desc">Longboard 9'0, midlength 7'0 et shortboard 5'11.</span>
+                        <span class="family-cta">Voir les 3 planches</span>
+                    </button>
+                    <button type="button" class="family" data-category="combinaisons" style="--photo:url('assets/photos/tile-combinaisons.jpg')">
+                        <span class="family-name">Combinaisons</span>
+                        <span class="family-desc">Steamers 3/2, 4/3, 5/4 à cagoule et shorty 2/2.</span>
+                        <span class="family-cta">Voir les 4 combinaisons</span>
+                    </button>
+                    <button type="button" class="family" data-category="accessoires" style="--photo:url('assets/photos/tile-accessoires.jpg')">
+                        <span class="family-name">Top UV et accessoires</span>
+                        <span class="family-desc">Top UV, boardshort, leash et wax bio.</span>
+                        <span class="family-cta">Voir les 4 accessoires</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Catalogue -------------------------------------------------------- -->
+        <section class="catalogue" id="catalogue" aria-labelledby="catalogue-title">
+            <div class="wrap">
+                <header class="catalogue-head">
+                    <h2 id="catalogue-title" class="display-l">La collection</h2>
+                    <p class="catalogue-count" id="catalogue-count" aria-live="polite">11 produits</p>
+                </header>
+
+                <div class="toolbar" role="search" aria-label="Filtrer la collection">
+                    <div class="segmented" role="group" aria-label="Famille">
+                        <button type="button" class="seg" data-filter-cat="all" aria-pressed="true">Tout</button>
+                        <button type="button" class="seg" data-filter-cat="combinaisons" aria-pressed="false">Combinaisons</button>
+                        <button type="button" class="seg" data-filter-cat="planches" aria-pressed="false">Planches</button>
+                        <button type="button" class="seg" data-filter-cat="accessoires" aria-pressed="false">Accessoires</button>
+                    </div>
+                    <div class="toolbar-fields">
+                        <label class="field">
+                            <span>Taille</span>
+                            <select id="size-filter"><option value="all">Toutes</option></select>
+                        </label>
+                        <label class="field">
+                            <span>Trier</span>
+                            <select id="sort-select">
+                                <option value="featured">Sélection</option>
+                                <option value="price-asc">Prix croissant</option>
+                                <option value="price-desc">Prix décroissant</option>
+                            </select>
+                        </label>
+                        <label class="field field-range">
+                            <span>Jusqu'à <b id="price-val">900 €</b></span>
+                            <input type="range" id="price-filter" min="15" max="900" step="5" value="900">
+                        </label>
+                    </div>
+                </div>
+
+                <div id="products-grid" class="products-grid" aria-live="polite"></div>
+            </div>
+        </section>
+
+        <!-- Engagements ------------------------------------------------------ -->
+        <section class="promises" aria-labelledby="promises-title">
+            <div class="wrap">
+                <h2 id="promises-title" class="display-m">Pensé pour durer.</h2>
+                <div class="promises-grid">
+                    <article>
+                        <h3>Réparé à Biarritz</h3>
+                        <p>Coutures et galons repris gratuitement par notre atelier pendant 3 ans.</p>
+                        <a href="sav-reparation.html" class="text-link">Demander une réparation</a>
+                    </article>
+                    <article>
+                        <h3>30 jours pour changer d'avis</h3>
+                        <p>Une taille qui ne va pas ? L'échange et le retour sont gratuits.</p>
+                        <a href="cgv.html" class="text-link">Lire les conditions</a>
+                    </article>
+                    <article>
+                        <h3>Essayé chez vous</h3>
+                        <p>Ouvrez un produit en 3D, puis posez-le dans votre salon en réalité augmentée, à taille réelle.</p>
+                        <a href="#catalogue" class="text-link">Choisir un produit</a>
+                    </article>
+                </div>
+            </div>
+        </section>
     </main>
 
-    <!-- Modale 3D / AR -->
-    <div id="product-modal" class="modal-overlay" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="modal-product-title">
-        <div class="modal-surface">
-            <button type="button" id="modal-close-btn" class="modal-close" aria-label="Fermer">&times;</button>
-            <div class="modal-viewer-pane">
-                <img id="modal-product-photo" class="modal-photo" src="" alt="">
-                <model-viewer id="main-model-viewer" src="" ar ar-modes="webxr scene-viewer quick-look" ar-scale="fixed"
-                    camera-controls touch-action="pan-y" auto-rotate rotation-per-second="18deg"
-                    shadow-intensity="1.2" exposure="1.0" alt="Aperçu 3D du produit" loading="lazy">
-                    <button type="button" slot="ar-button" class="custom-ar-trigger">
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
-                        Voir chez moi en AR
+    <!-- Fiche produit ------------------------------------------------------- -->
+    <div id="product-sheet" class="sheet" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="sheet-title" hidden>
+        <div class="sheet-backdrop" data-close-sheet></div>
+        <div class="sheet-panel" tabindex="-1">
+            <button type="button" id="sheet-close" class="icon-btn sheet-close" aria-label="Fermer la fiche produit">
+                <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 3l10 10M13 3L3 13" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+            </button>
+            <div class="sheet-stage">
+                <div class="stage-switch" role="group" aria-label="Affichage">
+                    <button type="button" class="stage-tab" data-view="3d" aria-pressed="true">3D</button>
+                    <button type="button" class="stage-tab" data-view="photo" aria-pressed="false">Photo</button>
+                </div>
+                <model-viewer id="sheet-viewer" class="sheet-viewer" alt="Modèle 3D du produit"
+                    ar ar-modes="webxr scene-viewer quick-look" ar-scale="fixed" camera-controls touch-action="pan-y"
+                    auto-rotate-delay="1200" rotation-per-second="14deg" interaction-prompt="none"
+                    shadow-intensity="1.1" shadow-softness=".9" exposure="1.05" environment-image="neutral" tone-mapping="aces" loading="lazy">
+                    <button type="button" slot="ar-button" class="ar-btn">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M12 2l9 5v10l-9 5-9-5V7z"/><path d="M12 22V12M21 7l-9 5-9-5"/></svg>
+                        Voir chez moi
                     </button>
                 </model-viewer>
+                <img id="sheet-photo" class="sheet-photo" src="" alt="" hidden>
+                <p class="stage-hint" id="stage-hint">Faites glisser pour tourner le produit.</p>
             </div>
-            <div class="modal-details-pane">
-                <span id="modal-product-category" class="card-category">Catégorie</span>
-                <h2 id="modal-product-title" class="card-title" style="font-size:1.7rem;letter-spacing:-.03em">Produit</h2>
-                <p id="modal-product-price" class="card-price" style="font-size:1.3rem;margin-bottom:10px">0,00 €</p>
-                <div id="modal-fit-badge" class="fit-indicator">Coupe</div>
-                <p id="modal-product-desc" style="font-size:.92rem;color:var(--color-slate-500);line-height:1.6;margin-bottom:18px"></p>
-                <div>
-                    <div style="display:flex;justify-content:space-between;align-items:baseline">
-                        <span style="font-size:.82rem;font-weight:600">Choisir une taille</span>
-                        <a href="guide-tailles.html" target="_blank" rel="noopener" style="font-size:.78rem;color:var(--color-ocean-blue);font-weight:600;text-decoration:none">Guide des tailles</a>
-                    </div>
-                    <div id="modal-sizes-container" class="size-selector-grid"></div>
+            <div class="sheet-info">
+                <p id="sheet-cat" class="sheet-cat"></p>
+                <h2 id="sheet-title" class="sheet-title"></h2>
+                <p id="sheet-tagline" class="sheet-tagline"></p>
+                <p id="sheet-price" class="sheet-price"></p>
+                <p id="sheet-desc" class="sheet-desc"></p>
+
+                <div class="size-head">
+                    <span id="size-label">Taille</span>
+                    <a href="guide-tailles.html" class="text-link">Guide des tailles</a>
                 </div>
-                <div class="tech-spec-table">
-                    <div class="spec-row"><span>Matière</span><strong id="modal-spec-material">-</strong></div>
-                    <div class="spec-row"><span>Température d'eau</span><strong id="modal-spec-temp">-</strong></div>
-                    <div class="spec-row"><span>Poids / Volume</span><strong id="modal-spec-weight">-</strong></div>
-                    <div class="spec-row"><span>Entretien</span><strong id="modal-spec-care">-</strong></div>
-                </div>
-                <button type="button" id="modal-add-cart-btn" class="btn-primary w-full">Ajouter à mon Quiver</button>
+                <div id="sheet-sizes" class="size-grid" role="radiogroup" aria-labelledby="size-label"></div>
+
+                <button type="button" id="sheet-add" class="btn btn-dark btn-block">Ajouter au panier</button>
+                <p class="sheet-note">Livraison offerte dès 100 €. Retours gratuits sous 30 jours.</p>
+
+                <dl id="sheet-specs" class="spec-list"></dl>
             </div>
         </div>
     </div>
 
-    <!-- Panier -->
-    <aside id="cart-drawer" class="cart-drawer" aria-hidden="true" role="dialog" aria-label="Mon quiver">
-        <div class="cart-drawer-header">
-            <h3 style="font-size:1.1rem">Mon Quiver (<span id="drawer-cart-count">0</span>)</h3>
-            <button type="button" id="cart-close-btn" aria-label="Fermer le panier" style="background:none;border:none;font-size:1.6rem;cursor:pointer">&times;</button>
+    <!-- Panier ------------------------------------------------------------- -->
+    <div id="cart-backdrop" class="cart-backdrop"></div>
+    <aside id="cart-drawer" class="cart-drawer" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="cart-title" tabindex="-1">
+        <div class="cart-head">
+            <h2 id="cart-title">Panier <span class="cart-head-count">(<span id="drawer-cart-count">0</span>)</span></h2>
+            <button type="button" id="cart-close-btn" class="icon-btn" aria-label="Fermer le panier">
+                <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 3l10 10M13 3L3 13" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+            </button>
         </div>
-        <div class="free-shipping-bar">
+        <div class="shipping">
             <span id="shipping-progress-text">Livraison offerte dès 100 €</span>
-            <div class="progress-track"><div id="shipping-progress-fill" class="progress-fill" style="width:0%"></div></div>
+            <div class="progress-track"><div id="shipping-progress-fill" class="progress-fill"></div></div>
         </div>
-        <div id="cart-items-list" class="cart-items-container"></div>
-        <div class="cart-drawer-footer">
-            <div class="cart-summary-line"><span>Sous-total HT</span><span id="cart-subtotal">0,00 €</span></div>
-            <div class="cart-summary-line"><span>TVA (20 %)</span><span id="cart-tax">0,00 €</span></div>
-            <div class="cart-summary-line total-line"><span>Total TTC</span><strong id="cart-total">0,00 €</strong></div>
-            <button type="button" id="checkout-trigger-btn" class="btn-primary w-full" style="margin-top:14px">Passer au paiement</button>
-            <p style="font-size:.7rem;color:var(--color-slate-500);text-align:center;margin-top:10px">Paiement chiffré · Apple Pay, Visa, Mastercard, CB et PayPal</p>
+        <div id="cart-items-list" class="cart-items"></div>
+        <div class="cart-foot">
+            <div class="cart-line"><span>Sous-total HT</span><span id="cart-subtotal">0,00 €</span></div>
+            <div class="cart-line"><span>TVA (20 %)</span><span id="cart-tax">0,00 €</span></div>
+            <div class="cart-line cart-total"><span>Total TTC</span><strong id="cart-total">0,00 €</strong></div>
+            <button type="button" id="checkout-trigger-btn" class="btn btn-dark btn-block">Passer au paiement</button>
+            <p class="cart-note">Paiement chiffré par carte, Apple Pay ou PayPal.</p>
         </div>
     </aside>
-    <div id="cart-backdrop" class="cart-backdrop"></div>
+
     <div id="toast-container" class="toast-hub" aria-live="polite"></div>
 
+    <!-- Pied de page -------------------------------------------------------- -->
     <footer class="site-footer">
-        <div class="container footer-grid">
-            <div class="footer-col">
-                <span class="brand-logo" style="margin-bottom:12px">AURA<span class="brand-badge">SURF</span></span>
-                <p style="font-size:.85rem;max-width:320px;line-height:1.6">Équipement de surf durable, conçu sur la côte atlantique.</p>
+        <div class="wrap">
+            <div class="footer-top">
+                <p class="footer-brand">AURA</p>
+                <p class="footer-claim">Équipement de surf dessiné et réparé à Biarritz.</p>
             </div>
-            <div class="footer-col">
-                <h4>Boutique</h4>
-                <ul>
-                    <li><a href="index.html#catalogue">Catalogue 3D</a></li>
-                    <li><a href="guide-tailles.html">Guide des tailles</a></li>
-                    <li><a href="conseils-epaisseur.html">Choisir sa combinaison</a></li>
-                    <li><a href="choisir-sa-planche.html">Choisir sa planche</a></li>
-                    <li><a href="tracabilite.html">Traçabilité</a></li>
-                </ul>
+            <div class="footer-grid">
+                <nav aria-label="Collection">
+                    <h3>Collection</h3>
+                    <ul>
+                        <li><a href="#catalogue" data-category-link="combinaisons">Combinaisons</a></li>
+                        <li><a href="#catalogue" data-category-link="planches">Planches</a></li>
+                        <li><a href="#catalogue" data-category-link="accessoires">Top UV et accessoires</a></li>
+                    </ul>
+                </nav>
+                <nav aria-label="Conseils">
+                    <h3>Conseils</h3>
+                    <ul>
+                        <li><a href="guide-tailles.html">Guide des tailles</a></li>
+                        <li><a href="conseils-epaisseur.html">Choisir sa combinaison</a></li>
+                        <li><a href="choisir-sa-planche.html">Choisir sa planche</a></li>
+                        <li><a href="tracabilite.html">Matières et traçabilité</a></li>
+                    </ul>
+                </nav>
+                <nav aria-label="Service">
+                    <h3>Service</h3>
+                    <ul>
+                        <li><a href="sav-reparation.html">Réparation et retours</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="checkout.html">Paiement</a></li>
+                    </ul>
+                </nav>
             </div>
-            <div class="footer-col">
-                <h4>Service</h4>
-                <ul>
-                    <li><a href="sav-reparation.html">Retours gratuits 30 jours</a></li>
-                    <li><a href="sav-reparation.html">Réparation sous garantie</a></li>
-                    <li><a href="contact.html">Contact et questions</a></li>
-                </ul>
+            <div class="footer-bottom">
+                <p>&copy; 2026 AURA SURF STUDIO</p>
+                <nav aria-label="Informations légales">
+                    <a href="cgv.html">CGV</a>
+                    <a href="mentions-legales.html">Mentions légales</a>
+                    <a href="confidentialite.html">Confidentialité</a>
+                    <a href="credits.html">Crédits</a>
+                </nav>
             </div>
-        </div>
-        <div class="footer-bottom container" style="display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap">
-            <p>&copy; 2026 AURA SURF STUDIO</p>
-            <p style="display:flex;gap:20px;flex-wrap:wrap">
-                <a href="cgv.html" style="color:inherit">CGV</a>
-                <a href="mentions-legales.html" style="color:inherit">Mentions légales</a>
-                <a href="confidentialite.html" style="color:inherit">Confidentialité</a>
-                <a href="credits.html" style="color:inherit">Crédits</a>
-            </p>
         </div>
     </footer>
 
