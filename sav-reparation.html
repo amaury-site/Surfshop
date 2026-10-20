@@ -3,72 +3,136 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Atelier Réparation &amp; Retours &bull; AURA SURF</title>
+    <title>Retours et réparation · AURA SURF</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="pages.css">
 </head>
 <body>
+<header class="site-header">
+    <div class="header-container">
+        <a href="index.html" class="brand-logo">AURA<span class="brand-badge">SERVICE</span></a>
+        <a href="index.html" class="nav-link">&larr; Retour à la boutique</a>
+    </div>
+</header>
 
-    <header class="site-header">
-        <div class="header-container">
-            <a href="index.html" class="brand-logo">
-                <span>AURA</span><span class="brand-badge">CARE LAB</span>
-            </a>
-            <a href="index.html" class="nav-link">&larr; Retour à l'Atelier</a>
+<main class="page-container">
+    <div class="page-header">
+        <span class="hero-tag">Retours, échanges, réparation</span>
+        <h1>Un mauvais choix de taille ne coûte rien</h1>
+        <p class="lead">Échangez gratuitement sous 30 jours. Faites réparer vos coutures pendant 3 ans à Biarritz plutôt que de racheter.</p>
+    </div>
+
+    <section class="page-card">
+        <div class="grid-3">
+            <div class="stat"><strong>30 jours</strong><span>pour échanger une taille, port gratuit</span></div>
+            <div class="stat"><strong>3 ans</strong><span>de garantie sur les coutures</span></div>
+            <div class="stat"><strong>24 h</strong><span>de délai de réponse sur les jours ouvrés</span></div>
         </div>
-    </header>
+    </section>
 
-    <main class="page-container">
-        <div class="page-header">
-            <span class="hero-tag">Circularité &amp; Rassurance Client</span>
-            <h1>Atelier Réparation &amp; Retours Simplifiés</h1>
-            <p style="color: var(--color-text-muted); margin-top: 8px;">Prolonger la durée de vie de vos équipements et garantir un échange sans friction en cas d'erreur de taille.</p>
-        </div>
+    <section class="page-card">
+        <h2>Échanger un article en 4 étapes</h2>
+        <ol class="steps">
+            <li><div><strong>Essayez à sec.</strong> Enfilez la combinaison ou le top UV sans l'avoir mouillé : seul un article non utilisé peut être échangé.</div></li>
+            <li><div><strong>Déclarez l'échange</strong> avec le formulaire ci-dessous et le numéro de votre commande.</div></li>
+            <li><div><strong>Imprimez l'étiquette prépayée</strong> que nous vous envoyons par e-mail.</div></li>
+            <li><div><strong>Déposez le colis</strong> en point relais. La nouvelle taille part dès réception, sous réserve de stock.</div></li>
+        </ol>
+    </section>
 
-        <section class="page-card">
-            <h2 style="font-size: 1.35rem; color: var(--color-ocean-deep); margin-bottom: 12px;">1. Retours Gratuits sous 30 Jours (Anti-Risque Taille)</h2>
-            <p style="font-size: 0.95rem; color: var(--color-text-muted); line-height: 1.6; margin-bottom: 16px;">
-                Si votre combinaison ou votre top UV ne convient pas parfaitement à votre morphologie lors du premier essayage à sec, vous disposez de 30 jours pour effectuer un échange de taille sans frais de port.
-            </p>
-            <div style="background: var(--color-foam-light); padding: 16px; border-radius: var(--radius-sm); font-size: 0.85rem; color: var(--color-ocean-dark);">
-                <strong>Procédure de retour WMS :</strong> Générez votre étiquette prépayée depuis votre e-mail de confirmation, indiquez le motif pour nourrir nos algorithmes de fit, et déposez votre colis dans un point relais.
-            </div>
-        </section>
+    <section class="page-card">
+        <h2>Réparation sous garantie</h2>
+        <p>Une couture qui lâche ou un galon décollé ? Envoyez-nous la combinaison : notre atelier de Biarritz recolle le néoprène et repose un galon étanche. La garantie couvre les défauts de fabrication, pas les déchirures causées par un choc ou une usure normale. Dans ce cas, l'atelier peut toujours réparer sur devis.</p>
+    </section>
 
-        <section class="page-card">
-            <h2 style="font-size: 1.35rem; color: var(--color-ocean-deep); margin-bottom: 12px;">2. Garantie Coutures 3 Ans &amp; Atelier Biarritz</h2>
-            <p style="font-size: 0.95rem; color: var(--color-text-muted); line-height: 1.6;">
-                Un accroc d'aileron ou un galon décollé ? Plutôt que de jeter, envoyez votre combinaison à notre atelier basque. Nous réparons le néoprène à la colle néoprène noire polymérisée et réappliquons un galon étanche thermo-soudé.
-            </p>
-        </section>
-
-        <section class="page-card">
-            <h2 style="font-size: 1.35rem; color: var(--color-ocean-deep); margin-bottom: 12px;">3. Déclarer une Réparation ou un Échange</h2>
-            <form id="sav-form" onsubmit="handleSavSubmit(event)">
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 14px;">
-                    <div>
-                        <label for="order-ref" style="font-size: 0.8rem; font-weight: 700; text-transform: uppercase;">N&deg; de Commande</label>
-                        <input type="text" id="order-ref" required placeholder="#SURF-XXXXX" style="width: 100%; padding: 10px; border: 1px solid var(--color-border); border-radius: var(--radius-sm); margin-top: 4px;">
-                    </div>
-                    <div>
-                        <label for="action-type" style="font-size: 0.8rem; font-weight: 700; text-transform: uppercase;">Type de Demande</label>
-                        <select id="action-type" style="width: 100%; padding: 10px; border: 1px solid var(--color-border); border-radius: var(--radius-sm); margin-top: 4px;">
-                            <option value="fit">Échange de taille (Mauvais fit)</option>
-                            <option value="repair">Réparation de couture sous garantie</option>
-                            <option value="recycle">Recyclage fin de vie</option>
-                        </select>
-                    </div>
+    <section class="page-card" id="declaration">
+        <h2>Déclarer une demande</h2>
+        <div id="sav-success" class="result-box" hidden role="status" aria-live="polite" style="margin-bottom:18px"></div>
+        <form id="sav-form" novalidate>
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="order-ref">Numéro de commande</label>
+                    <input id="order-ref" class="form-control" placeholder="#AURA-12345" autocomplete="off">
                 </div>
-                <button type="submit" class="btn-primary" style="width: fit-content;">Soumettre à l'Atelier</button>
-            </form>
-        </section>
-    </main>
+                <div class="form-group">
+                    <label for="action-type">Type de demande</label>
+                    <select id="action-type" class="form-control">
+                        <option value="fit">Échange de taille</option>
+                        <option value="repair">Réparation de couture sous garantie</option>
+                        <option value="recycle">Recyclage en fin de vie</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="sav-email">Adresse e-mail</label>
+                <input id="sav-email" type="email" class="form-control" placeholder="alex.dupont@exemple.fr" autocomplete="email">
+            </div>
+            <div class="form-group" id="size-group">
+                <label for="new-size">Taille souhaitée</label>
+                <select id="new-size" class="form-control">
+                    <option value="XS">XS</option><option value="S">S</option><option value="M">M</option><option value="L">L</option><option value="XL">XL</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="sav-message">Précisions (facultatif)</label>
+                <textarea id="sav-message" class="form-control" rows="4" maxlength="500" placeholder="Où se situe le défaut ? Pourquoi la taille ne convient-elle pas ?"></textarea>
+            </div>
+            <button type="submit" class="btn-primary btn-inline">Envoyer ma demande</button>
+            <p class="note">Version de démonstration : la demande n'est pas encore transmise à un serveur.</p>
+        </form>
+    </section>
 
-    <script>
-        function handleSavSubmit(e) {
-            e.preventDefault();
-            alert("Dossier SAV enregistré ! Notre atelier logistique vous contacte sous 24h avec votre bon d'expédition.");
-            document.getElementById("sav-form").reset();
-        }
-    </script>
+    <section class="page-card">
+        <h2>Questions fréquentes</h2>
+        <details><summary>Puis-je échanger une combinaison déjà portée dans l'eau ?</summary><p>Non, l'échange de taille concerne les articles essayés à sec. Si le néoprène a été mouillé, il n'est plus repris.</p></details>
+        <details><summary>Qui paie le transport pour une réparation ?</summary><p>Nous prenons en charge le retour. L'envoi vers l'atelier se fait avec l'étiquette prépayée fournie après votre déclaration.</p></details>
+        <details><summary>Que devient une combinaison en fin de vie ?</summary><p>Choisissez « Recyclage » dans le formulaire : nous la récupérons pour la transformer en sous-couches isolantes.</p></details>
+        <details><summary>Je n'ai plus mon numéro de commande.</summary><p>Il figure dans l'e-mail de confirmation, au format #AURA suivi de cinq chiffres.</p></details>
+    </section>
+</main>
+
+<script>
+const $ = id => document.getElementById(id);
+const labels = { fit: "échange de taille", repair: "réparation sous garantie", recycle: "recyclage en fin de vie" };
+
+function setError(id, msg) {
+    const el = $(id);
+    let err = $("err-" + id);
+    if (!err) {
+        err = document.createElement("small");
+        err.id = "err-" + id; err.className = "form-error"; err.setAttribute("role", "alert");
+        el.parentNode.appendChild(err);
+    }
+    el.classList.toggle("invalid", !!msg);
+    el.setAttribute("aria-invalid", String(!!msg));
+    err.textContent = msg || "";
+    return !msg;
+}
+
+$("action-type").addEventListener("change", () => {
+    $("size-group").hidden = $("action-type").value !== "fit";
+});
+
+$("sav-form").addEventListener("submit", e => {
+    e.preventDefault();
+    const ref = $("order-ref").value.trim().toUpperCase();
+    const okRef = setError("order-ref", /^#?AURA-\d{5}$/.test(ref) ? "" : "Format attendu : #AURA-12345.");
+    const okMail = setError("sav-email", /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test($("sav-email").value.trim()) ? "" : "Adresse e-mail invalide.");
+    if (!okRef) return $("order-ref").focus();
+    if (!okMail) return $("sav-email").focus();
+
+    const type = $("action-type").value;
+    const ticket = "SAV-" + Math.floor(10000 + Math.random() * 90000);
+    const box = $("sav-success");
+    box.innerHTML = "";
+    const strong = document.createElement("strong");
+    strong.textContent = "Demande enregistrée (" + ticket + ").";
+    box.append(strong, document.createTextNode(" Nous vous répondons à " + $("sav-email").value.trim() + " sous 24 h ouvrées pour votre " + labels[type] + "."));
+    box.hidden = false;
+    box.scrollIntoView({ behavior: "smooth", block: "center" });
+    $("sav-form").reset();
+    $("size-group").hidden = false;
+});
+</script>
 </body>
 </html>
