@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Paiement Sécurisé • AURA SURF</title>
+    <title>Paiement Sécurisé &bull; AURA SURF</title>
     <link rel="stylesheet" href="styles.css">
     <style>
         .checkout-grid {
@@ -103,45 +103,45 @@
                     <div class="form-row">
                         <div class="form-group">
                             <label for="firstname">Prénom</label>
-                            <input type="text" id="firstname" class="form-control" required placeholder="Alex">
+                            <input type="text" id="firstname" class="form-control" required placeholder="Alex" autocomplete="given-name">
                         </div>
                         <div class="form-group">
                             <label for="lastname">Nom</label>
-                            <input type="text" id="lastname" class="form-control" required placeholder="Dupont">
+                            <input type="text" id="lastname" class="form-control" required placeholder="Dupont" autocomplete="family-name">
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="email">Adresse E-mail (Confirmation &amp; Suivi WMS)</label>
-                        <input type="email" id="email" class="form-control" required placeholder="alex.dupont@surf.fr">
+                        <input type="email" id="email" class="form-control" required placeholder="alex.dupont@surf.fr" autocomplete="email">
                     </div>
                     <div class="form-group">
                         <label for="address">Adresse de livraison</label>
-                        <input type="text" id="address" class="form-control" required placeholder="14 Avenue de la Côte des Basques">
+                        <input type="text" id="address" class="form-control" required placeholder="14 Avenue de la Côte des Basques" autocomplete="street-address">
                     </div>
                     <div class="form-row">
                         <div class="form-group">
                             <label for="zipcode">Code Postal</label>
-                            <input type="text" id="zipcode" class="form-control" required placeholder="64200">
+                            <input type="text" id="zipcode" class="form-control" required placeholder="64200" autocomplete="postal-code">
                         </div>
                         <div class="form-group">
                             <label for="city">Ville</label>
-                            <input type="text" id="city" class="form-control" required placeholder="Biarritz">
+                            <input type="text" id="city" class="form-control" required placeholder="Biarritz" autocomplete="address-level2">
                         </div>
                     </div>
 
                     <h3 style="margin: 24px 0 16px; font-size: 1.1rem;">2. Informations Bancaires</h3>
                     <div class="form-group">
                         <label for="card-num">Numéro de Carte Bancaire</label>
-                        <input type="text" id="card-num" class="form-control" maxlength="19" required placeholder="4970 &bull;&bull;&bull;&bull; &bull;&bull;&bull;&bull; &bull;&bull;&bull;&bull;">
+                        <input type="text" id="card-num" class="form-control" maxlength="19" required placeholder="4970 &bull;&bull;&bull;&bull; &bull;&bull;&bull;&bull; &bull;&bull;&bull;&bull;" autocomplete="cc-number">
                     </div>
                     <div class="form-row">
                         <div class="form-group">
                             <label for="card-exp">Expiration (MM/AA)</label>
-                            <input type="text" id="card-exp" class="form-control" maxlength="5" required placeholder="08/28">
+                            <input type="text" id="card-exp" class="form-control" maxlength="5" required placeholder="08/28" autocomplete="cc-exp">
                         </div>
                         <div class="form-group">
                             <label for="card-cvc">Cryptogramme CVC</label>
-                            <input type="text" id="card-cvc" class="form-control" maxlength="3" required placeholder="382">
+                            <input type="text" id="card-cvc" class="form-control" maxlength="3" required placeholder="382" autocomplete="cc-csc">
                         </div>
                     </div>
 
